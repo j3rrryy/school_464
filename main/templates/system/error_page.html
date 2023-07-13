@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %} {% block content %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <header>
+    <h1 class="page__header">
+      <i class="fa-solid fa-xmark fa-beat"></i> {{ title }}
+      <i class="fa-solid fa-xmark fa-beat"></i>
+    </h1>
+  </header>
+  <p style="text-align: center">
+    <a class="text-link" href="/">Вернуться на главную страницу <i class="fa-solid fa-right-long"></i></a>
+  </p>
+  <button class="btn-close" href="/" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endblock content %}

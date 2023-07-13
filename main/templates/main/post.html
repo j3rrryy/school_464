@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %} {% load static %} {% block content %}
+<div class="post">
+
+  <!-- post photo -->
+  <div class="post__photo-container">
+    {% if post.photo %}
+    <img class="rounded" src="{{ post.photo.url }}" width="100%" loading="lazy" />
+    {% else %}
+    <img class="rounded" src="{% static 'main\img\halfofthemos.webp' %}" alt="Новость" width="100%" loading="lazy" />
+    {% endif %}
+    <header>
+      <h1 class="post__header">{{ post.headline }}</h1>
+    </header>
+  </div>
+
+  <!-- post text -->
+  <div class="post__content mt-5 rounded border">
+    <article>
+      {{ post.text|safe|linebreaksbr }}
+    </article>
+  </div>
+</div>
+<div class="d-flex">
+  <div class="ms-auto mt-auto">
+    <p class="post__date">{{ post.date }}</p>
+  </div>
+</div>
+{% endblock %}

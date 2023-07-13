@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Государственное бюджетное общеобразовательное учреждение средняя
+  общеобразовательная школа №464 Пушкинского района Санкт-Петербурга" />
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'main/favicons/favicon.ico' %}" />
+  <link rel="preload" as="style" href="{% static '/main/css/style.css' %}" onload="this.rel='stylesheet'" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" as />
+  <script src="https://lidrekon.ru/slep/js/jquery.js"></script>
+  <script src="https://lidrekon.ru/slep/js/uhpv-hover-full.min.js"></script>
+  <title>{{ title }}</title>
+</head>
+
+<body>
+  <div class="container-fluid p-0 overflow-x-hidden d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-static-top" style="background-color: rgba(22, 34, 57, 0.95)">
+      <div class="container-fluid">
+        <!-- logo -->
+        <a class="navbar-brand mb-0 h1 text-white" href="/">
+          <yellow><i class="fa-solid fa-graduation-cap d-inline-block"></i></yellow>
+          ГБОУ школа №464
+        </a>
+
+        <!-- navbar items -->
+        <ul class="navbar-nav ms-auto d-flex flex-row">
+          <li class="nav-item">
+            <a class="nav-link text-wrap me-3" href="/news/" title="Лента новостей"><i
+                class="fa-solid fa-newspaper mb-0 h5" style="color: #fff"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-wrap me-3" href="https://vk.com/school464spb" title="ВКонтакте" target="_blank">
+              <i class="fa-brands fa-vk mb-0 h5" style="color: #fff"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-wrap me-3" href="" title="Версия для слабовидящих" id="specialButton">
+              <i class="fa-solid fa-glasses mb-0 h5" style="color: #fff"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-wrap me-3" href="/admin/" title="Войти">
+              <i class="fa-solid fa-right-to-bracket mb-0 h5" style="color: #fff"></i></a>
+          </li>
+        </ul>
+
+        <!-- menu -->
+        <button class="navbar-toggler" title="Меню" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+          style="color: #fff; background-color: #f5a425">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" id="offcanvasNavbar" tabindex="-1" aria-labelledby="offcanvasNavbarLabel"
+          style="background-color: #242c38; color: #fff">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Меню</h5>
+            <button class="btn-close" title="Закрыть" type="button" data-bs-dismiss="offcanvas" aria-label="Закрыть"
+              style="background-color: #f5a425; color: #242c38"></button>
+          </div>
+          <div class="offcanvas-body">
+            <form class="d-flex mt-3 mb-3" role="search" method="get" action="/search/">
+              <input class="form-control me-2" name="query" type="search" placeholder="Поиск" aria-label="Поиск" />
+              <button class="btn" title="Поиск" type="submit" style="
+                    background-color: #f5a425;
+                    color: #242c38;
+                    border-color: #242c38;
+                  ">
+                Поиск
+              </button>
+            </form>
+
+            <!-- items from the database -->
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              {% for key, value in menu %} {% if value %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-wrap text-white" href="{{ key.get_absolute_url }}" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ key.menu_info }}
+                </a>
+                <ul class="dropdown-menu">
+                  {% for v in value %}
+                  <li>
+                    <a class="dropdown-item text-wrap text-white" href="{{ v.get_absolute_url }}">{{ v.menu_info }}</a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link text-wrap text-white" href="{{ key.get_absolute_url }}">{{ key.menu_info }}</a>
+              </li>
+              {% endif %}{% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- "back to top" button -->
+    <button class="btn btn-floating" id="btn-back-to-top" type="button"
+      style="background-color: #f5a425; color: #242c38; border-color: #242c38">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- main content / no padding on the index page -->
+    <main class="content" {% if no_padding %} style="padding: 0px" {% endif %}>
+      {% block content %} {% endblock %}
+    </main>
+
+    <!-- footer -->
+    <footer class="footer mt-auto">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xl-2 col-md-6 col-sm-12 text-center">
+            <h5 class="text-center">И.О. директора</h5>
+            <ul class="list-unstyled text-wrap text-center">
+              <li>
+                <p>Теплякова Алина Сергеевна</p>
+              </li>
+            </ul>
+          </div>
+          <div class="col-xl-2 col-md-6 col-sm-12">
+            <h5 class="text-center">Контакты</h5>
+            <ul class="list-unstyled text-wrap text-center">
+              <li>
+                <p><i class="fa-solid fa-phone"></i> Секретарь: 452-11-26</p>
+              </li>
+              <li>
+                <p><i class="fa-solid fa-phone"></i> Директор: 452-22-74</p>
+              </li>
+              <li>
+                <p>
+                  <i class="fa-solid fa-phone"></i> Зам. директора: 452-23-35
+                </p>
+              </li>
+              <li>
+                <p>
+                  <i class="fa-solid fa-envelope"></i> school-464@yandex.ru
+                </p>
+              </li>
+              <li>
+                <p>
+                  <i class="fa-solid fa-envelope"></i>
+                  info.sch464@obr.gov.spb.ru
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="col-xl-3 col-md-6 col-sm-12 text-center">
+            <h5 class="text-center">Адреса</h5>
+            <div class="d-flex justify-content-center">
+              <script
+                src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A147642064e43eea10afa053256fc471b41b22c644f7399995234417d1b83ace3&amp;width=320&amp;height=240&amp;lang=ru_RU&amp;scroll=true"
+                title="map" type="text/javascript" charset="utf-8" async></script>
+            </div>
+          </div>
+
+          <!-- banners from the database -->
+          <div class="col-xl-5 col-md-6 col-sm-12 text-center">
+            <h5 class="text-center">Рекомендованные сайты</h5>
+            {% if banners %}
+            <div class="container-fluid">
+              {% for group in banners %}
+              <div class="row">
+                {% for banner in group %}
+                <div class="col-xl-3 col-md-6 col-sm-12 text-center my-1" style="max-height: 80px">
+                  <a class="text-link" href="{{ banner.url }}" target="_blank">
+                    <img class="img-fluid" src="{{ banner.banner.url }}" alt="Баннер" loading="lazy"
+                      style="max-height: 80px" />
+                  </a>
+                </div>
+                {% endfor %}
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="{% static '/main/js/main.js' %}"></script>
+  <script src="https://kit.fontawesome.com/04e52cf776.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

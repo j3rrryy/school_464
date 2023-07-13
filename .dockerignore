@@ -1,0 +1,16 @@
+mypy_cache
+.vscode
+.git
+.gitignore
+venv
+__pycache__
+static
+Dockerfile
+*.md
+examples
+.github
+media/footer_photos/**
+media/pages/**
+media/news/**
+LICENSE
+celerybeat-schedule

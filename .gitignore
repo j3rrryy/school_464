@@ -1,0 +1,12 @@
+mypy_cache/
+.vscode/
+venv/
+__pycache__/
+/static/
+media/footer_photos/
+media/news/
+media/pages/
+docker/env/
+docker/nginx/prod/
+docker-compose.yml
+celerybeat-schedule

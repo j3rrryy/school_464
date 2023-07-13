@@ -1,0 +1,102 @@
+version: "3.9"
+
+volumes:
+  pgdata:
+  static:
+  media:
+
+
+services:
+  django:
+    build:
+      context: .
+    restart: always
+    ports:
+      - "8000:8000"
+    env_file:
+      - docker/env/.env.prod
+    volumes:
+      - ./:/app
+      - static:/app/static
+      - media:/app/media
+    depends_on:
+      - postgres
+      - redis
+    command: sh -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && gunicorn --workers=4 --reload --max-requests=1000 school_464.wsgi -b 0.0.0.0:8000"
+    container_name: django_prod
+
+  nginx:
+    image: nginx:stable-alpine
+    restart: always
+    working_dir: /app
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - static:/app/static
+      - media:/app/media
+      - ./docker/nginx/dev/:/etc/nginx/conf.d:ro
+      - ./docker/nginx/prod/:/etc/nginx/conf.d:ro
+      - ./docker/certbot/conf:/etc/letsencrypt:ro
+      - ./docker/certbot/www:/var/www/certbot:ro
+    links:
+      - django
+    depends_on:
+      - django
+    container_name: nginx_prod
+
+  postgres:
+    image: postgres:alpine
+    restart: always
+    env_file:
+      - docker/env/.env.prod
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    container_name: postgres_prod
+
+  redis:
+    image: redis:alpine
+    restart: always
+    command:
+      - redis-server
+    ports:
+      - "6379:6379"
+    env_file:
+      - docker/env/.env.prod
+    container_name: redis_prod
+
+  celery-worker:
+    build: .
+    restart: always
+    command: celery -A school_464 worker --loglevel=info
+    env_file:
+      - docker/env/.env.prod
+    volumes:
+      - ./:/app
+      - media:/app/media
+    depends_on:
+      - redis
+    container_name: celery-worker_prod
+
+  celery-beat:
+    build: .
+    restart: always
+    command: celery -A school_464 beat --loglevel=info
+    env_file:
+      - docker/env/.env.prod
+    volumes:
+      - ./:/app
+      - media:/app/media
+    depends_on:
+      - redis
+    container_name: celery-beat_prod
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - ./docker/certbot/conf:/etc/letsencrypt:rw
+      - ./docker/certbot/www:/var/www/certbot:rw
+    command: certonly --webroot --webroot-path=/var/www/certbot/ --email <your_email> --agree-tos --no-eff-email -d <domen_name (example.com)> -d <domen_name (www.example.com)>
+    depends_on:
+      - nginx
+    container_name: certbot_prod

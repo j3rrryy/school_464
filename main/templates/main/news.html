@@ -1,0 +1,79 @@
+{% extends 'main/base.html' %} {% load static %} {% block content %}
+<h1 class="page-header">Лента новостей</h1>
+
+<!-- news cards -->
+<div class="news-container">
+  {% for post in news %}
+  <div class="news__post">
+    <a href="{{ post.get_absolute_url }}">
+      <div class="news__header">
+        {% if post.photo %}
+        <img src="{{ post.photo.url }}" alt="Новость" loading="lazy" />
+        {% else %}
+        <img src="{% static 'main\img\halfofthemos.webp' %}" alt="Новость" loading="lazy" />
+        {% endif %}
+      </div>
+    </a>
+    <div class="news__body">
+      <a href="{{ post.get_absolute_url }}">
+        <div class="news__title">
+          <h3>{% if post.is_pinned %}<i class="fa-solid fa-thumbtack h5"></i>{% endif %}
+            {{ post.headline|truncatewords:3 }}</h3>
+        </div>
+        <p>{{ post.text|striptags|truncatewords:10|safe }}</p>
+      </a>
+      <div class="d-flex ms-auto mt-auto">
+        <p class="news__date m-0">{{ post.date }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- pagination -->
+<div class="mt-auto">
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center mb-0 mt-3">
+      {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page=1" aria-label="First" style="
+            background-color: #242c38;
+            color: #f5a425 !important;
+            border-color: #242c38;
+          "><span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">First</span></a>
+      </li>
+      {% endif %} {% for p in paginator.page_range %}
+      {% if page_obj.number == p %}
+      <li class="page-item active">
+        <a class="page-link" href="?page={{ p }}" style="
+            background-color: #f5a425;
+            color: #242c38 !important;
+            border-color: #242c38;
+          ">{{ p }}</a>
+      </li>
+      {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %} <li class="page-item">
+        <a class="page-link" href="?page={{ p }}" style="
+            background-color: #242c38;
+            color: #f5a425 !important;
+            border-color: #242c38;
+          ">{{ p }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ paginator.num_pages }}" aria-label="Last" style="
+            background-color: #242c38;
+            color: #f5a425 !important;
+            border-color: #242c38;
+          ">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Last</span>
+          </a>
+        </li>
+        {% endif %}
+    </ul>
+  </nav>
+</div>
+{% endblock %}

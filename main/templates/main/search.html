@@ -1,0 +1,69 @@
+{% extends 'main/base.html' %} {% block content %}
+<div class="page-container">
+  <header>
+    <h1 class="page-header">Результаты поиска по запросу: {{ query }}</h1>
+  </header>
+
+  <!-- search field -->
+  <form class="d-flex mt-3 mb-5" action="/search/" role="search" method="get">
+    <input class="form-control me-2" name="query" type="search" placeholder="Поиск" aria-label="Поиск" />
+    <button class="btn" type="submit" style="background-color: #f5a425; color: #242c38; border-color: #242c38">
+      Поиск
+    </button>
+  </form>
+
+  <!-- search results -->
+  <div class="container-fluid">
+    <div class="row">
+      <!-- news -->
+      {% if search_results.news %}
+      <div class="col-xl-6 col-xs-12">
+        <header>
+          <h4>Новости:</h4>
+        </header>
+        <article>
+          <ul class="list-unstyled text-wrap">
+            {% for res in search_results.news %}
+            <li class="mb-3">
+              <div class="d-flex">
+                <a href="/post/{{ res.slug }}/">
+                  <h5 class="text-wrap">{{ res.headline }}</h5>
+                  <p class="text-wrap">{{ res.text|truncatewords:20|safe }}</p>
+                </a>
+                <p class="post__date d-flex ms-auto align-items-center">
+                  {{ res.date }}
+                </p>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </article>
+      </div>
+      {% endif %}
+
+      <!-- pages -->
+      {% if search_results.page %}
+      <div class="col-xl-6 col-xs-12">
+        <header>
+          <h4>Страницы:</h4>
+        </header>
+        <article>
+          <ul class="list-unstyled text-wrap">
+            {% for res in search_results.page %}
+            <li>
+              <a class="text-wrap" href="/{{ res.slug }}/">
+                <div class="d-flex">
+                  <h5 class="text-wrap">{{ res.menu_info }}</h5>
+                  <i class="fa-solid fa-arrow-right ms-auto h5 mt-1"></i>
+                </div>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </article>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
