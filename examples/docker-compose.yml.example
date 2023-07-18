@@ -22,7 +22,7 @@ services:
     depends_on:
       - postgres
       - redis
-    command: sh -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && gunicorn --workers=4 --reload --max-requests=1000 school_464.wsgi -b 0.0.0.0:8000"
+    command: bash -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && gunicorn --workers=4 --reload --max-requests=1000 school_464.wsgi -b 0.0.0.0:8000"
     container_name: django_prod
 
   nginx:
@@ -96,7 +96,7 @@ services:
     volumes:
       - ./docker/certbot/conf:/etc/letsencrypt:rw
       - ./docker/certbot/www:/var/www/certbot:rw
-    command: certonly --webroot --webroot-path=/var/www/certbot/ --email <your_email> --agree-tos --no-eff-email -d <domen_name (example.com)> -d <domen_name (www.example.com)>
+    command: certonly --webroot --webroot-path=/var/www/certbot/ --email <your_email> --agree-tos --no-eff-email -d <domain_name (example.com)> -d <domain_name (www.example.com)>
     depends_on:
       - nginx
     container_name: certbot_prod

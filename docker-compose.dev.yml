@@ -22,7 +22,7 @@ services:
     depends_on:
       - postgres
       - redis
-    command: sh -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     container_name: django_dev
 
   nginx:
