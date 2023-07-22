@@ -5,7 +5,7 @@
 <div class="news-container">
   {% for post in news %}
   <div class="news__post">
-    <a href="{{ post.get_absolute_url }}">
+    <a href="{{ post.get_absolute_url }}" title="{{ post.headline }}">
       <div class="news__header">
         {% if post.photo %}
         <img src="{{ post.photo.url }}" alt="Новость" loading="lazy" />
@@ -15,10 +15,10 @@
       </div>
     </a>
     <div class="news__body">
-      <a href="{{ post.get_absolute_url }}">
+      <a href="{{ post.get_absolute_url }}" title="{{ post.headline }}">
         <div class="news__title">
           <h3>{% if post.is_pinned %}<i class="fa-solid fa-thumbtack h5"></i>{% endif %}
-            {{ post.headline|truncatewords:3 }}</h3>
+            {{ post.headline|truncatewords:4 }}</h3>
         </div>
         <p>{{ post.text|striptags|truncatewords:10|safe }}</p>
       </a>

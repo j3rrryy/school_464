@@ -24,8 +24,9 @@
     <nav class="navbar navbar-static-top" style="background-color: rgba(22, 34, 57, 0.95)">
       <div class="container-fluid">
         <!-- logo -->
-        <a class="navbar-brand mb-0 h1 text-white" href="/">
-          <yellow><i class="fa-solid fa-graduation-cap d-inline-block"></i></yellow>
+        <a class="navbar-brand h1 mb-auto text-white" href="/">
+          <img class="d-inline-block align-text-top" src="{% static 'main/img/logo.svg' %}" id="logo"
+            alt="Логотип школы">
           ГБОУ школа №464
         </a>
 
@@ -76,25 +77,29 @@
 
             <!-- items from the database -->
             <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-              {% for key, value in menu %} {% if value %}
+              {% for key, value in menu %}
+              {% if value %}
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-wrap text-white" href="{{ key.get_absolute_url }}" role="button"
                   data-bs-toggle="dropdown" aria-expanded="false">
                   {{ key.menu_info }}
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu submenu">
                   {% for v in value %}
                   <li>
-                    <a class="dropdown-item text-wrap text-white" href="{{ v.get_absolute_url }}">{{ v.menu_info }}</a>
+                    <a class="dropdown-item submenu-item text-wrap text-white" href="{{ v.get_absolute_url }}">
+                      {{ v.menu_info }}</a>
                   </li>
                   {% endfor %}
                 </ul>
               </li>
               {% else %}
               <li class="nav-item">
-                <a class="nav-link text-wrap text-white" href="{{ key.get_absolute_url }}">{{ key.menu_info }}</a>
+                <a class="nav-link text-wrap text-white" href="{{ key.get_absolute_url }}">
+                  {{ key.menu_info }}</a>
               </li>
-              {% endif %}{% endfor %}
+              {% endif %}
+              {% endfor %}
             </ul>
           </div>
         </div>

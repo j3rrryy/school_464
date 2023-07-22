@@ -27,6 +27,10 @@ class News(models.Model):
         super().save(*args, **kwargs)
         cache.delete('news')  # delete the cache to display new data
 
+    def delete(self, *args, **kwargs):
+        super().delete(*args, **kwargs)
+        cache.delete('news')  # delete the cache to display updated data
+
     class Meta:
         verbose_name = "новость"
         verbose_name_plural = "Новости"
@@ -59,7 +63,11 @@ class Page(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        cache.delete('news')  # delete the cache to display new data
+        cache.delete('menu')  # delete the cache to display new data
+
+    def delete(self, *args, **kwargs):
+        super().delete(*args, **kwargs)
+        cache.delete('menu')  # delete the cache to display updated data
 
     class Meta:
         verbose_name = "страницу"
@@ -79,7 +87,11 @@ class Banner(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        cache.delete('news')  # delete the cache to display new data
+        cache.delete('banners')  # delete the cache to display new data
+
+    def delete(self, *args, **kwargs):
+        super().delete(*args, **kwargs)
+        cache.delete('banners')  # delete the cache to display updated data
 
     class Meta:
         verbose_name = "баннер"

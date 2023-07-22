@@ -26,7 +26,7 @@ def menu_data(request):
 
         cache.set(MENU, menu, 60 * 60)
 
-    return {'menu': menu.items()}
+    return {MENU: menu.items()}
 
 
 def banners_data(request):
@@ -50,4 +50,4 @@ def banners_data(request):
 
         cache.set(BANNERS, banners, 60 * 60)
 
-    return {'banners': banners}
+    return {BANNERS: banners}

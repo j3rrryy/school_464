@@ -9,7 +9,7 @@ class NewsSitemap(Sitemap):
     """
 
     changefreq = 'never'
-    priority = 0.9
+    priority = 0.7
     protocol = 'https'
 
     def items(self):
@@ -25,7 +25,7 @@ class PageSitemap(Sitemap):
     """
 
     changefreq = 'monthly'
-    priority = 0.6
+    priority = 1.0
     protocol = 'https'
 
     def items(self):

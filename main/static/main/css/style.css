@@ -1,9 +1,18 @@
-yellow {
-  color: #f5a425;
-}
-
 .hidden {
   display: none;
+}
+
+#logo {
+  max-height: 30px;
+}
+
+.submenu {
+  background-color: #242c38;
+  border-color: #f5a425;
+}
+
+.submenu-item {
+  background-color: #242c38;
 }
 
 #btn-back-to-top {
@@ -31,7 +40,7 @@ yellow {
 }
 
 #school__headline {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("/static/main/img/D9ZlUTnSG4E.webp");
   background-attachment: fixed;
 }
@@ -41,7 +50,7 @@ yellow {
 }
 
 #school__education {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("/static/main/img/LuD05L-0pQ4.webp");
   background-attachment: fixed;
 }
@@ -51,7 +60,7 @@ yellow {
 }
 
 #school__news {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("/static/main/img/oupakcNE4c8.webp");
   background-attachment: fixed;
 }
@@ -61,7 +70,7 @@ yellow {
 }
 
 #school__banners {
-  display: block;
+  display: flex;
   background-image: url("/static/main/img/choosing-bg.webp");
 }
 
