@@ -1,5 +1,7 @@
-{% extends 'main/base.html' %} {% load static %} {% block content %}
+{% extends 'main/base.html' %}
+{% load static %}
 
+{% block content %}
 <!-- school name -->
 <section class="school">
   <div class="school__container" id="school__headline">
@@ -28,8 +30,14 @@
         прилагаем усилия, чтобы найти индивидуальный подход к каждому ребенку.
         Не стесняйтесь обращаться и помните, что мы всегда рады вас видеть!
       </p>
+      <div class="d-flex pt-5">
+        <a class="btn m-auto school__button" href="/svedeniya-ob-obrazovatelnoj-organizacii/">
+          <p class="h4 mb-0 text-black">Сведения об образовательной организации</p>
+        </a>
+      </div>
     </div>
   </div>
+
 </section>
 
 <!-- education -->
@@ -96,7 +104,7 @@
         <i class="fa-solid fa-down-long h1 m-auto"></i>
       </div>
       <div class="d-flex pt-5">
-        <a class="btn m-auto" id="school__button" href="/news/">
+        <a class="btn m-auto school__button" href="/news/">
           <p class="h4 mb-0 text-black">Лента новостей</p>
         </a>
       </div>
@@ -109,20 +117,20 @@
   <div class="school__container" id="school__banners">
     <div class="row p-5 m-auto">
       <div class="col-xl-3 col-md-6 col-sm-12 text-center">
-        <img class="banner__img mx-auto d-block" src="{% static 'main\img\gosuslugi.webp' %}" alt="Госуслуги"
+        <img class="banner__img mx-auto d-block rounded" src="{% static 'main\img\gosuslugi.webp' %}" alt="Госуслуги"
           loading="lazy">
       </div>
       <div class="col-xl-3 col-md-6 col-sm-12 text-center">
-        <a href="https://www.gosuslugi.ru/600426/1/form"><img class="banner__img mx-auto d-block"
+        <a href="https://www.gosuslugi.ru/600426/1/form"><img class="banner__img mx-auto d-block rounded"
             src="{% static 'main\img\1grade.webp' %}" alt="Запись в первый класс" loading="lazy"></a>
       </div>
       <div class="col-xl-3 col-md-6 col-sm-12 text-center">
         <a href="https://revizorro.onf.ru/">
-          <img class="banner__img mx-auto d-block" src="{% static 'main\img\revizorro.webp' %}" alt="Народный ревизорро"
-            loading="lazy"></a>
+          <img class="banner__img mx-auto d-block rounded" src="{% static 'main\img\revizorro.webp' %}"
+            alt="Народный ревизорро" loading="lazy"></a>
       </div>
       <div class="col-xl-3 col-md-6 col-sm-12 text-center">
-        <img class="banner__img mx-auto d-block" src="{% static 'main\img\telefon-doveria.webp' %}"
+        <img class="banner__img mx-auto d-block rounded" src="{% static 'main\img\telefon-doveria.webp' %}"
           alt="Телефон доверия" loading="lazy">
       </div>
     </div>

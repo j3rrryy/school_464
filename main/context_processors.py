@@ -7,6 +7,10 @@ from .models import *
 
 
 def menu_data(request):
+    """
+    Create a menu with sub-items.
+    """
+
     MENU = 'menu'
 
     menu = cache.get(MENU)
@@ -30,6 +34,10 @@ def menu_data(request):
 
 
 def banners_data(request):
+    """
+    Create table with banners.
+    """
+
     BANNERS = 'banners'
 
     banners = cache.get(BANNERS)

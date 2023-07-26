@@ -7,7 +7,7 @@
 - Dynamic footer
 - Automatic cleaning of unused media files
 - Automatic conversion of images to WebP
-- Automatic DB backups (Celery)
+- Automatic DB backups to Yandex Disk (Celery)
 - Uses PostgreSQL
 - Supports caching (Redis)
 - Supports XML maps
@@ -19,6 +19,8 @@
 - Docker
 
 ## :hammer_and_wrench: Getting started
+
+- [Register](https://oauth.yandex.ru/client/new) your app in Yandex Disk, get your `ClientID`, then paste it in `https://oauth.yandex.ru/authorize?response_type=token&client_id=<ClientID>` and get your final token
 
 - Create `.env.dev` file with variables as in the file in the `examples/docker/env/` folder, then put it in the `docker/env/` folder
 
@@ -38,7 +40,7 @@
     docker compose -f docker-compose.dev.yml up --build -d
     ```
 
-- Run the **prod build** and get an SSL certificate
+- Run the **prod build** and get a SSL certificate
 
   - Build the project
 
@@ -61,7 +63,7 @@
   - Comment out the command in `docker-compose.yml`
 
     ```shell
-    # certonly --webroot --webroot-path=/var/www/certbot/ --email email@mail.com --agree-tos --no-eff-email -d example.com -d www.example.com
+    command: certonly --webroot --webroot-path=/var/www/certbot/ --email <your_email> --agree-tos --no-eff-email -d <domain (example.com)> -d <domain (www.example.com)>
     ```
 
   - Uncomment the part of nginx config in `docker/nginx/prod/django.conf`
@@ -101,7 +103,7 @@
   - Press `Ctrl+C` + `Ctrl+Shift+V`
 
     ```shell
-    python manage.py dumpdata --exclude auth.permission --exclude contenttypes > backup/<your_file_name>.json
+    python manage.py db_backup
     ```
 
 ---
@@ -117,7 +119,7 @@
   - Press `Ctrl+C` + `Ctrl+Shift+V`
 
     ```shell
-    python manage.py loaddata backup/<your_file_name>.json
+    python manage.py db_restore <your_backup_name>
     ```
 
 ### :x: Stop

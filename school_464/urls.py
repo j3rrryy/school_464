@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 
-from school_464 import settings
+from . import settings
 
 handler403 = 'main.views.tr_handler403'
 handler404 = 'main.views.tr_handler404'
@@ -26,7 +26,7 @@ handler500 = 'main.views.tr_handler500'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('ckeditor5/', include('django_ckeditor_5.urls')),
     path('', include('main.urls'))
 ]
 

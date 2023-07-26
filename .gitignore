@@ -2,9 +2,6 @@ mypy_cache/
 .vscode/
 venv/
 __pycache__/
-/static/
-media/footer_photos/
-media/news/
-media/pages/
+static/
 docker-compose.yml
 celerybeat-schedule

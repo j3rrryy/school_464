@@ -80,11 +80,12 @@
   margin-bottom: 40px;
 }
 
-#school__button {
+.school__button {
   background-color: #f5a425;
 }
 
-#school__button:hover {
+.school__button:hover {
+  color: #f5a425;
   background-color: #476ca0;
 }
 
@@ -110,7 +111,7 @@
 .post__photo-container img {
   max-height: 300px;
   object-fit: cover;
-  filter: brightness(40%);
+  filter: brightness(60%);
 }
 
 .post__header {

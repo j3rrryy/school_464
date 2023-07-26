@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.core.cache import cache
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 from django_resized import ResizedImageField
 
 
@@ -9,9 +9,9 @@ class News(models.Model):
     slug = models.SlugField(max_length=255, unique=True,
                             db_index=True, verbose_name='URL')
     headline = models.CharField(max_length=255, verbose_name='Заголовок')
-    text = RichTextField(verbose_name='Текст')
-    photo = ResizedImageField(upload_to='news/', blank=True,
-                              force_format='WEBP', quality=75, verbose_name='Фото')
+    text = CKEditor5Field(verbose_name='Текст', config_name='default')
+    photo = ResizedImageField(blank=True, force_format='WEBP',
+                              quality=75, verbose_name='Фото')
     is_pinned = models.BooleanField(default=False, verbose_name='Закреплено')
     date = models.DateField(auto_now_add=True, verbose_name="Дата")
     is_published = models.BooleanField(
@@ -45,7 +45,8 @@ class Page(models.Model):
 
     slug = models.SlugField(max_length=255, unique=True,
                             db_index=True, verbose_name='URL')
-    content = RichTextField(verbose_name='Содержимое страницы')
+    content = CKEditor5Field(verbose_name='Содержимое страницы',
+                             config_name='default')
     in_menu = models.BooleanField(default=True, verbose_name='Включен в меню')
     menu_info = models.CharField(max_length=255, verbose_name='Имя в меню')
     menu_position = models.IntegerField(
@@ -76,8 +77,8 @@ class Page(models.Model):
 
 class Banner(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название')
-    banner = ResizedImageField(
-        upload_to='footer_photos/', force_format='WEBP', quality=75, verbose_name='Баннер')
+    banner = ResizedImageField(force_format='WEBP', quality=75,
+                               verbose_name='Баннер')
     url = models.CharField(max_length=255, verbose_name='Ссылка')
     position = models.IntegerField(default=1, verbose_name='Позиция')
     is_enabled = models.BooleanField(default=True, verbose_name='Включен')

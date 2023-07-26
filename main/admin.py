@@ -1,11 +1,14 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from ckeditor.widgets import CKEditorWidget
 
 from .models import *
 
 
 def make_published(modeladmin, request, queryset):
+    """
+    Publish the news.
+    """
+
     queryset.update(is_published=True)
 
 
@@ -13,6 +16,10 @@ make_published.short_description = "Опубликовать выбранные 
 
 
 def make_unpublished(modeladmin, request, queryset):
+    """
+    Unpublish the news.
+    """
+
     queryset.update(is_published=False)
 
 
@@ -20,6 +27,10 @@ make_unpublished.short_description = "Снять выбранные новост
 
 
 def pin(modeladmin, request, queryset):
+    """
+    Pin the news.
+    """
+
     queryset.update(is_pinned=True)
 
 
@@ -27,6 +38,10 @@ pin.short_description = "Закрепить"
 
 
 def unpin(modeladmin, request, queryset):
+    """
+    Unpin the news.
+    """
+
     queryset.update(is_pinned=False)
 
 
@@ -34,6 +49,10 @@ unpin.short_description = "Открепить"
 
 
 def enable_item(modeladmin, request, queryset):
+    """
+    Enable the page in the menu.
+    """
+
     queryset.update(in_menu=True)
 
 
@@ -41,6 +60,10 @@ enable_item.short_description = "Включить в меню"
 
 
 def disable_item(modeladmin, request, queryset):
+    """
+    Remove the page from the menu.
+    """
+
     queryset.update(in_menu=False)
 
 
@@ -48,6 +71,10 @@ disable_item.short_description = "Убрать из меню"
 
 
 def enable_banner(modeladmin, request, queryset):
+    """
+    Enable banner.
+    """
+
     queryset.update(is_enabled=True)
 
 
@@ -55,6 +82,10 @@ enable_banner.short_description = "Включить"
 
 
 def disable_banner(modeladmin, request, queryset):
+    """
+    Disable banner.
+    """
+
     queryset.update(is_enabled=False)
 
 
@@ -90,10 +121,6 @@ class PageAdmin(admin.ModelAdmin):
               'is_subpage', 'parent_page', 'menu_position')
     prepopulated_fields = {'slug': ('menu_info',)}
     actions = [enable_item, disable_item]
-
-    formfield_overrides = {
-        models.TextField: {'widget': CKEditorWidget},
-    }
 
 
 class BannerAdmin(admin.ModelAdmin):

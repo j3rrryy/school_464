@@ -9,8 +9,6 @@ Dockerfile
 *.md
 examples
 .github
-media/footer_photos/**
-media/pages/**
-media/news/**
+media/**
 LICENSE
 celerybeat-schedule

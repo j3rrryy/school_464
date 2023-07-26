@@ -19,6 +19,8 @@ from celery.schedules import crontab
 
 env = environ.Env()
 
+
+# The .env file used (.env.dev / .env.prod)
 environ.Env.read_env(env_file=Path('./docker/env/.env.dev'))
 
 
@@ -52,7 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
-    'ckeditor',
+    'django_ckeditor_5',
     'django_cleanup',
     'debug_toolbar',
     'main.apps.MainConfig',
@@ -89,38 +91,9 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'school_464.wsgi.application'
 
-# CKEditor config
-
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': [
-            ['Format', 'Bold', 'Italic', 'Underline', 'Strike',
-                'Subscript', 'Superscript', 'RemoveFormat'],
-            ['NumberedList', 'BulletedList', 'Blockquote', 'Code'],
-            ['Link', 'Unlink', 'Anchor'],
-            ['Image', 'Table', 'HorizontalRule', 'SpecialChar'],
-            ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-            ['TextColor', 'BGColor'],
-            ['Source'],
-            ['Maximize'],
-        ],
-        'width': '100%',
-        'height': 500,
-        'filebrowserUploadUrl': '/ckeditor/upload/',
-        'toolbarCanCollapse': True,
-        'allowedContent': True,
-        'extraPlugins': ','.join([
-            'autogrow',
-            'image2',
-            'div',
-            'autolink',
-            'placeholder',
-        ]),
-        'autogrow_max_height': 800,
-    }
-}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -135,7 +108,6 @@ DATABASES = {
         'PORT': env('POSTGRES_PORT'),
     }
 }
-
 
 CACHES = {
     "default": {
@@ -157,10 +129,6 @@ CELERY_TIMEZONE = 'Europe/Moscow'
 CELERY_BEAT_SCHEDULE = {
     'backup_database': {
         'task': 'main.tasks.dbbackup_task',
-        'schedule': crontab(minute='0', hour='0', day_of_month='1'),
-    },
-    'delete_backup': {
-        'task': 'main.tasks.dbbackup_cleanup_task',
         'schedule': crontab(minute='0', hour='0', day_of_month='1'),
     },
 }
@@ -207,8 +175,7 @@ STATICFILES_DIRS = []
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
-CKEDITOR_UPLOAD_PATH = os.path.join(BASE_DIR, 'media/pages/')
+BACKUP_ROOT = os.path.join(BASE_DIR, 'backups')
 
 DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': lambda request: DEBUG,
@@ -222,3 +189,142 @@ INTERNAL_IPS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# CKEditor 5 config
+
+customColorPalette = [
+    {"color": "hsl(4, 90%, 58%)", "label": "Red"},
+    {"color": "hsl(340, 82%, 52%)", "label": "Pink"},
+    {"color": "hsl(291, 64%, 42%)", "label": "Purple"},
+    {"color": "hsl(262, 52%, 47%)", "label": "Deep Purple"},
+    {"color": "hsl(231, 48%, 48%)", "label": "Indigo"},
+    {"color": "hsl(207, 90%, 54%)", "label": "Blue"},
+]
+
+CKEDITOR_5_CONFIGS = {
+    "default": {
+        "language": "ru",
+        "blockToolbar": [
+            "paragraph",
+            "heading1",
+            "heading2",
+            "heading3",
+            "|",
+            "bulletedList",
+            "numberedList",
+            "|",
+            "blockQuote",
+        ],
+        "toolbar": [
+            "heading",
+            "codeBlock",
+            "|",
+            "outdent",
+            "indent",
+            "|",
+            "bold",
+            "italic",
+            "link",
+            "underline",
+            "strikethrough",
+            "code",
+            "subscript",
+            "superscript",
+            "highlight",
+            "|",
+            "bulletedList",
+            "numberedList",
+            "todoList",
+            "|",
+            "blockQuote",
+            "insertImage",
+            "|",
+            "fontSize",
+            "fontFamily",
+            "fontColor",
+            "fontBackgroundColor",
+            "mediaEmbed",
+            "removeFormat",
+            "insertTable",
+            "sourceEditing",
+        ],
+        "image": {
+            "toolbar": [
+                "imageTextAlternative",
+                "|",
+                "imageStyle:alignLeft",
+                "imageStyle:alignRight",
+                "imageStyle:alignCenter",
+                "imageStyle:side",
+                "|",
+                "toggleImageCaption",
+                "|"
+            ],
+            "styles": [
+                "full",
+                "side",
+                "alignLeft",
+                "alignRight",
+                "alignCenter",
+            ],
+        },
+        "table": {
+            "contentToolbar": [
+                "tableColumn",
+                "tableRow",
+                "mergeTableCells",
+                "tableProperties",
+                "tableCellProperties",
+            ],
+            "tableProperties": {
+                "borderColors": customColorPalette,
+                "backgroundColors": customColorPalette,
+            },
+            "tableCellProperties": {
+                "borderColors": customColorPalette,
+                "backgroundColors": customColorPalette,
+            },
+        },
+        "heading": {
+            "options": [
+                {
+                    "model": "paragraph",
+                    "title": "Paragraph",
+                    "class": "ck-heading_paragraph",
+                },
+                {
+                    "model": "heading1",
+                    "view": "h1",
+                    "title": "Heading 1",
+                    "class": "ck-heading_heading1",
+                },
+                {
+                    "model": "heading2",
+                    "view": "h2",
+                    "title": "Heading 2",
+                    "class": "ck-heading_heading2",
+                },
+                {
+                    "model": "heading3",
+                    "view": "h3",
+                    "title": "Heading 3",
+                    "class": "ck-heading_heading3",
+                },
+            ]
+        },
+        "list": {
+            "properties": {
+                "styles": True,
+                "startIndex": True,
+                "reversed": True,
+            }
+        },
+        "htmlSupport": {
+            "allow": [
+                {"name": "/.*/", "attributes": True,
+                    "classes": True, "styles": True}
+            ]
+        },
+    },
+}

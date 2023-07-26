@@ -1,34 +1,41 @@
 import os
 import glob
-from datetime import datetime
 
-from django.core.management import call_command
 from celery import shared_task
+
+from .utils import db_backup, yadisk_setup
 
 
 @shared_task
 def dbbackup_task():
     """
-    Do a database backup
+    Do a backup of the db and your files +
+    upload it to Yandex Disk
+    and delete an old backup +
+    remove it from Yandex Disk.
     """
-    call_command(
-        'dumpdata',
-        '--natural-foreign',
-        '--natural-primary',
-        '--exclude=contenttypes',
-        '--exclude=admin.logentry',
-        '--indent=4',
-        f'--output=backup/database-{datetime.now().strftime("%Y-%m-%d-%H-%M-%S")}.json'
-    )
 
+    # do a db backup
+    db_backup()
 
-@shared_task
-def dbbackup_cleanup_task():
-    """
-    Delete an old database backup
-    """
-    backup_files = glob.glob("backup/database-*.json")
-    backup_files.sort(key=os.path.getctime)
-    if len(backup_files) > 2:
-        oldest_backup = backup_files[0]
-        os.remove(oldest_backup)
+    # delete an old db backup
+
+    backups = glob.glob("backups/backup-*.zip")
+
+    if len(backups) > 5:
+
+        # the oldest backups are located at the beginning
+        backups.sort(key=os.path.getctime)
+
+        # get only backups for deletion
+        oldest_backups = backups[:-5]
+
+        # delete old backups
+        for archive in oldest_backups:
+            os.remove(archive)
+
+        # delete the same backups from Yandex Disk
+        yadisk = yadisk_setup()
+        for archive in oldest_backups:
+            archive_name = os.path.basename(archive)
+            yadisk.remove(f'/backups/{archive_name}')
