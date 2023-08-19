@@ -71,7 +71,7 @@ MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
-ROOT_URLCONF = 'school_464.urls'
+ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
     {
@@ -92,7 +92,7 @@ TEMPLATES = [
 ]
 
 
-WSGI_APPLICATION = 'school_464.wsgi.application'
+WSGI_APPLICATION = 'backend.wsgi.application'
 
 
 # Database

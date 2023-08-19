@@ -22,7 +22,7 @@ services:
     depends_on:
       - postgres
       - redis
-    command: bash -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && gunicorn --workers=4 --reload --max-requests=1000 school_464.wsgi -b 0.0.0.0:8000"
+    command: bash -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && gunicorn --workers=4 --reload --max-requests=1000 backend.wsgi -b 0.0.0.0:8000"
     container_name: django_prod
 
   nginx:
@@ -68,7 +68,7 @@ services:
   celery-worker:
     build: .
     restart: always
-    command: celery -A school_464 worker --loglevel=info
+    command: celery -A backend worker --loglevel=info
     env_file:
       - docker/env/.env.prod
     volumes:
@@ -81,7 +81,7 @@ services:
   celery-beat:
     build: .
     restart: always
-    command: celery -A school_464 beat --loglevel=info
+    command: celery -A backend beat --loglevel=info
     env_file:
       - docker/env/.env.prod
     volumes:
@@ -96,7 +96,7 @@ services:
     volumes:
       - ./docker/certbot/conf:/etc/letsencrypt:rw
       - ./docker/certbot/www:/var/www/certbot:rw
-    command: certonly --webroot --webroot-path=/var/www/certbot/ --email <your_email> --agree-tos --no-eff-email -d <domain_name (example.com)> -d <domain_name (www.example.com)>
+    command: certonly --webroot --webroot-path=/var/www/certbot/ --email <your_email> --agree-tos --no-eff-email -d <domain (example.com)> -d <domain (www.example.com)>
     depends_on:
       - nginx
     container_name: certbot_prod

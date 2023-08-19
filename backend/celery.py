@@ -4,9 +4,9 @@ from celery import Celery
 
 
 # Set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'school_464.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
 
-app = Celery('school_464')
+app = Celery('backend')
 
 # Using a string here means the worker doesn't have to serialize
 # the configuration object to child processes.

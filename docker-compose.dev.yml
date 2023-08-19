@@ -64,7 +64,7 @@ services:
   celery-worker:
     build: .
     restart: always
-    command: celery -A school_464 worker --loglevel=debug
+    command: celery -A backend worker --loglevel=debug
     env_file:
       - docker/env/.env.dev
     volumes:
@@ -77,7 +77,7 @@ services:
   celery-beat:
     build: .
     restart: always
-    command: celery -A school_464 beat --loglevel=debug
+    command: celery -A backend beat --loglevel=debug
     env_file:
       - docker/env/.env.dev
     volumes:

@@ -7,8 +7,8 @@
 <!-- news cards -->
 <div class="news-container">
   {% for post in news %}
-  <div class="news__post">
-    <a href="{{ post.get_absolute_url }}" title="{{ post.headline }}">
+  <a href="{{ post.get_absolute_url }}" title="{{ post.headline }}">
+    <div class="news__post">
       <div class="news__header">
         {% if post.photo %}
         <img src="{{ post.photo.url }}" alt="Новость" loading="lazy" />
@@ -16,20 +16,18 @@
         <img src="{% static 'main\img\halfofthemos.webp' %}" alt="Новость" loading="lazy" />
         {% endif %}
       </div>
-    </a>
-    <div class="news__body">
-      <a href="{{ post.get_absolute_url }}" title="{{ post.headline }}">
+      <div class="news__body">
         <div class="news__title">
           <h3>{% if post.is_pinned %}<i class="fa-solid fa-thumbtack h5"></i>{% endif %}
             {{ post.headline|truncatewords:4 }}</h3>
         </div>
         <p>{{ post.text|striptags|truncatewords:10|safe }}</p>
-      </a>
-      <div class="d-flex ms-auto mt-auto">
-        <p class="news__date m-0">{{ post.date }}</p>
+        <div class="d-flex ms-auto mt-auto">
+          <p class="news__date m-0">{{ post.date }}</p>
+        </div>
       </div>
     </div>
-  </div>
+  </a>
   {% endfor %}
 </div>
 

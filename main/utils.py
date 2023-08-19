@@ -9,7 +9,7 @@ from django.core.management import call_command
 from yadisk import YaDisk
 from yadisk.exceptions import PathNotFoundError
 
-from school_464.settings import env, MEDIA_ROOT, BACKUP_ROOT
+from backend.settings import env, MEDIA_ROOT, BACKUP_ROOT
 
 
 def yadisk_setup():
