@@ -92,6 +92,22 @@
 
 ---
 
+- Run tests
+
+  - Get access to the container
+
+     ```shell
+    docker exec -it <container_name> sh
+    ```
+
+  - Press `Ctrl+C` + `Ctrl+Shift+V`
+
+    ```shell
+    python manage.py test main
+    ```
+
+---
+
 - Create a database backup file
 
   - Get access to the container
