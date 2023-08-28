@@ -9,20 +9,22 @@ from django.core.management import call_command
 from yadisk import YaDisk
 from yadisk.exceptions import PathNotFoundError
 
-from backend.settings import env, MEDIA_ROOT, BACKUP_ROOT
+from .models import YandexDiskToken
+from backend.settings import MEDIA_ROOT, BACKUP_ROOT
 
 
-def yadisk_setup():
+def yadisk_setup() -> YaDisk | None:
     """
     Get a YaDisk object, check the token
     and create a folder for backups if not exists.
     """
 
-    yadisk = YaDisk(token=env('YADISK_TOKEN'))
+    yadisk = YaDisk(token=YandexDiskToken.objects.first().token)
 
     # checks if the token is valid
     if not yadisk.check_token():
-        print('TOKEN IS NOT VALID!')
+        print('THE TOKEN IS INVALID OR MISSING FROM THE DB!')
+        return None
 
     # create the backup folder if not exists
     if not yadisk.exists('/backups'):
@@ -100,10 +102,11 @@ def db_backup():
     # delete the unarchived backup folder
     shutil.rmtree(backup_path)
 
-    # upload the backup folder
-    yadisk.upload(f'{backup_path}.zip',
-                  f'/backups/{backup_name}.zip',
-                  overwrite=True)
+    if yadisk:
+        # upload the backup folder
+        yadisk.upload(f'{backup_path}.zip',
+                      f'/backups/{backup_name}.zip',
+                      overwrite=True)
 
 
 def db_restore(backup_name: str):
@@ -122,10 +125,13 @@ def db_restore(backup_name: str):
     else:
         yadisk = yadisk_setup()
 
-        try:
-            # try to download the backup from
-            # Yandex Disk to the local folder
-            yadisk.download(f'/backups/{backup_name}', backup)
-            restore_backup(backup)
-        except PathNotFoundError:
+        if yadisk:
+            try:
+                # try to download the backup from
+                # Yandex Disk to the local folder
+                yadisk.download(f'/backups/{backup_name}', backup)
+                restore_backup(backup)
+            except PathNotFoundError:
+                raise FileNotFoundError
+        else:
             raise FileNotFoundError

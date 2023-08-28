@@ -1,3 +1,5 @@
+from datetime import date, timedelta
+
 from django.db import models
 from django.urls import reverse
 from django.core.cache import cache
@@ -13,7 +15,7 @@ class News(models.Model):
     photo = ResizedImageField(blank=True, force_format='WEBP',
                               quality=75, verbose_name='Фото')
     is_pinned = models.BooleanField(default=False, verbose_name='Закреплено')
-    date = models.DateField(auto_now_add=True, verbose_name="Дата")
+    date = models.DateField(auto_now_add=True, verbose_name='Дата')
     is_published = models.BooleanField(
         default=True, verbose_name='Опубликовано')
 
@@ -32,8 +34,8 @@ class News(models.Model):
         cache.delete('news')  # delete the cache to display updated data
 
     class Meta:
-        verbose_name = "новость"
-        verbose_name_plural = "Новости"
+        verbose_name = 'новость'
+        verbose_name_plural = 'Новости'
 
 
 class Page(models.Model):
@@ -71,8 +73,8 @@ class Page(models.Model):
         cache.delete('menu')  # delete the cache to display updated data
 
     class Meta:
-        verbose_name = "страницу"
-        verbose_name_plural = "Страницы"
+        verbose_name = 'страницу'
+        verbose_name_plural = 'Страницы'
 
 
 class Banner(models.Model):
@@ -95,5 +97,18 @@ class Banner(models.Model):
         cache.delete('banners')  # delete the cache to display updated data
 
     class Meta:
-        verbose_name = "баннер"
-        verbose_name_plural = "Баннеры"
+        verbose_name = 'баннер'
+        verbose_name_plural = 'Баннеры'
+
+
+class YandexDiskToken(models.Model):
+    token = models.CharField(max_length=60, verbose_name='Токен Яндекс Диска')
+    expiration_date = models.DateField(default=date.today() + timedelta(weeks=52),
+                                       verbose_name='Дата истечения')
+
+    def __str__(self):
+        return str(self.token)
+
+    class Meta:
+        verbose_name = 'токен Яндекс Диска'
+        verbose_name_plural = 'Токен Яндекс Диска'

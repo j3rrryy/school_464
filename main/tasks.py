@@ -38,4 +38,7 @@ def dbbackup_task():
         yadisk = yadisk_setup()
         for archive in oldest_backups:
             archive_name = os.path.basename(archive)
-            yadisk.remove(f'/backups/{archive_name}')
+            path = f'/backups/{archive_name}'
+
+            if yadisk.exists(path):
+                yadisk.remove(path)

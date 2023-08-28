@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from main.models import News, Page, Banner
+from main.models import *
 
 
 class MainNewsModelTestCase(TestCase):
@@ -117,5 +117,22 @@ class MainBannerModelTestCase(TestCase):
 
         expected = "Test Banner"
         actual = str(self.test_banner)
+
+        self.assertEqual(expected, actual)
+
+
+class MainTokenModelTestCase(TestCase):
+    def setUp(self):
+        self.test_token = YandexDiskToken.objects.create(
+            token='abc12345'
+        )
+
+    def test_str(self):
+        """
+        Test the __str__ method
+        """
+
+        expected = "abc12345"
+        actual = str(self.test_token)
 
         self.assertEqual(expected, actual)

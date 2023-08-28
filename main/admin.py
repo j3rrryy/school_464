@@ -92,11 +92,12 @@ def disable_banner(modeladmin, request, queryset):
 disable_banner.short_description = "Выключить"
 
 
+@admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('id', 'slug', 'headline', 'get_photo',
-                    'is_pinned', 'is_published')
+                    'is_pinned', 'date', 'is_published')
     list_display_links = ('id', 'slug', 'headline')
-    search_fields = ('headline', 'text')
+    search_fields = ('headline', 'text', 'date')
     prepopulated_fields = {'slug': ('headline',)}
     fields = ('headline', 'slug', 'text', 'photo',
               'get_photo', 'is_pinned', 'is_published')
@@ -111,6 +112,7 @@ class NewsAdmin(admin.ModelAdmin):
     get_photo.short_description = "Миниатюра"
 
 
+@admin.register(Page)
 class PageAdmin(admin.ModelAdmin):
     list_display = ('id', 'slug', 'in_menu', 'menu_info',
                     'menu_position', 'is_subpage', 'parent_page')
@@ -123,6 +125,7 @@ class PageAdmin(admin.ModelAdmin):
     actions = [enable_item, disable_item]
 
 
+@admin.register(Banner)
 class BannerAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'get_banner',
                     'url', 'position', 'is_enabled')
@@ -140,6 +143,11 @@ class BannerAdmin(admin.ModelAdmin):
     get_banner.short_description = "Миниатюра"
 
 
-admin.site.register(News, NewsAdmin)
-admin.site.register(Page, PageAdmin)
-admin.site.register(Banner, BannerAdmin)
+@admin.register(YandexDiskToken)
+class YandexDiskTokenAdmin(admin.ModelAdmin):
+    list_display = ('token', 'expiration_date')
+    list_display_links = ('token', )
+    fields = ('token', )
+
+    def has_add_permission(self, *args, **kwargs):
+        return not YandexDiskToken.objects.exists()

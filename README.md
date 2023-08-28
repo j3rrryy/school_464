@@ -20,8 +20,6 @@
 
 ## :hammer_and_wrench: Getting started
 
-- [Register](https://oauth.yandex.ru/client/new) your app in Yandex Disk, get your `ClientID`, then paste it in `https://oauth.yandex.ru/authorize?response_type=token&client_id=<ClientID>` and get your final token
-
 - Create `.env.dev` file with variables as in the file in the `examples/docker/env/` folder, then put it in the `docker/env/` folder
 
 - **(For prod)** Create `.env.prod` file with variables as in the file in the `examples/docker/env/` folder, then put it in the `docker/env/` folder
@@ -31,6 +29,8 @@
 - **(For prod)** Create `docker-compose.yml` file with your data as in the `examples/` folder, then put it in the `/` folder
 
 - **(For prod)** Change `settings.py`: `environ.Env.read_env(env_file=Path('./docker/env/.env.dev'))` ---> `environ.Env.read_env(env_file=Path('./docker/env/.env.prod'))`
+
+- **(For backups to Yandex Disk)** [Register](https://oauth.yandex.ru/client/new) your app in Yandex Disk, grant all `cloud` privileges to use Yandex Disk API, get your `ClientID`, then paste it in `https://oauth.yandex.ru/authorize?response_type=token&client_id=<ClientID>`, get your final token and use it in the admin panel
 
 ### :rocket: Start
 
