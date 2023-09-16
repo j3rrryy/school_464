@@ -55,23 +55,22 @@
         <!-- menu -->
         <button class="zoom-elem navbar-toggler" title="Меню" type="button" data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
-          style="color: #fff; background-color: #f5a425; box-shadow: none">
-          <span class="navbar-toggler-icon"></span>
+          style="color: var(--bs-white); background-color: var(--main-color-1); box-shadow: none">
+          <span class="navbar-toggler-icon" data-bs-theme="dark"></span>
         </button>
         <div class="offcanvas offcanvas-end" id="offcanvasNavbar" tabindex="-1" aria-labelledby="offcanvasNavbarLabel"
-          style="background-color: #242c38; color: #fff">
+          style="background-color: var(--main-color-2); color: var(--bs-white)">
           <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Меню</h5>
-            <button class="btn-close" title="Закрыть" type="button" data-bs-dismiss="offcanvas"
+            <button class="btn-close" title="Закрыть" type="button" data-bs-dismiss="offcanvas" data-bs-theme="dark"
               aria-label="Закрыть"></button>
           </div>
           <div class="offcanvas-body">
             <form class="d-flex mt-3 mb-3" role="search" method="get" action="/search/">
               <input class="form-control me-2" name="query" type="search" placeholder="Поиск" aria-label="Поиск" />
-              <button class="btn" title="Поиск" type="submit" style="
-                    background-color: #f5a425;
-                    color: #242c38;
-                    border-color: #242c38;
+              <button class="btn" title="Поиск" type="submit" data-bs-theme="dark" style="
+                    background-color: var(--main-color-1);
+                    color: var(--main-color-2);
                   ">
                 Поиск
               </button>
@@ -109,8 +108,8 @@
     </nav>
 
     <!-- "back to top" button -->
-    <button class="btn btn-floating" id="btn-back-to-top" type="button"
-      style="background-color: #f5a425; color: #242c38; border-color: #242c38">
+    <button class="btn btn-floating" id="btn-back-to-top" type="button" data-bs-theme="dark"
+      style="background-color: var(--main-color-1); color: var(--main-color-2);">
       <i class="fas fa-arrow-up"></i>
     </button>
 

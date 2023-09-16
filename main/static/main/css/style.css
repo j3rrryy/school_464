@@ -1,5 +1,13 @@
-.hidden {
-  display: none;
+:root {
+  --main-color-1: #f5a425;
+  --main-color-2: #242c38;
+  --main-color-3: #476ca0;
+  --error-color: #58151c;
+  --error-bg-color: #cf9399;
+  --error-bg-color-hover: #8a5359;
+  --news-color: #10182f;
+  --date-color: #242c38;
+  --footer-color: #152036;
 }
 
 #logo {
@@ -8,11 +16,11 @@
 
 .zoom-navbar-elem {
   transition: all 0.4s ease;
-  color: #fff !important;
+  color: var(--bs-white) !important;
 }
 
 .zoom-navbar-elem:hover {
-  color: #f5a425 !important;
+  color: var(--main-color-1) !important;
   transform: scale(1.3)
 }
 
@@ -25,8 +33,8 @@
 }
 
 .btn-close {
-  background-color: #f5a425 !important;
-  color: #242c38 !important;
+  background-color: var(--main-color-1) !important;
+  color: var(--main-color-2) !important;
   transition: all 0.4s ease;
 }
 
@@ -35,12 +43,12 @@
 }
 
 .submenu {
-  background-color: #242c38 !important;
-  border-color: #f5a425 !important;
+  background-color: var(--main-color-2) !important;
+  border-color: var(--main-color-1) !important;
 }
 
 .submenu-item {
-  background-color: #242c38 !important;
+  background-color: var(--main-color-2) !important;
 }
 
 #btn-back-to-top {
@@ -65,7 +73,7 @@
 .school__container {
   display: flex;
   width: 100%;
-  color: #ffffff;
+  color: var(--bs-white);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -114,14 +122,14 @@
 }
 
 .school__button {
-  color: #000 !important;
-  background-color: #f5a425 !important;
+  color: var(--bs-black) !important;
+  background-color: var(--main-color-1) !important;
   transition: all 0.4s ease !important;
 }
 
 .school__button:hover {
-  color: #ffffff !important;
-  background-color: #476ca0 !important;
+  color: var(--bs-white) !important;
+  background-color: var(--main-color-3) !important;
   transform: scale(1.1)
 }
 
@@ -155,7 +163,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #ffffff;
+  color: var(--bs-white);
   font-size: 36px;
   text-align: center;
   z-index: 2;
@@ -167,7 +175,7 @@
   max-width: 100%;
   align-items: center;
   justify-content: space-evenly;
-  color: #10182f;
+  color: var(--news-color);
   flex-wrap: wrap;
 }
 
@@ -175,7 +183,7 @@
   margin: 10px;
   width: 300px;
   max-height: 458px;
-  background-color: #ffffff;
+  background-color: var(--bs-white);
   border-radius: 10px;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
   overflow: hidden;
@@ -209,23 +217,23 @@
 
 a {
   text-decoration: none !important;
-  color: #476ca0 !important;
+  color: var(--main-color-3) !important;
 }
 
 a:hover {
   text-decoration: none;
-  color: #f5a425 !important;
+  color: var(--main-color-1) !important;
 }
 
 #error-link {
-  color: #58151c !important;
-  background-color: #cf9399 !important;
+  color: var(--error-color) !important;
+  background-color: var(--error-bg-color) !important;
   transition: all 0.4s ease !important;
 }
 
 #error-link:hover {
-  color: #ffffff !important;
-  background-color: #8a5359 !important;
+  color: var(--bs-white) !important;
+  background-color: var(--error-bg-color-hover) !important;
   transform: scale(1.05)
 }
 
@@ -233,15 +241,15 @@ a:hover {
 .news__date {
   margin: 10px 0px;
   min-width: 106px;
-  color: #242c38;
+  color: var(--date-color);
   opacity: 0.6;
 }
 
 .footer {
   padding: 15px 30px 10px;
-  color: #ffffff;
+  color: var(--bs-white);
   flex-shrink: 0;
-  background-color: #152036;
+  background-color: var(--footer-color);
   background-image: url("/static/main/img/choosing-bg.webp");
   background-repeat: no-repeat;
   background-size: cover;
