@@ -193,4 +193,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Froala Editor config
 
-FRAOLA_EDITOR_THIRD_PARTY = ('embedly', 'image_tui', 'line_height', 'special_characters')
+FROALA_EDITOR_THIRD_PARTY = ('embedly', 'image_tui', 'line_height', 'special_characters')
