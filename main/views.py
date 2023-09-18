@@ -42,15 +42,13 @@ class NewsView(ListView):
         return context
 
     def get_queryset(self) -> QuerySet[Any]:
-        NEWS = 'news'
-
-        news = cache.get(NEWS)
+        news = cache.get('news')
 
         if not news:
             news = super().get_queryset()
             news = news.filter(is_published=True).order_by(
                 F('is_pinned').desc(), '-date')
-            cache.set(NEWS, news, 60 * 10)
+            cache.set('news', news, 60 * 10)
 
         return news
 

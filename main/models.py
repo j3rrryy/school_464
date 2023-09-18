@@ -1,9 +1,7 @@
-from datetime import date, timedelta
-
 from django.db import models
 from django.urls import reverse
 from django.core.cache import cache
-from django_ckeditor_5.fields import CKEditor5Field
+from froala_editor.fields import FroalaField
 from django_resized import ResizedImageField
 
 
@@ -11,7 +9,7 @@ class News(models.Model):
     slug = models.SlugField(max_length=255, unique=True,
                             db_index=True, verbose_name='URL')
     headline = models.CharField(max_length=255, verbose_name='Заголовок')
-    text = CKEditor5Field(verbose_name='Текст', config_name='default')
+    text = FroalaField(verbose_name='Текст')
     photo = ResizedImageField(blank=True, force_format='WEBP',
                               quality=75, verbose_name='Фото')
     is_pinned = models.BooleanField(default=False, verbose_name='Закреплено')
@@ -27,11 +25,17 @@ class News(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        cache.delete('news')  # delete the cache to display new data
+
+        # delete the cache to display new data
+        cache.delete('news')
+        cache.delete(f'post_{self.slug}')
 
     def delete(self, *args, **kwargs):
         super().delete(*args, **kwargs)
-        cache.delete('news')  # delete the cache to display updated data
+
+        # delete the cache to display new data
+        cache.delete('news')
+        cache.delete(f'post_{self.slug}')
 
     class Meta:
         verbose_name = 'новость'
@@ -47,8 +51,7 @@ class Page(models.Model):
 
     slug = models.SlugField(max_length=255, unique=True,
                             db_index=True, verbose_name='URL')
-    content = CKEditor5Field(verbose_name='Содержимое страницы',
-                             config_name='default')
+    content = FroalaField(verbose_name='Содержимое страницы')
     in_menu = models.BooleanField(default=True, verbose_name='Включен в меню')
     menu_info = models.CharField(max_length=255, verbose_name='Имя в меню')
     menu_position = models.IntegerField(
@@ -66,11 +69,17 @@ class Page(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        cache.delete('menu')  # delete the cache to display new data
+
+        # delete the cache to display new data
+        cache.delete('menu')
+        cache.delete(f'page_{self.slug}')
 
     def delete(self, *args, **kwargs):
         super().delete(*args, **kwargs)
-        cache.delete('menu')  # delete the cache to display updated data
+
+        # delete the cache to display new data
+        cache.delete('menu')
+        cache.delete(f'page_{self.slug}')
 
     class Meta:
         verbose_name = 'страницу'
@@ -103,8 +112,7 @@ class Banner(models.Model):
 
 class YandexDiskToken(models.Model):
     token = models.CharField(max_length=60, verbose_name='Токен Яндекс Диска')
-    expiration_date = models.DateField(default=date.today() + timedelta(weeks=52),
-                                       verbose_name='Дата истечения')
+    expiration_date = models.DateField(auto_now=True, verbose_name='Дата установки')
 
     def __str__(self):
         return str(self.token)

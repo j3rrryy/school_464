@@ -19,11 +19,15 @@ def yadisk_setup() -> YaDisk | None:
     and create a folder for backups if not exists.
     """
 
-    yadisk = YaDisk(token=YandexDiskToken.objects.first().token)
+    if token := YandexDiskToken.objects.first():
+        yadisk = YaDisk(token=token.token)
+    else:
+        print('THE TOKEN IS MISSING FROM THE DB!')
+        return None
 
     # checks if the token is valid
     if not yadisk.check_token():
-        print('THE TOKEN IS INVALID OR MISSING FROM THE DB!')
+        print('THE TOKEN IS INVALID!')
         return None
 
     # create the backup folder if not exists
@@ -43,6 +47,8 @@ def restore_backup(backup_path: str):
         backup.extractall(BACKUP_ROOT)
 
     # restore the db
+    print('Restoring the database...')
+    call_command('flush', '--no-input')
     call_command('loaddata', 'backups/database.json')
 
     # remove used file
@@ -55,6 +61,7 @@ def restore_backup(backup_path: str):
             os.remove(file_path)
 
     # copy new files
+    print('Restoring media files...')
     for filename in os.listdir(os.path.join(BACKUP_ROOT, 'media')):
         src_file = os.path.join(BACKUP_ROOT, 'media', filename)
         dst_file = os.path.join(MEDIA_ROOT, filename)
@@ -70,6 +77,7 @@ def db_backup():
     upload it to Yandex Disk.
     """
 
+    yadisk = yadisk_setup()
     backup_name = f'backup-{datetime.now().strftime("%Y-%m-%d-%H-%M-%S")}'
     backup_path = os.path.join(BACKUP_ROOT, backup_name)
     media_path = os.path.join(backup_path, 'media')
@@ -78,6 +86,7 @@ def db_backup():
     os.mkdir(backup_path)
 
     # create the db backup file
+    print('Creating the database backup file...')
     call_command(
         'dumpdata',
         '--natural-foreign',
@@ -88,12 +97,11 @@ def db_backup():
         f'--output=backups/{backup_name}/database.json'
     )
 
-    yadisk = yadisk_setup()
-
     # create folder for media files
     os.mkdir(media_path)
 
     # copy media files to the backup folder
+    print('Copying media files to the backup folder...')
     copy_tree(MEDIA_ROOT, media_path)
 
     # archive the backup folder
@@ -104,6 +112,7 @@ def db_backup():
 
     if yadisk:
         # upload the backup folder
+        print('Uploading the backup folder to Yandex Disk...')
         yadisk.upload(f'{backup_path}.zip',
                       f'/backups/{backup_name}.zip',
                       overwrite=True)
@@ -121,6 +130,7 @@ def db_restore(backup_name: str):
     backups = glob.glob(os.path.join(BACKUP_ROOT, 'backup-*.zip'))
 
     if backup in backups:
+        print('Restoring a backup from system files...')
         restore_backup(backup)
     else:
         yadisk = yadisk_setup()
@@ -129,6 +139,7 @@ def db_restore(backup_name: str):
             try:
                 # try to download the backup from
                 # Yandex Disk to the local folder
+                print('Restoring a backup from Yandex Disk...')
                 yadisk.download(f'/backups/{backup_name}', backup)
                 restore_backup(backup)
             except PathNotFoundError:

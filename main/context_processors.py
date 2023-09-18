@@ -11,9 +11,7 @@ def menu_data(request):
     Create a menu with sub-items.
     """
 
-    MENU = 'menu'
-
-    menu = cache.get(MENU)
+    menu = cache.get('menu')
 
     if not menu:
         data = Page.objects.filter(in_menu=True)
@@ -28,9 +26,9 @@ def menu_data(request):
             if parent_item:
                 menu[parent_item].append(item)  # create sub menu items
 
-        cache.set(MENU, menu, 60 * 60)
+        cache.set('menu', menu, 60 * 60)
 
-    return {MENU: menu.items()}
+    return {'menu': menu.items()}
 
 
 def banners_data(request):
@@ -38,9 +36,7 @@ def banners_data(request):
     Create table with banners.
     """
 
-    BANNERS = 'banners'
-
-    banners = cache.get(BANNERS)
+    banners = cache.get('banners')
 
     if not banners:
         banners_list = sorted(Banner.objects.filter(
@@ -56,6 +52,6 @@ def banners_data(request):
                 i += 1
                 c = 0
 
-        cache.set(BANNERS, banners, 60 * 60)
+        cache.set('banners', banners, 60 * 60)
 
-    return {BANNERS: banners}
+    return {'banners': banners}
