@@ -44,7 +44,7 @@ class News(models.Model):
 
 class Page(models.Model):
     # page/subpage choices
-    CHOICES = (
+    TYPE_CHOICES = (
         ('menu', 'Пункт'),
         ('sub_menu', 'Подпункт')
     )
@@ -57,9 +57,9 @@ class Page(models.Model):
     menu_position = models.IntegerField(
         default=1, verbose_name='Позиция в меню/подменю')
     is_subpage = models.CharField(
-        max_length=255, default='menu', choices=CHOICES, verbose_name='Пункт/подпункт')
+        max_length=255, default='menu', choices=TYPE_CHOICES, verbose_name='Пункт/подпункт')
     parent_page = models.CharField(
-        max_length=255, blank=True, verbose_name='Имя родительского пункта в меню')
+        max_length=255, default='blank', choices=[], verbose_name='Имя родительского пункта в меню')
 
     def __str__(self):
         return str(self.menu_info)
@@ -80,6 +80,14 @@ class Page(models.Model):
         # delete the cache to display new data
         cache.delete('menu')
         cache.delete(f'page_{self.slug}')
+
+    def set_parent_choices(self):
+        parent_choices = Page.objects.filter(in_menu=True).values_list('menu_info', 'menu_info')
+        self._meta.get_field('parent_page').choices = [('blank', '---------')] + list(parent_choices)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.set_parent_choices()
 
     class Meta:
         verbose_name = 'страницу'
@@ -108,15 +116,3 @@ class Banner(models.Model):
     class Meta:
         verbose_name = 'баннер'
         verbose_name_plural = 'Баннеры'
-
-
-class YandexDiskToken(models.Model):
-    token = models.CharField(max_length=60, verbose_name='Токен Яндекс Диска')
-    expiration_date = models.DateField(auto_now=True, verbose_name='Дата установки')
-
-    def __str__(self):
-        return str(self.token)
-
-    class Meta:
-        verbose_name = 'токен Яндекс Диска'
-        verbose_name_plural = 'Токен Яндекс Диска'

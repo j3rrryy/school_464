@@ -141,13 +141,3 @@ class BannerAdmin(admin.ModelAdmin):
             return mark_safe(f"<img src='{object.banner.url}' width=100>")
 
     get_banner.short_description = "Миниатюра"
-
-
-@admin.register(YandexDiskToken)
-class YandexDiskTokenAdmin(admin.ModelAdmin):
-    list_display = ('token', 'expiration_date')
-    list_display_links = ('token', )
-    fields = ('token', )
-
-    def has_add_permission(self, *args, **kwargs):
-        return not YandexDiskToken.objects.exists()

@@ -60,29 +60,3 @@ services:
     env_file:
       - docker/env/.env.dev
     container_name: redis_dev
-
-  celery-worker:
-    build: .
-    restart: always
-    command: celery -A backend worker --loglevel=debug
-    env_file:
-      - docker/env/.env.dev
-    volumes:
-      - ./:/app
-      - media:/app/media
-    depends_on:
-      - redis
-    container_name: celery-worker_dev
-
-  celery-beat:
-    build: .
-    restart: always
-    command: celery -A backend beat --loglevel=debug
-    env_file:
-      - docker/env/.env.dev
-    volumes:
-      - ./:/app
-      - media:/app/media
-    depends_on:
-      - redis
-    container_name: celery-beat_dev

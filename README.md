@@ -7,7 +7,6 @@
 - Dynamic footer
 - Automatic cleaning of unused media files
 - Automatic conversion of images to WebP
-- Automatic DB backups to Yandex Disk (Celery)
 - Uses PostgreSQL
 - Supports caching (Redis)
 - Supports XML maps
@@ -29,8 +28,6 @@
 - **(For prod)** Create `docker-compose.yml` file with your data as in the `examples/` folder, then put it in the `/` folder
 
 - **(For prod)** Change `settings.py`: `environ.Env.read_env(env_file=Path('./docker/env/.env.dev'))` ---> `environ.Env.read_env(env_file=Path('./docker/env/.env.prod'))`
-
-- **(For backups to Yandex Disk)** [Register](https://oauth.yandex.ru/client/new) your app in Yandex Disk, grant all `cloud` privileges to use Yandex Disk API, get your `ClientID`, then paste it in `https://oauth.yandex.ru/authorize?response_type=token&client_id=<ClientID>`, get your final token and use it in the admin panel
 
 ### :rocket: Start
 
@@ -104,38 +101,6 @@
 
     ```shell
     python manage.py test main
-    ```
-
----
-
-- Create a database backup file
-
-  - Get access to the container
-
-     ```shell
-    docker exec -it <container_name> sh
-    ```
-
-  - Press `Ctrl+C` + `Ctrl+Shift+V`
-
-    ```shell
-    python manage.py db_backup
-    ```
-
----
-
-- Restore the database from backup files
-
-  - Get access to the container
-
-     ```shell
-    docker exec -it <container_name> sh
-    ```
-
-  - Press `Ctrl+C` + `Ctrl+Shift+V`
-
-    ```shell
-    python manage.py db_restore <your_backup_name>
     ```
 
 ### :x: Stop

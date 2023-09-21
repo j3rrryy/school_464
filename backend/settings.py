@@ -14,7 +14,6 @@ import os
 from pathlib import Path
 
 import environ
-from celery.schedules import crontab
 
 
 env = environ.Env()
@@ -114,23 +113,6 @@ CACHES = {
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": env('REDIS_LOCATION'),
     }
-}
-
-
-CELERY_BROKER_URL = env('CELERY_BROKER_URL')
-CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND')
-CELERY_TASK_TRACK_STARTED = True
-CELERY_TASK_TIME_LIMIT = 30 * 60
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Europe/Moscow'
-
-CELERY_BEAT_SCHEDULE = {
-    'backup_database': {
-        'task': 'main.tasks.dbbackup_task',
-        'schedule': crontab(minute='0', hour='0', day_of_month='1'),
-    },
 }
 
 

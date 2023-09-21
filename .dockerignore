@@ -11,4 +11,3 @@ examples
 .github
 media/**
 LICENSE
-celerybeat-schedule
