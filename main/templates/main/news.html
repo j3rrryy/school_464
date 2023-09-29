@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<h1 class="page-header">Лента новостей</h1>
+<h2 class="page-header">Лента новостей</h2>
 
 <!-- news cards -->
 <div class="news-container">
@@ -37,7 +37,7 @@
     <ul class="pagination justify-content-center mb-0 mt-3">
       {% if page_obj.has_previous %}
       <li class="page-item">
-        <a class="page-link" href="?page=1" aria-label="First" data-bs-theme="dark" style="
+        <a class="page-link zoom-elem" href="?page=1" aria-label="First" data-bs-theme="dark" style="
             background-color: var(--main-color-2);
             color: var(--main-color-1) !important;
             border: none;
@@ -47,14 +47,14 @@
       {% endif %} {% for p in paginator.page_range %}
       {% if page_obj.number == p %}
       <li class="page-item active">
-        <a class="page-link" href="?page={{ p }}" data-bs-theme="dark" style="
+        <a class="page-link zoom-elem" href="?page={{ p }}" data-bs-theme="dark" style="
             background-color: var(--main-color-1);
             color: var(--main-color-2) !important;
             border: none;
           ">{{ p }}</a>
       </li>
       {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %} <li class="page-item">
-        <a class="page-link" href="?page={{ p }}" data-bs-theme="dark" style="
+        <a class="page-link zoom-elem" href="?page={{ p }}" data-bs-theme="dark" style="
             background-color: var(--main-color-2);
             color: var(--main-color-1) !important;
             border: none;
@@ -63,7 +63,7 @@
         {% endif %}
         {% endfor %}
         {% if page_obj.has_next %}
-        <li class="page-item">
+        <li class="page-item zoom-elem">
           <a class="page-link" href="?page={{ paginator.num_pages }}" aria-label="Last" data-bs-theme="dark" style="
             background-color: var(--main-color-2);
             color: var(--main-color-1) !important;

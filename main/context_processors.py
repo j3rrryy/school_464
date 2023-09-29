@@ -17,10 +17,10 @@ def menu_data(request):
         data = Page.objects.filter(in_menu=True)
         menu = OrderedDict()
 
-        for item in sorted(filter(lambda x: x.is_subpage == 'menu', data), key=lambda y: y.menu_position):
+        for item in sorted(filter(lambda x: x.parent_page == '---------', data), key=lambda y: y.menu_position):
             menu[item] = []  # create base menu items
 
-        for item in sorted(filter(lambda x: x.is_subpage == 'sub_menu', data), key=lambda y: y.menu_position):
+        for item in sorted(filter(lambda x: x.parent_page != '---------', data), key=lambda y: y.menu_position):
             parent_item = next(
                 (x for x in data if x.menu_info == item.parent_page), None)
             if parent_item:

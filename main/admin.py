@@ -115,12 +115,12 @@ class NewsAdmin(admin.ModelAdmin):
 @admin.register(Page)
 class PageAdmin(admin.ModelAdmin):
     list_display = ('id', 'slug', 'in_menu', 'menu_info',
-                    'menu_position', 'is_subpage', 'parent_page')
+                    'menu_position', 'parent_page')
     list_display_links = ('id', 'slug')
     search_fields = ('id', 'content', 'menu_info',
                      'menu_position', 'in_menu', 'parent_page')
     fields = ('menu_info', 'slug', 'content', 'in_menu',
-              'is_subpage', 'parent_page', 'menu_position')
+              'parent_page', 'menu_position')
     prepopulated_fields = {'slug': ('menu_info',)}
     actions = [enable_item, disable_item]
 

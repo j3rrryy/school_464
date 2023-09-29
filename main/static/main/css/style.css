@@ -67,7 +67,8 @@
 .school {
   position: relative;
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
 }
 
 .school__container {
@@ -107,7 +108,7 @@
 }
 
 #banners-section {
-  max-height: 600px;
+  min-height: auto;
 }
 
 #school__banners {
@@ -134,7 +135,6 @@
 }
 
 .page-header {
-  font-size: 25px;
   text-align: center;
   margin-bottom: 15px;
 }
@@ -164,7 +164,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: var(--bs-white);
-  font-size: 36px;
   text-align: center;
   z-index: 2;
 }
