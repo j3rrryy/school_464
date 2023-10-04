@@ -2,7 +2,7 @@ from django.db.models.signals import pre_delete, pre_save
 from django.dispatch import receiver
 from django.core.cache import cache
 
-from .models import *
+from .models import News, Page, Banner
 
 
 @receiver([pre_delete, pre_save], sender=News)

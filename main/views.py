@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView
 from django.utils.html import escape
 
-from .models import *
+from .models import News, Page
 
 
 class IndexView(TemplateView):

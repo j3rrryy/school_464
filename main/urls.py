@@ -1,8 +1,9 @@
 from django.urls import path
 from django.contrib.sitemaps.views import sitemap
 
-from .sitemap import *
-from .views import *
+from .sitemap import NewsSitemap, PageSitemap
+from .views import IndexView, NewsView, SearchView,\
+    PostView, PageView
 
 
 sitemaps = {

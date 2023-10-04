@@ -23,7 +23,7 @@ services:
       - postgres
       - redis
     command: bash -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
-    container_name: django_dev
+    container_name: school_464_django_dev
 
   nginx:
     image: nginx:stable-alpine
@@ -39,7 +39,7 @@ services:
       - django
     depends_on:
       - django
-    container_name: nginx_dev
+    container_name: school_464_nginx_dev
 
   postgres:
     image: postgres:alpine
@@ -48,7 +48,7 @@ services:
       - docker/env/.env.dev
     volumes:
       - pgdata:/var/lib/postgresql/data/
-    container_name: postgres_dev
+    container_name: school_464_postgres_dev
 
   redis:
     image: redis:alpine
@@ -59,4 +59,4 @@ services:
       - "6379:6379"
     env_file:
       - docker/env/.env.dev
-    container_name: redis_dev
+    container_name: school_464_redis_dev

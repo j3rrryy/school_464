@@ -3,7 +3,7 @@ from collections import OrderedDict
 
 from django.core.cache import cache
 
-from .models import *
+from .models import Page, Banner
 
 
 def menu_data(request):

@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from main.models import *
+from main.models import News, Page, Banner
 
 
 class MainNewsModelTestCase(TestCase):
@@ -9,7 +9,7 @@ class MainNewsModelTestCase(TestCase):
         self.test_news = News.objects.create(
             slug='test-news',
             headline='Test News',
-            text='Test Text',
+            text='Test Text'
         )
 
     def test_is_pinned_false_by_default(self):
@@ -33,7 +33,7 @@ class MainNewsModelTestCase(TestCase):
         Test the __str__ method
         """
 
-        expected = "Test News"
+        expected = 'Test News'
         actual = str(self.test_news)
 
         self.assertEqual(expected, actual)
@@ -70,7 +70,7 @@ class MainPageModelTestCase(TestCase):
         Test the __str__ method
         """
 
-        expected = "Test Page"
+        expected = 'Test Page'
         actual = str(self.test_page)
 
         self.assertEqual(expected, actual)
@@ -115,7 +115,7 @@ class MainBannerModelTestCase(TestCase):
         Test the __str__ method
         """
 
-        expected = "Test Banner"
+        expected = 'Test Banner'
         actual = str(self.test_banner)
 
         self.assertEqual(expected, actual)
