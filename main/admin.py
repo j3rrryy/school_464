@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import News, Page, Banner
+from . import models
 
 
 def make_published(modeladmin, request, queryset):
@@ -92,7 +92,7 @@ def disable_banner(modeladmin, request, queryset):
 disable_banner.short_description = "Выключить"
 
 
-@admin.register(News)
+@admin.register(models.News)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('id', 'slug', 'headline', 'get_photo',
                     'is_pinned', 'date', 'is_published')
@@ -112,7 +112,7 @@ class NewsAdmin(admin.ModelAdmin):
     get_photo.short_description = "Миниатюра"
 
 
-@admin.register(Page)
+@admin.register(models.Page)
 class PageAdmin(admin.ModelAdmin):
     list_display = ('id', 'slug', 'in_menu', 'menu_info',
                     'menu_position', 'parent_page')
@@ -125,7 +125,7 @@ class PageAdmin(admin.ModelAdmin):
     actions = [enable_item, disable_item]
 
 
-@admin.register(Banner)
+@admin.register(models.Banner)
 class BannerAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'get_banner',
                     'url', 'position', 'is_enabled')

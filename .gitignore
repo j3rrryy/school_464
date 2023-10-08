@@ -2,5 +2,5 @@ mypy_cache/
 .vscode/
 venv/
 __pycache__/
-static/
+/static/
 docker-compose.yml

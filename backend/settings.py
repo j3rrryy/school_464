@@ -18,9 +18,7 @@ import environ
 
 env = environ.Env()
 
-
-# The .env file used (.env.dev / .env.prod)
-environ.Env.read_env(env_file=Path('./docker/env/.env.dev'))
+environ.Env.read_env()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

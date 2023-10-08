@@ -27,8 +27,6 @@
 
 - **(For prod)** Create `docker-compose.yml` file with your data as in the `examples/` folder, then put it in the `/` folder
 
-- **(For prod)** Change `settings.py`: `environ.Env.read_env(env_file=Path('./docker/env/.env.dev'))` ---> `environ.Env.read_env(env_file=Path('./docker/env/.env.prod'))`
-
 ### :rocket: Start
 
 - Run the **dev build**

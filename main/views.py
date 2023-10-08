@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView
 from django.utils.html import escape
 
-from .models import News, Page
+from . import models
 
 
 class IndexView(TemplateView):
@@ -30,7 +30,7 @@ class NewsView(ListView):
     News page view with pagination
     """
 
-    model = News
+    model = models.News
     template_name = 'main/news.html'
     context_object_name = 'news'
     paginate_by = 8
@@ -71,10 +71,10 @@ class SearchView(ListView):
     def get_queryset(self):
         query = self.request.GET.get('query')
 
-        news_results = News.objects.filter(
+        news_results = models.News.objects.filter(
             Q(headline__icontains=query) | Q(text__icontains=query)
         )
-        page_results = Page.objects.filter(
+        page_results = models.Page.objects.filter(
             Q(menu_info__icontains=query) | Q(content__icontains=query)
         )
 
@@ -89,7 +89,7 @@ class PostView(DetailView):
     Post page view
     """
 
-    model = News
+    model = models.News
     template_name = 'main/post.html'
     context_object_name = 'post'
     slug_url_kwarg = 'post_slug'
@@ -118,7 +118,7 @@ class PageView(DetailView):
     Website page view
     """
 
-    model = Page
+    model = models.Page
     template_name = 'main/page.html'
     context_object_name = 'page'
     slug_url_kwarg = 'page_slug'

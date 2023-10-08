@@ -3,7 +3,7 @@ from collections import OrderedDict
 
 from django.core.cache import cache
 
-from .models import Page, Banner
+from . import models
 
 
 def menu_data(request):
@@ -14,7 +14,7 @@ def menu_data(request):
     menu = cache.get('menu')
 
     if not menu:
-        data = Page.objects.filter(in_menu=True)
+        data = models.Page.objects.filter(in_menu=True)
         menu = OrderedDict()
 
         for item in sorted(filter(lambda x: x.parent_page == '---------', data), key=lambda y: y.menu_position):
@@ -39,7 +39,7 @@ def banners_data(request):
     banners = cache.get('banners')
 
     if not banners:
-        banners_list = sorted(Banner.objects.filter(
+        banners_list = sorted(models.Banner.objects.filter(
             is_enabled=True), key=lambda banner: banner.position)
         banners = [[] for _ in range(math.ceil(len(banners_list) / 4))]
         i = 0  # position of list in res
