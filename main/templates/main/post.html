@@ -7,9 +7,10 @@
   <!-- post photo -->
   <div class="post__photo-container">
     {% if post.photo %}
-    <img class="rounded" src="{{ post.photo.url }}" width="100%" loading="lazy" />
+    <img class="rounded" src="{{ post.photo.url }}" width="100%" loading="lazy" decoding="async" fetchpriority="high">
     {% else %}
-    <img class="rounded" src="{% static 'main\img\halfofthemos.webp' %}" alt="Новость" width="100%" loading="lazy" />
+    <img class="rounded" src="{% static 'main\img\halfofthemos.webp' %}" alt="Новость" width="100%" loading="lazy"
+      decoding="async" fetchpriority="high">
     {% endif %}
     <header>
       <h1 class="post__header">{{ post.headline }}</h1>

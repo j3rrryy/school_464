@@ -3,21 +3,23 @@
 <html lang="ru">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Государственное бюджетное общеобразовательное учреждение средняя
-  общеобразовательная школа №464 Пушкинского района Санкт-Петербурга" />
-  <link rel="shortcut icon" type="image/x-icon" href="{% static 'main/favicons/favicon.ico' %}" />
-  <link rel="preload" as="style" href="{% static '/main/css/style.css' %}" onload="this.rel='stylesheet'" />
+  общеобразовательная школа №464 Пушкинского района Санкт-Петербурга">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'main/favicons/favicon.ico' %}">
+  <link rel="stylesheet" href="{% static '/main/css/style.css' %}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
-  <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet"
-    type="text/css" />
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://lidrekon.ru/slep/js/jquery.js"></script>
-  <script src="https://lidrekon.ru/slep/js/uhpv-hover-full.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <script src="{% static '/main/js/script.js' %}" async></script>
+  <script src="https://lidrekon.ru/slep/js/jquery.js" async></script>
+  <script src="https://lidrekon.ru/slep/js/uhpv-hover-full.min.js" defer></script>
+  <script src="https://kit.fontawesome.com/04e52cf776.js" crossorigin="anonymous" async></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"
+    async></script>
   <title>{{ title }}</title>
 </head>
 
@@ -28,32 +30,32 @@
         <!-- logo -->
         <a class="navbar-brand h1 mb-auto text-white" href="/">
           <img class="d-inline-block align-text-top" src="{% static 'main/img/logo.svg' %}" id="logo"
-            alt="Логотип школы">
+            alt="Логотип школы" decoding="async" fetchpriority="high">
           ГБОУ школа №464
         </a>
 
         <!-- navbar items -->
-        <ul class="navbar-nav ms-auto d-flex flex-row">
-          <li class="nav-item">
-            <a class="nav-link text-wrap me-3" href="/news/" title="Лента новостей"><i
+        <ul class="navbar-nav nav-elems ms-auto flex-row">
+          <li class="nav-item nav-icon">
+            <a class="nav-link text-wrap" href="/news/" title="Лента новостей"><i
                 class="fa-solid fa-newspaper mb-0 h5 zoom-navbar-elem"></i></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-wrap me-3" href="https://vk.com/school464spb" title="ВКонтакте" target="_blank">
+          <li class="nav-item nav-icon">
+            <a class="nav-link text-wrap" href="https://vk.com/school464spb" title="ВКонтакте" target="_blank">
               <i class="fa-brands fa-vk mb-0 h5 zoom-navbar-elem"></i></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-wrap me-3" href="" title="Версия для слабовидящих" id="specialButton">
+          <li class="nav-item nav-icon">
+            <a class="nav-link text-wrap" href="" title="Версия для слабовидящих" id="specialButton">
               <i class="fa-solid fa-glasses mb-0 h5 zoom-navbar-elem"></i></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-wrap me-3" href="/admin/" title="Войти">
+          <li class="nav-item nav-icon">
+            <a class="nav-link text-wrap" href="/admin/" title="Войти">
               <i class="fa-solid fa-right-to-bracket mb-0 h5 zoom-navbar-elem"></i></a>
           </li>
         </ul>
 
         <!-- menu -->
-        <button class="zoom-elem navbar-toggler" title="Меню" type="button" data-bs-toggle="offcanvas"
+        <button class="zoom-elem navbar-toggler me-2" title="Меню" type="button" data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
           style="color: var(--bs-white); background-color: var(--main-color-1); box-shadow: none">
           <span class="navbar-toggler-icon" data-bs-theme="dark"></span>
@@ -67,7 +69,7 @@
           </div>
           <div class="offcanvas-body">
             <form class="d-flex mt-3 mb-3" role="search" method="get" action="/search/">
-              <input class="form-control me-2" name="query" type="search" placeholder="Поиск" aria-label="Поиск" />
+              <input class="form-control me-2" name="query" type="search" placeholder="Поиск" aria-label="Поиск">
               <button class="btn" title="Поиск" type="submit" data-bs-theme="dark" style="
                     background-color: var(--main-color-1);
                     color: var(--main-color-2);
@@ -108,7 +110,7 @@
     </nav>
 
     <!-- "back to top" button -->
-    <button class="btn btn-floating" id="btn-back-to-top" type="button" data-bs-theme="dark"
+    <button class="btn btn-floating" id="btn-back-to-top" type="button" data-bs-theme="dark" aria-label="Наверх"
       style="background-color: var(--main-color-1); color: var(--main-color-2);">
       <i class="fas fa-arrow-up"></i>
     </button>
@@ -177,7 +179,7 @@
                 <div class="col-xl-3 col-md-6 col-sm-12 text-center my-1" style="max-height: 80px">
                   <a class="text-link" href="{{ banner.url }}" target="_blank">
                     <img class="zoom-elem img-fluid rounded" src="{{ banner.banner.url }}" alt="Баннер" loading="lazy"
-                      style="max-height: 80px" />
+                      decoding="async" fetchpriority="low" style="max-height: 80px">
                   </a>
                 </div>
                 {% endfor %}
@@ -190,13 +192,7 @@
       </div>
     </footer>
   </div>
-  <script src="{% static '/main/js/script.js' %}"></script>
-  <script type="text/javascript"
-    src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js"></script>
-  <script src="https://kit.fontawesome.com/04e52cf776.js" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
   </script>

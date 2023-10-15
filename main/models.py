@@ -10,7 +10,7 @@ class News(models.Model):
     headline = models.CharField(max_length=255, verbose_name='Заголовок')
     text = FroalaField(verbose_name='Текст')
     photo = ResizedImageField(blank=True, force_format='WEBP',
-                              quality=75, verbose_name='Фото')
+                              size=[640, 360], quality=75, verbose_name='Фото')
     is_pinned = models.BooleanField(default=False, verbose_name='Закреплено')
     date = models.DateField(auto_now_add=True, verbose_name='Дата')
     is_published = models.BooleanField(
@@ -59,7 +59,7 @@ class Page(models.Model):
 
 class Banner(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название')
-    banner = ResizedImageField(force_format='WEBP', quality=75,
+    banner = ResizedImageField(force_format='WEBP', size=[145, 80], quality=75,
                                verbose_name='Баннер')
     url = models.CharField(max_length=255, verbose_name='Ссылка')
     position = models.IntegerField(default=1, verbose_name='Позиция')

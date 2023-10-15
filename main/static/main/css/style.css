@@ -14,6 +14,16 @@
   max-height: 30px;
 }
 
+.nav-item {
+  margin-right: 1rem;
+}
+
+.nav-link:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  color: var(--main-color-1) !important;
+}
+
 .zoom-navbar-elem {
   transition: all 0.4s ease;
   color: var(--bs-white) !important;
@@ -75,16 +85,15 @@
   display: flex;
   width: 100%;
   color: var(--bs-white);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 #school__headline {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("/static/main/img/D9ZlUTnSG4E.webp");
   background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
 }
 
 #school__greeting {
@@ -95,6 +104,8 @@
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("/static/main/img/LuD05L-0pQ4.webp");
   background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
 }
 
 #school__equipment {
@@ -105,6 +116,8 @@
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("/static/main/img/oupakcNE4c8.webp");
   background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
 }
 
 #banners-section {
@@ -281,5 +294,21 @@ a:hover {
 @media (max-width: 768px) {
   .content {
     padding: 12px 21px;
+  }
+}
+
+@media (max-width: 490px) {
+  .navbar-toggler {
+    order: 1;
+  }
+
+  .nav-elems {
+    width: 100vh;
+    margin-top: 0.5rem;
+    order: 2;
+  }
+
+  .nav-icon {
+    margin: auto;
   }
 }

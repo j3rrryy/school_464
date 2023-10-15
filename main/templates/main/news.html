@@ -11,9 +11,9 @@
     <div class="news__post">
       <div class="news__header">
         {% if post.photo %}
-        <img src="{{ post.photo.url }}" alt="Новость" loading="lazy" />
+        <img src="{{ post.photo.url }}" alt="Новость" decoding="async" fetchpriority="high">
         {% else %}
-        <img src="{% static 'main\img\halfofthemos.webp' %}" alt="Новость" loading="lazy" />
+        <img src="{% static 'main\img\halfofthemos.webp' %}" alt="Новость" decoding="async" fetchpriority="high">
         {% endif %}
       </div>
       <div class="news__body">

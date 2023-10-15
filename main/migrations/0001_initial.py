@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=255, verbose_name='Название')),
-                ('banner', django_resized.forms.ResizedImageField(crop=None, force_format='WEBP', keep_meta=True, quality=75, scale=None, size=[1920, 1080], upload_to='', verbose_name='Баннер')),
+                ('banner', django_resized.forms.ResizedImageField(crop=None, force_format='WEBP', keep_meta=True, quality=75, scale=None, size=[145, 80], upload_to='', verbose_name='Баннер')),
                 ('url', models.CharField(max_length=255, verbose_name='Ссылка')),
                 ('position', models.IntegerField(default=1, verbose_name='Позиция')),
                 ('is_enabled', models.BooleanField(default=True, verbose_name='Включен')),
@@ -35,7 +35,7 @@ class Migration(migrations.Migration):
                 ('slug', models.SlugField(max_length=255, unique=True, verbose_name='URL')),
                 ('headline', models.CharField(max_length=255, verbose_name='Заголовок')),
                 ('text', froala_editor.fields.FroalaField(verbose_name='Текст')),
-                ('photo', django_resized.forms.ResizedImageField(blank=True, crop=None, force_format='WEBP', keep_meta=True, quality=75, scale=None, size=[1920, 1080], upload_to='', verbose_name='Фото')),
+                ('photo', django_resized.forms.ResizedImageField(blank=True, crop=None, force_format='WEBP', keep_meta=True, quality=75, scale=None, size=[640, 360], upload_to='', verbose_name='Фото')),
                 ('is_pinned', models.BooleanField(default=False, verbose_name='Закреплено')),
                 ('date', models.DateField(auto_now_add=True, verbose_name='Дата')),
                 ('is_published', models.BooleanField(default=True, verbose_name='Опубликовано')),
