@@ -1,16 +1,16 @@
 {% extends 'main/base.html' %}
 
 {% block content %}
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
+<div class="alert alert-danger fade show" role="alert">
   <header>
-    <h1 class="page-header">
+    <h3 class="page-header">
       <i class="fa-solid fa-xmark fa-beat"></i> {{ title }}
       <i class="fa-solid fa-xmark fa-beat"></i>
-    </h1>
+    </h3>
   </header>
   <div class="d-flex pt-5">
-    <a class="btn m-auto" id="error-link" href="/">
-      <p class="h5 mb-0">Вернуться на главную страницу <i class="fa-solid fa-right-long"></i></p>
+    <a class="btn m-auto" id="error-link" href="{{ request.META.HTTP_REFERER|escape }}">
+      <p class="h5 mb-0">Вернуться на предыдущую страницу <i class="fa-solid fa-right-long"></i></p>
     </a>
   </div>
 </div>

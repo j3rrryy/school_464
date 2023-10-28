@@ -33,11 +33,11 @@
 
 <!-- pagination -->
 <div class="mt-auto">
-  <nav aria-label="Page navigation">
+  <nav aria-label="Страницы">
     <ul class="pagination justify-content-center mb-0 mt-3">
       {% if page_obj.has_previous %}
       <li class="page-item">
-        <a class="page-link zoom-elem" href="?page=1" aria-label="First" data-bs-theme="dark" style="
+        <a class="page-link zoom-elem" href="?page=1" aria-label="Первая страница" data-bs-theme="dark" style="
             background-color: var(--main-color-2);
             color: var(--main-color-1) !important;
             border: none;
@@ -64,7 +64,8 @@
         {% endfor %}
         {% if page_obj.has_next %}
         <li class="page-item zoom-elem">
-          <a class="page-link" href="?page={{ paginator.num_pages }}" aria-label="Last" data-bs-theme="dark" style="
+          <a class="page-link" href="?page={{ paginator.num_pages }}" aria-label="Последняя страница"
+            data-bs-theme="dark" style="
             background-color: var(--main-color-2);
             color: var(--main-color-1) !important;
             border: none;

@@ -14,8 +14,6 @@
     integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
   <script src="{% static '/main/js/script.js' %}" async></script>
-  <script src="https://lidrekon.ru/slep/js/jquery.js" async></script>
-  <script src="https://lidrekon.ru/slep/js/uhpv-hover-full.min.js" defer></script>
   <script src="https://kit.fontawesome.com/04e52cf776.js" crossorigin="anonymous" async></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"
@@ -25,7 +23,7 @@
 
 <body>
   <div class="container-fluid p-0 overflow-x-hidden d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-static-top" style="background-color: rgba(22, 34, 57, 0.95)">
+    <nav class="navbar navbar-static-top" style="background-color: rgba(22, 34, 57, 1)">
       <div class="container-fluid">
         <!-- logo -->
         <a class="navbar-brand h1 mb-auto text-white" href="/">
@@ -38,27 +36,83 @@
         <ul class="navbar-nav nav-elems ms-auto flex-row">
           <li class="nav-item nav-icon">
             <a class="nav-link text-wrap" href="/news/" title="Лента новостей"><i
-                class="fa-solid fa-newspaper mb-0 h5 zoom-navbar-elem"></i></a>
+                class="fa-solid fa-newspaper mb-0 h5 navbar-elem zoom-elem"></i></a>
           </li>
           <li class="nav-item nav-icon">
             <a class="nav-link text-wrap" href="https://vk.com/school464spb" title="ВКонтакте" target="_blank">
-              <i class="fa-brands fa-vk mb-0 h5 zoom-navbar-elem"></i></a>
+              <i class="fa-brands fa-vk mb-0 h5 navbar-elem zoom-elem"></i></a>
           </li>
           <li class="nav-item nav-icon">
-            <a class="nav-link text-wrap" href="" title="Версия для слабовидящих" id="specialButton">
-              <i class="fa-solid fa-glasses mb-0 h5 zoom-navbar-elem"></i></a>
+            <a class="nav-link text-wrap" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom"
+              aria-controls="offcanvasBottom" href="" title="Версия для слабовидящих">
+              <i class="fa-solid fa-glasses mb-0 h5 navbar-elem zoom-elem"></i></a>
           </li>
           <li class="nav-item nav-icon">
             <a class="nav-link text-wrap" href="/admin/" title="Войти">
-              <i class="fa-solid fa-right-to-bracket mb-0 h5 zoom-navbar-elem"></i></a>
+              <i class="fa-solid fa-right-to-bracket mb-0 h5 navbar-elem zoom-elem"></i></a>
           </li>
         </ul>
 
+        <!-- version for visually impaired -->
+        <div class="d-flex">
+          <div class="offcanvas offcanvas-bottom m-auto h-auto w-75 rounded-4 mb-2" tabindex="-1" id="offcanvasBottom"
+            aria-labelledby="offcanvasBottomLabel">
+            <div class="offcanvas-header d-flex">
+              <h5 class="offcanvas-title m-auto" id="offcanvasBottomLabel">Версия для слабовидящих</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Закрыть"></button>
+            </div>
+            <div class="offcanvas-body small">
+              <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                  <h5 class="text-center">Размер шрифта</h5>
+                  <div class="text-center">
+                    <button class="btn basic-btn" id="decreaseFontBtn" aria-label="Уменьшить шрифт">
+                      <i class="fa-solid fa-font zoom-elem"><i class="fa-solid fa-minus"></i></i>
+                    </button>
+                    <button class="btn basic-btn" id="normalFontBtn" aria-label="Обычный шрифт">
+                      <i class="fa-solid fa-font zoom-elem"></i>
+                    </button>
+                    <button class="btn basic-btn" id="increaseFontBtn" aria-label="Увеличить шрифт">
+                      <i class="fa-solid fa-font zoom-elem"><i class="fa-solid fa-plus"></i></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                  <h5 class="text-center">Цветовая схема</h5>
+                  <div class="text-center">
+                    <button class="btn basic-btn" id="defaultColorBtn" aria-label="Обычная цветовая схема">
+                      <i class="fa-solid fa-ban zoom-elem"></i>
+                    </button>
+                    <button class="btn border-black" id="blackOnWhiteBtn" aria-label="Цветовая схема черный/белый"
+                      style="background-color: var(--bs-black); color: var(--bs-white)">
+                      <i class="fa-solid fa-font zoom-elem"></i>
+                    </button>
+                    <button class="btn border-black" id="darkBlueOnLightBlueBtn"
+                      aria-label="Цветовая схема темно-синий/голубой"
+                      style="background-color: var(--vis-imp-1-0); color: var(--vis-imp-1-1)">
+                      <i class="fa-solid fa-font zoom-elem"></i>
+                    </button>
+                    <button class="btn border-black" id="brownOnBeigeBtn" aria-label="Цветовая схема коричневый/бежевый"
+                      style="background-color: var(--vis-imp-2-0); color: var(--vis-imp-2-1)">
+                      <i class="fa-solid fa-font zoom-elem"></i>
+                    </button>
+                    <button class="btn border-black" id="greenOnDarkBrownBtn"
+                      aria-label="Цветовая схема зеленый/темно-коричневый"
+                      style="background-color: var(--vis-imp-3-0); color: var(--vis-imp-3-1)">
+                      <i class="fa-solid fa-font zoom-elem"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- menu -->
-        <button class="zoom-elem navbar-toggler me-2" title="Меню" type="button" data-bs-toggle="offcanvas"
+        <button class="navbar-toggler me-2" title="Меню" type="button" data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
           style="color: var(--bs-white); background-color: var(--main-color-1); box-shadow: none">
-          <span class="navbar-toggler-icon" data-bs-theme="dark"></span>
+          <span class="navbar-toggler-icon zoom-elem " data-bs-theme="dark"></span>
         </button>
         <div class="offcanvas offcanvas-end" id="offcanvasNavbar" tabindex="-1" aria-labelledby="offcanvasNavbarLabel"
           style="background-color: var(--main-color-2); color: var(--bs-white)">
@@ -110,8 +164,8 @@
     </nav>
 
     <!-- "back to top" button -->
-    <button class="btn btn-floating" id="btn-back-to-top" type="button" data-bs-theme="dark" aria-label="Наверх"
-      style="background-color: var(--main-color-1); color: var(--main-color-2);">
+    <button class="btn btn-floating zoom-elem" id="btn-back-to-top" type="button" data-bs-theme="dark"
+      aria-label="Наверх" style="background-color: var(--main-color-1); color: var(--main-color-2);">
       <i class="fas fa-arrow-up"></i>
     </button>
 
@@ -176,7 +230,7 @@
               {% for group in banners %}
               <div class="row">
                 {% for banner in group %}
-                <div class="col-xl-3 col-md-6 col-sm-12 text-center my-1" style="max-height: 80px">
+                <div class="col-xl-3 col-md-6 col-sm-12 text-center mb-2" style="max-height: 80px">
                   <a class="text-link" href="{{ banner.url }}" target="_blank">
                     <img class="zoom-elem img-fluid rounded" src="{{ banner.banner.url }}" alt="Баннер" loading="lazy"
                       decoding="async" fetchpriority="low" style="max-height: 80px">

@@ -30,10 +30,9 @@
             <li class="mb-3">
               <div class="d-flex">
                 <a href="/post/{{ res.slug }}/">
-                  <h5 class="text-wrap">{{ res.headline }}</h5>
-                  <p class="text-wrap">{{ res.text|truncatewords:20|safe }}</p>
+                  <h5 class="text-wrap mt-auto mb-auto me-3">{{ res.headline }}</h5>
                 </a>
-                <p class="post__date d-flex ms-auto align-items-center">
+                <p class="post__date ms-auto mt-auto mb-auto">
                   {{ res.date }}
                 </p>
               </div>
@@ -53,11 +52,11 @@
         <article>
           <ul class="list-unstyled text-wrap">
             {% for res in search_results.page %}
-            <li>
+            <li class="mb-3">
               <a class="text-wrap" href="/{{ res.slug }}/">
                 <div class="d-flex">
-                  <h5 class="text-wrap">{{ res.menu_info }}</h5>
-                  <i class="fa-solid fa-arrow-right ms-auto h5 mt-1"></i>
+                  <h5 class="text-wrap mt-auto mb-auto me-3">{{ res.menu_info }}</h5>
+                  <i class="fa-solid fa-arrow-right h5 ms-auto mt-auto mb-auto"></i>
                 </div>
               </a>
             </li>

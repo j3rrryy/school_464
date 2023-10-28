@@ -4,7 +4,7 @@
 {% block content %}
 <!-- school name -->
 <section class="school">
-  <div class="school__container" id="school__headline">
+  <div class="school__container" id="school__name">
     <h1 class="text-wrap text-center m-auto p-5">
       Государственное бюджетное общеобразовательное учреждение средняя
       общеобразовательная школа №464 Пушкинского района Санкт-Петербурга
@@ -37,24 +37,31 @@
       </div>
     </div>
   </div>
-
 </section>
 
-<!-- education -->
+<!-- headmaster -->
 <section class="school">
-  <div class="school__container" id="school__education">
+  <div class="school__container" id="school__headmaster">
     <div class="m-auto" data-aos="fade-up" data-aos-duration="1200">
       <h2 class="h2 text-wrap text-center m-auto p-5">
-        <i class="fa-solid fa-book" style="color: var(--bs-white)"></i> Образование
-        <i class="fa-solid fa-book" style="color: var(--bs-white)"></i>
+        <i class="fa-solid fa-user" style="color: var(--bs-white)"></i> Директор школы
+        <i class="fa-solid fa-user" style="color: var(--bs-white)"></i>
       </h2>
-      <p class="h4 p-5 m-auto">
-        Школа осуществляет образовательный процесс в соответствии с уровнями
-        общеобразовательных программ трех ступеней общего образования:<br><br>Начальное
-        общее образование (1-4 классы, нормативный срок освоения — 4 года);<br><br>Основное
-        общее образование (5-9 классы, нормативный срок освоения — 5 лет);<br><br>Среднее
-        общее образование (10-11 классы, нормативный срок освоения — 2 года).
-      </p>
+      <div class="row p-3 m-auto">
+        <div class="col-md-6 col-sm-12 d-flex mb-4">
+          <img class="m-auto d-block rounded" src="{% static 'main\img\7J6uRpURzDo.webp' %}"
+            alt="Теплякова Алина Сергеевна" style="max-width: 300px;" loading="lazy" decoding="async"
+            fetchpriority="low">
+        </div>
+        <div class="col-md-6 col-sm-12 d-flex mb-4">
+          <p class="h4 m-auto text-center justify-content-center">
+            Теплякова Алина Сергеевна<br><br>
+            <i class="fa-solid fa-clock"></i> Часы приема: вторник 14.30-16.00<br>
+            <i class="fa-solid fa-phone"></i> 465-15-55<br>
+            <i class="fa-solid fa-envelope"></i> direktor.sch464@obr.gov.spb.ru
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -101,7 +108,7 @@
         Предлагаем вам ознакомиться с нашей новостной лентой
       </p>
       <div class="d-flex">
-        <i class="fa-solid fa-down-long h1 m-auto"></i>
+        <i class="fa-solid fa-arrow-down-long h1 m-auto"></i>
       </div>
       <div class="d-flex p-5">
         <a class="btn m-auto school__button" href="/news/" data-bs-theme="dark">
@@ -135,7 +142,6 @@
           alt="Телефон доверия" loading="lazy" decoding="async" fetchpriority="low">
       </div>
     </div>
-  </div>
   </div>
 </section>
 {% endblock %}

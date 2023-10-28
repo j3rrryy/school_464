@@ -2,16 +2,27 @@
   --main-color-1: #f5a425;
   --main-color-2: #242c38;
   --main-color-3: #476ca0;
-  --error-color: #58151c;
-  --error-bg-color: #cf9399;
-  --error-bg-color-hover: #8a5359;
+  --vis-imp-1-0: #9dd1ff !important;
+  --vis-imp-1-1: #063494 !important;
+  --vis-imp-2-0: #f7f3d6 !important;
+  --vis-imp-2-1: #9f6843 !important;
+  --vis-imp-3-0: #3b2716 !important;
+  --vis-imp-3-1: #70c64d !important;
   --news-color: #10182f;
   --date-color: #242c38;
   --footer-color: #152036;
+  --error-color: #58151c;
+  --error-bg-color: #cf9399;
+  --error-bg-color-hover: #8a5359;
 }
 
 #logo {
   max-height: 30px;
+}
+
+.basic-btn {
+  background-color: var(--main-color-1) !important;
+  color: var(--main-color-2) !important;
 }
 
 .nav-item {
@@ -24,14 +35,12 @@
   color: var(--main-color-1) !important;
 }
 
-.zoom-navbar-elem {
-  transition: all 0.4s ease;
+.navbar-elem {
   color: var(--bs-white) !important;
 }
 
-.zoom-navbar-elem:hover {
+.navbar-elem:hover {
   color: var(--main-color-1) !important;
-  transform: scale(1.3)
 }
 
 .zoom-elem {
@@ -49,7 +58,7 @@
 }
 
 .btn-close:hover {
-  transform: scale(1.15)
+  transform: scale(1.1)
 }
 
 .submenu {
@@ -67,15 +76,9 @@
   bottom: 20px;
   right: 20px;
   z-index: 3;
-  transition: all 0.4s ease;
-}
-
-#btn-back-to-top:hover {
-  transform: scale(1.2)
 }
 
 .school {
-  position: relative;
   display: flex;
   min-height: 100vh;
   height: auto;
@@ -88,45 +91,36 @@
   overflow-y: hidden;
 }
 
-#school__headline {
+#school__name {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("/static/main/img/D9ZlUTnSG4E.webp");
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
+    url("/static/main/img/7XexEA35vjw.webp");
 }
 
-#school__greeting {
-  background-image: url("/static/main/img/choosing-bg.webp");
-}
-
-#school__education {
+#school__headmaster {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("/static/main/img/LuD05L-0pQ4.webp");
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
-}
-
-#school__equipment {
-  background-image: url("/static/main/img/choosing-bg.webp");
 }
 
 #school__news {
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("/static/main/img/oupakcNE4c8.webp");
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
+}
+
+#school__greeting,
+#school__equipment,
+#school__banners {
+  background-image: url("/static/main/img/choosing-bg.webp");
 }
 
 #banners-section {
   min-height: auto;
 }
 
-#school__banners {
-  display: flex;
-  background-image: url("/static/main/img/choosing-bg.webp");
+#school__name,
+#school__headmaster,
+#school__news {
+  background-size: cover;
+  background-position: center;
 }
 
 .banner__img {
@@ -251,7 +245,6 @@ a:hover {
 
 .post__date,
 .news__date {
-  margin: 10px 0px;
   min-width: 106px;
   color: var(--date-color);
   opacity: 0.6;
