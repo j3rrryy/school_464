@@ -12,6 +12,7 @@
 - Supports XML maps
 - Custom error pages
 - Version for the visually impaired
+- RSS
 
 ## :computer: Requirements
 
