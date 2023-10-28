@@ -1,8 +1,8 @@
 from django.urls import path
 from django.contrib.sitemaps.views import sitemap
 
-from . import views
 from . import sitemap as sitemaps
+from . import views, feeds
 
 
 sitemaps = {
@@ -16,5 +16,6 @@ urlpatterns = [
     path('search/', views.SearchView.as_view(), name='search'),
     path('post/<slug:post_slug>/', views.PostView.as_view(), name='post'),
     path('<slug:page_slug>/', views.PageView.as_view(), name='page'),
+    path('feeds/', feeds.LatestNewsFeed(), name='news_feed'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemaps'),
 ]

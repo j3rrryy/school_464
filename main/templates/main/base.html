@@ -48,6 +48,10 @@
               <i class="fa-solid fa-glasses mb-0 h5 navbar-elem zoom-elem"></i></a>
           </li>
           <li class="nav-item nav-icon">
+            <a class="nav-link text-wrap" href="/feeds/latest/" title="RSS">
+              <i class="fa-solid fa-rss mb-0 h5 navbar-elem zoom-elem"></i></a>
+          </li>
+          <li class="nav-item nav-icon">
             <a class="nav-link text-wrap" href="/admin/" title="Войти">
               <i class="fa-solid fa-right-to-bracket mb-0 h5 navbar-elem zoom-elem"></i></a>
           </li>
@@ -137,9 +141,12 @@
               {% for key, value in menu %}
               {% if value %}
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-wrap text-white" href="{{ key.get_absolute_url }}" role="button"
-                  data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link text-wrap text-white" href="{{ key.get_absolute_url }}"
+                  style="display: inline-block;">
                   {{ key.menu_info }}
+                </a>
+                <a class="nav-link text-wrap text-white dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                  aria-expanded="false" style="display: inline-block;">
                 </a>
                 <ul class="dropdown-menu submenu">
                   {% for v in value %}
