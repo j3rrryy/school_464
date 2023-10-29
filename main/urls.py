@@ -15,7 +15,7 @@ urlpatterns = [
     path('news/', views.NewsView.as_view(), name='news'),
     path('search/', views.SearchView.as_view(), name='search'),
     path('post/<slug:post_slug>/', views.PostView.as_view(), name='post'),
+    path('feed/', feeds.LatestNewsFeed(), name='news_feed'),
     path('<slug:page_slug>/', views.PageView.as_view(), name='page'),
-    path('feeds/', feeds.LatestNewsFeed(), name='news_feed'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='sitemaps'),
 ]

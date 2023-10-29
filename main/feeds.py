@@ -4,7 +4,7 @@ from .models import News
 
 class LatestNewsFeed(Feed):
     title = "Новости школы 464"
-    link = "/feeds/"
+    link = "/news/"
     description = "Последние новости на сайте школы 464."
 
     def items(self):
