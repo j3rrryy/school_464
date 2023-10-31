@@ -142,6 +142,10 @@ class PageView(DetailView):
         return page
 
 
+def offline(request):
+    return render(request, 'system/offline.html')
+
+
 def tr_handler404(request, exception):
     """
     404 error handler

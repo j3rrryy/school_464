@@ -2,17 +2,18 @@
 
 ## :book: Key features
 
-- Easy editing of HTML pages
+- RSS
+- PWA
 - Dynamic menu
 - Dynamic footer
-- Automatic cleaning of unused media files
-- Automatic conversion of images to WebP
 - Uses PostgreSQL
-- Supports caching (Redis)
 - Supports XML maps
 - Custom error pages
+- Supports caching (Redis)
+- Easy editing of HTML pages
 - Version for the visually impaired
-- RSS
+- Automatic conversion of images to WebP
+- Automatic cleaning of unused media files
 
 ## :computer: Requirements
 

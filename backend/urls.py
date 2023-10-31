@@ -28,7 +28,8 @@ handler500 = 'main.views.tr_handler500'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('froala_editor/', include('froala_editor.urls')),
-    path('', include('main.urls'))
+    path('', include('main.urls')),
+    path('', include('pwa.urls')),
 ]
 
 if settings.DEBUG:
