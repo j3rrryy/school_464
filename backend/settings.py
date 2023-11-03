@@ -173,6 +173,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Froala Editor config
 
 FROALA_EDITOR_THIRD_PARTY = ('embedly', 'image_tui', 'line_height', 'special_characters')
+FROALA_UPLOAD_PATH = ''
 
 # PWA
 

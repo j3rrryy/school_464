@@ -55,3 +55,12 @@ class MainViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'main/page.html')
         self.assertContains(response, 'Test Page')
+
+
+class SystemViewsTestCase(TestCase):
+    def test_offline(self):
+        response = self.client.get(reverse('offline'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'system/offline.html')
+        self.assertContains(response, 'Нет подключения к интернету')
