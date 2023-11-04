@@ -52,10 +52,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'froala_editor',
-    'django_cleanup',
     'debug_toolbar',
     'pwa',
     'main.apps.MainConfig',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [

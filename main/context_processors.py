@@ -1,5 +1,4 @@
 import math
-from collections import OrderedDict
 
 from django.core.cache import cache
 
@@ -15,7 +14,7 @@ def menu_data(request):
 
     if not menu:
         data = models.Page.objects.filter(in_menu=True)
-        menu = OrderedDict()
+        menu = {}
 
         for item in sorted(filter(lambda x: x.parent_page == '---------', data), key=lambda y: y.menu_position):
             menu[item] = []  # create base menu items
