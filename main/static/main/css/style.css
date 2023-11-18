@@ -17,7 +17,8 @@
 }
 
 #logo {
-  max-height: 30px;
+  height: 30px;
+  width: 40px;
 }
 
 .basic-btn {
