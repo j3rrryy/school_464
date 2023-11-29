@@ -35,7 +35,6 @@ services:
     volumes:
       - static:/app/static
       - media:/app/media
-      - ./docker/nginx/dev/:/etc/nginx/conf.d:ro
       - ./docker/nginx/prod/:/etc/nginx/conf.d:ro
       - ./docker/certbot/conf:/etc/letsencrypt:ro
       - ./docker/certbot/www:/var/www/certbot:ro
