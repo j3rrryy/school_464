@@ -243,8 +243,8 @@
                 {% for banner in group %}
                 <div class="col-xl-3 col-md-6 col-sm-12 text-center mb-2" style="max-height: 80px">
                   <a class="text-link" href="{{ banner.url }}" target="_blank">
-                    <img class="zoom-elem img-fluid rounded" src="{{ banner.banner.url }}" alt="Баннер" loading="lazy"
-                      decoding="async" fetchpriority="low" style="max-height: 80px">
+                    <img class="zoom-elem img-fluid rounded" src="{{ banner.banner.url }}" alt="{{ banner.name }}"
+                      loading="lazy" decoding="async" fetchpriority="low" style="max-height: 80px">
                   </a>
                 </div>
                 {% endfor %}
