@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
-    'froala_editor',
+    'django_ckeditor_5',
     'debug_toolbar',
     'pwa',
     'main.apps.MainConfig',
@@ -172,7 +172,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Froala Editor config
 
-FROALA_EDITOR_THIRD_PARTY = ('embedly', 'image_tui', 'line_height', 'special_characters')
+FROALA_EDITOR_THIRD_PARTY = (
+    'embedly', 'image_tui', 'line_height', 'special_characters')
 FROALA_UPLOAD_PATH = ''
 
 # PWA
@@ -215,75 +216,234 @@ PWA_APP_ICONS = [
 PWA_APP_ICONS_APPLE = PWA_APP_ICONS
 PWA_APP_SPLASH_SCREEN = [
     {
-      'src': '/static/main/img/pwa/splash-640x1136.png',
-      'media': 'screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
+        'src': '/static/main/img/pwa/splash-640x1136.png',
+        'media': 'screen and (device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
     },
     {
-      'src': '/static/main/img/pwa/splash-750x1334.png',
-      'media': 'screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
+        'src': '/static/main/img/pwa/splash-750x1334.png',
+        'media': 'screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
     },
     {
-      'src': '/static/main/img/pwa/splash-828x1792.png',
-      'media': 'screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
+        'src': '/static/main/img/pwa/splash-828x1792.png',
+        'media': 'screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
     },
     {
-      'src': '/static/main/img/pwa/splash-1125x2436.png',
-      'media': 'screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'
+        'src': '/static/main/img/pwa/splash-1125x2436.png',
+        'media': 'screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'
     },
     {
-      'src': '/static/main/img/pwa/splash-1170x2532.png',
-      'media': 'screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'
+        'src': '/static/main/img/pwa/splash-1170x2532.png',
+        'media': 'screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'
     },
     {
-      'src': '/static/main/img/pwa/splash-1179x2556.png',
-      'media': 'screen and (device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'
+        'src': '/static/main/img/pwa/splash-1179x2556.png',
+        'media': 'screen and (device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'
     },
     {
-      'src': '/static/main/img/pwa/splash-1242x2208.png',
-      'media': 'screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'
+        'src': '/static/main/img/pwa/splash-1242x2208.png',
+        'media': 'screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'
     },
     {
-      'src': '/static/main/img/pwa/splash-1242x2688.png',
-      'media': 'screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'
+        'src': '/static/main/img/pwa/splash-1242x2688.png',
+        'media': 'screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'
     },
     {
-      'src': '/static/main/img/pwa/splash-1284x2778.png',
-      'media': 'screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'
+        'src': '/static/main/img/pwa/splash-1284x2778.png',
+        'media': 'screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'
     },
     {
-      'src': '/static/main/img/pwa/splash-1290x2796.png',
-      'media': 'screen and (device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'
+        'src': '/static/main/img/pwa/splash-1290x2796.png',
+        'media': 'screen and (device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)'
     },
     {
-      'src': '/static/main/img/pwa/splash-1488x2266.png',
-      'media': 'screen and (device-width: 744px) and (device-height: 1133px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
+        'src': '/static/main/img/pwa/splash-1488x2266.png',
+        'media': 'screen and (device-width: 744px) and (device-height: 1133px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
     },
     {
-      'src': '/static/main/img/pwa/splash-1536x2048.png',
-      'media': 'screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
+        'src': '/static/main/img/pwa/splash-1536x2048.png',
+        'media': 'screen and (device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
     },
     {
-      'src': '/static/main/img/pwa/splash-1620x2160.png',
-      'media': 'screen and (device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
+        'src': '/static/main/img/pwa/splash-1620x2160.png',
+        'media': 'screen and (device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
     },
     {
-      'src': '/static/main/img/pwa/splash-1640x2360.png',
-      'media': 'screen and (device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
+        'src': '/static/main/img/pwa/splash-1640x2360.png',
+        'media': 'screen and (device-width: 820px) and (device-height: 1180px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
     },
     {
-      'src': '/static/main/img/pwa/splash-1668x2224.png',
-      'media': 'screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
+        'src': '/static/main/img/pwa/splash-1668x2224.png',
+        'media': 'screen and (device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
     },
     {
-      'src': '/static/main/img/pwa/splash-1668x2388.png',
-      'media': 'screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
+        'src': '/static/main/img/pwa/splash-1668x2388.png',
+        'media': 'screen and (device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
     },
     {
-      'src': '/static/main/img/pwa/splash-2048x2732.png',
-      'media': 'screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
+        'src': '/static/main/img/pwa/splash-2048x2732.png',
+        'media': 'screen and (device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)'
     }
 ]
 PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'ru-RU'
 PWA_APP_DEBUG_MODE = False
-PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'main', 'static', 'main', 'js', 'serviceworker.js')
+PWA_SERVICE_WORKER_PATH = os.path.join(
+    BASE_DIR, 'main', 'static', 'main', 'js', 'serviceworker.js')
+
+
+# CKEditor 5
+
+customColorPalette = [
+    {
+        'color': 'hsl(4, 90%, 58%)',
+        'label': 'Red'
+    },
+    {
+        'color': 'hsl(340, 82%, 52%)',
+        'label': 'Pink'
+    },
+    {
+        'color': 'hsl(291, 64%, 42%)',
+        'label': 'Purple'
+    },
+    {
+        'color': 'hsl(262, 52%, 47%)',
+        'label': 'Deep Purple'
+    },
+    {
+        'color': 'hsl(231, 48%, 48%)',
+        'label': 'Indigo'
+    },
+    {
+        'color': 'hsl(207, 90%, 54%)',
+        'label': 'Blue'
+    },
+]
+
+CKEDITOR_5_CONFIGS = {
+    "default": {
+        "language": "ru",
+        "blockToolbar": [
+            "paragraph",
+            "heading1",
+            "heading2",
+            "heading3",
+            "|",
+            "bulletedList",
+            "numberedList",
+            "|",
+            "blockQuote",
+        ],
+        "toolbar": [
+            "heading",
+            "codeBlock",
+            "|",
+            "outdent",
+            "indent",
+            "|",
+            "alignment",
+            "bold",
+            "italic",
+            "link",
+            "underline",
+            "strikethrough",
+            "code",
+            "subscript",
+            "superscript",
+            "highlight",
+            "|",
+            "bulletedList",
+            "numberedList",
+            "todoList",
+            "|",
+            "blockQuote",
+            "insertImage",
+            "|",
+            "fontSize",
+            "fontFamily",
+            "fontColor",
+            "fontBackgroundColor",
+            "mediaEmbed",
+            "removeFormat",
+            "insertTable",
+            "sourceEditing",
+        ],
+        "image": {
+            "toolbar": [
+                "imageTextAlternative",
+                "|",
+                "imageStyle:alignLeft",
+                "imageStyle:alignRight",
+                "imageStyle:alignCenter",
+                "imageStyle:side",
+                "|",
+                "toggleImageCaption",
+                "|"
+            ],
+            "styles": [
+                "full",
+                "side",
+                "alignLeft",
+                "alignRight",
+                "alignCenter",
+            ],
+        },
+        "table": {
+            "contentToolbar": [
+                "tableColumn",
+                "tableRow",
+                "mergeTableCells",
+                "tableProperties",
+                "tableCellProperties",
+            ],
+            "tableProperties": {
+                "borderColors": customColorPalette,
+                "backgroundColors": customColorPalette,
+            },
+            "tableCellProperties": {
+                "borderColors": customColorPalette,
+                "backgroundColors": customColorPalette,
+            },
+        },
+        "heading": {
+            "options": [
+                {
+                    "model": "paragraph",
+                    "title": "Paragraph",
+                    "class": "ck-heading_paragraph",
+                },
+                {
+                    "model": "heading1",
+                    "view": "h1",
+                    "title": "Heading 1",
+                    "class": "ck-heading_heading1",
+                },
+                {
+                    "model": "heading2",
+                    "view": "h2",
+                    "title": "Heading 2",
+                    "class": "ck-heading_heading2",
+                },
+                {
+                    "model": "heading3",
+                    "view": "h3",
+                    "title": "Heading 3",
+                    "class": "ck-heading_heading3",
+                },
+            ]
+        },
+        "list": {
+            "properties": {
+                "styles": True,
+                "startIndex": True,
+                "reversed": True,
+            }
+        },
+        "htmlSupport": {
+            "allow": [
+                {"name": "/.*/", "attributes": True,
+                    "classes": True, "styles": True}
+            ]
+        },
+    },
+}

@@ -17,9 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
-from froala_editor import views
 
 from . import settings
+
 
 handler403 = 'main.views.tr_handler403'
 handler404 = 'main.views.tr_handler404'
@@ -27,7 +27,8 @@ handler500 = 'main.views.tr_handler500'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('froala_editor/', include('froala_editor.urls')),
+    path("ckeditor5/", include('django_ckeditor_5.urls'),
+         name="ck_editor_5_upload_file"),
     path('', include('main.urls')),
     path('', include('pwa.urls')),
 ]

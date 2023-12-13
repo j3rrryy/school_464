@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-from froala_editor.fields import FroalaField
+from django_ckeditor_5.fields import CKEditor5Field
 from django_resized import ResizedImageField
 
 
@@ -8,7 +8,7 @@ class News(models.Model):
     slug = models.SlugField(max_length=255, unique=True,
                             db_index=True, verbose_name='URL')
     headline = models.CharField(max_length=255, verbose_name='Заголовок')
-    text = FroalaField(verbose_name='Текст')
+    text = CKEditor5Field(verbose_name='Текст')
     photo = ResizedImageField(blank=True, force_format='WEBP',
                               size=[640, 360], quality=75, verbose_name='Фото')
     is_pinned = models.BooleanField(default=False, verbose_name='Закреплено')
@@ -30,7 +30,7 @@ class News(models.Model):
 class Page(models.Model):
     slug = models.SlugField(max_length=255, unique=True,
                             db_index=True, verbose_name='URL')
-    content = FroalaField(verbose_name='Содержимое страницы')
+    content = CKEditor5Field(verbose_name='Содержимое страницы')
     in_menu = models.BooleanField(default=True, verbose_name='Включен в меню')
     menu_info = models.CharField(max_length=255, verbose_name='Имя в меню')
     menu_position = models.IntegerField(
@@ -45,8 +45,10 @@ class Page(models.Model):
         return reverse('page', kwargs={'page_slug': self.slug})
 
     def set_parent_choices(self):
-        parent_choices = Page.objects.filter(in_menu=True, parent_page='---------').values_list('menu_info', 'menu_info')
-        self._meta.get_field('parent_page').choices = [('---------', '---------')] + list(parent_choices)
+        parent_choices = Page.objects.filter(
+            in_menu=True, parent_page='---------').values_list('menu_info', 'menu_info')
+        self._meta.get_field('parent_page').choices = [
+            ('---------', '---------')] + list(parent_choices)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
