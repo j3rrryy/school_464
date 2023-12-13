@@ -47,7 +47,7 @@ class NewsView(ListView):
         if not news:
             news = super().get_queryset()
             news = news.filter(is_published=True).order_by(
-                F('is_pinned').desc(), '-date')
+                F('is_pinned').desc(), '-pk')
             cache.set('news', news, 60 * 10)
 
         return news

@@ -21,7 +21,7 @@
           <h3>{% if post.is_pinned %}<i class="fa-solid fa-thumbtack h5"></i>{% endif %}
             {{ post.headline|truncatewords:4 }}</h3>
         </div>
-        <p>{{ post.text|striptags|truncatewords:10|safe }}</p>
+        <p>{{ post.text|striptags|truncatewords:8|safe }}</p>
         <div class="d-flex ms-auto mt-auto">
           <p class="news__date m-0">{{ post.date }}</p>
         </div>
