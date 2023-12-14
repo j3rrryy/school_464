@@ -33,7 +33,7 @@ class NewsView(ListView):
     model = models.News
     template_name = 'main/news.html'
     context_object_name = 'news'
-    paginate_by = 8
+    paginate_by = 6
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
