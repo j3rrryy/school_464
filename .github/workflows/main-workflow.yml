@@ -20,3 +20,7 @@ jobs:
         run: |
           docker compose -f docker-compose.dev.yml up --build
           docker compose exec school_464_django_dev sh -c "python manage.py test main"
+
+      - name: Test the app
+        run: |
+          docker compose exec school_464_django_dev sh -c "python manage.py test main"
