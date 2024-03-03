@@ -19,5 +19,7 @@ jobs:
           sleep 20
 
       - name: Run tests
-        run: docker compose exec school_464_django_dev sh -c "python manage.py test main"
+        run: |
+          docker compose exec -it school_464_django_dev sh
+          python manage.py test main
           
