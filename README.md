@@ -31,19 +31,17 @@
 
 ### :rocket: Start
 
+- Run the **test build**
+
+  ```shell
+  docker compose -f docker-compose.tests.yml up --build
+  ```
+
 - Run the **dev build**
 
-  - Run the tests
-
-    ```shell
-    docker compose -f docker-compose.dev.yml up --build -d -e RUN_TESTS=true
-    ```
-
-  - Run the app
-
-    ```shell
-    docker compose -f docker-compose.dev.yml up --build -d -e RUN_TESTS=false
-    ```
+  ```shell
+  docker compose -f docker-compose.dev.yml up --build -d
+  ```
 
 - Run the **prod build** and get a SSL certificate
 
@@ -114,7 +112,7 @@
   - Press `Ctrl+C` + `Ctrl+Shift+V`
 
     ```shell
-    python manage.py test main
+    python manage.py test
     ```
 
 ### :x: Stop

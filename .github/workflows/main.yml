@@ -14,5 +14,4 @@ jobs:
         run: cp examples/docker/env/.env.dev.example docker/env/.env.dev
 
       - name: Build and run Docker containers with tests
-        run: |
-          docker compose -f docker-compose.dev.yml up --build -e RUN_TESTS=true
+        run: docker compose -f docker-compose.tests.yml up --build
