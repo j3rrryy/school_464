@@ -1,0 +1,21 @@
+name: CI
+
+on: [push]
+
+jobs:
+  run_tests:
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Copy .env.example
+        run: cp examples/docker/env/.env.dev.example docker/env/.env.dev
+
+      - name: Build and run Docker containers
+        run: docker compose -f docker-compose.dev.yml up --build
+
+      - name: Run tests
+        run: docker compose exec school_464_django_dev sh -c "python manage.py test main"
+          
