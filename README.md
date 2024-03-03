@@ -31,12 +31,6 @@
 
 ### :rocket: Start
 
-- Run the **test build**
-
-  ```shell
-  docker compose -f docker-compose.tests.yml up --build
-  ```
-
 - Run the **dev build**
 
   ```shell
