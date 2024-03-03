@@ -13,5 +13,14 @@ jobs:
       - name: Copy .env.example
         run: cp examples/docker/env/.env.dev.example docker/env/.env.dev
 
-      - name: Build and run Docker containers with tests
-        run: docker compose -f docker-compose.tests.yml up --build
+      - name: Build Docker containers
+        run: |
+          docker compose -f docker-compose.tests.yml build
+
+      - name: Run Docker containers exclude Django
+        run: |
+          docker compose -f docker-compose.tests.yml up nginx postgres redis -d
+          sleep 20
+
+      - name: Run Django tests
+        run: docker compose -f docker-compose.tests.yml up django
