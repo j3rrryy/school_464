@@ -22,7 +22,16 @@ services:
     depends_on:
       - postgres
       - redis
-    command: bash -c "python manage.py collectstatic --no-input && python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: bash -c "
+      python manage.py collectstatic --no-input &&
+      python manage.py makemigrations &&
+      python manage.py migrate &&
+      {{- if [ \"$RUN_TESTS\" = \"true\" ]; then
+        python manage.py test main;
+      else
+        python manage.py runserver 0.0.0.0:8000;
+      fi }}
+      "
     container_name: school_464_django_dev
 
   nginx:

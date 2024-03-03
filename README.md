@@ -33,8 +33,16 @@
 
 - Run the **dev build**
 
+  - Run the tests
+
     ```shell
-    docker compose -f docker-compose.dev.yml up --build -d
+    docker compose -f docker-compose.dev.yml up --build -d -e RUN_TESTS=true
+    ```
+
+  - Run the app
+
+    ```shell
+    docker compose -f docker-compose.dev.yml up --build -d -e RUN_TESTS=false
     ```
 
 - Run the **prod build** and get a SSL certificate
