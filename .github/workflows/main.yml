@@ -13,13 +13,6 @@ jobs:
       - name: Copy .env.example
         run: cp examples/docker/env/.env.dev.example docker/env/.env.dev
 
-      - name: Build and run Docker containers
+      - name: Build and run Docker containers with tests
         run: |
-          docker compose -f docker-compose.dev.yml up --build -d
-          sleep 20
-
-      - name: Run tests
-        run: |
-          docker compose exec -it school_464_django_dev sh
-          python manage.py test main
-          
+          docker compose -f docker-compose.dev.yml up --build -e RUN_TESTS=true
