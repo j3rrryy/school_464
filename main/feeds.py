@@ -1,4 +1,5 @@
 from django.contrib.syndication.views import Feed
+
 from .models import News
 
 
@@ -8,7 +9,7 @@ class LatestNewsFeed(Feed):
     description = "Последние новости на сайте школы 464."
 
     def items(self):
-        return News.objects.filter(is_published=True).order_by('-date')[:5]
+        return News.objects.filter(is_published=True).order_by("-date")[:5]
 
     def item_title(self, item):
         return item.headline

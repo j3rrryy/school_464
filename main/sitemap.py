@@ -8,9 +8,9 @@ class NewsSitemap(Sitemap):
     Sitemap for news
     """
 
-    changefreq = 'never'
+    changefreq = "never"
     priority = 0.7
-    protocol = 'https'
+    protocol = "https"
 
     def items(self):
         return News.objects.all()
@@ -24,9 +24,9 @@ class PageSitemap(Sitemap):
     Sitemap for pages
     """
 
-    changefreq = 'monthly'
+    changefreq = "monthly"
     priority = 1.0
-    protocol = 'https'
+    protocol = "https"
 
     def items(self):
         return Page.objects.all()

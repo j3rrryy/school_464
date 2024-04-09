@@ -7,9 +7,7 @@ from main.models import News, Page, Banner
 class MainNewsModelTestCase(TestCase):
     def setUp(self):
         self.test_news = News.objects.create(
-            slug='test-news',
-            headline='Test News',
-            text='Test Text'
+            slug="test-news", headline="Test News", text="Test Text"
         )
 
     def test_is_pinned_false_by_default(self):
@@ -33,7 +31,7 @@ class MainNewsModelTestCase(TestCase):
         Test the __str__ method
         """
 
-        expected = 'Test News'
+        expected = "Test News"
         actual = str(self.test_news)
 
         self.assertEqual(expected, actual)
@@ -43,7 +41,7 @@ class MainNewsModelTestCase(TestCase):
         Test that get_absolute_url returns the expected URL.
         """
 
-        expected = reverse('post', kwargs={'post_slug': self.test_news.slug})
+        expected = reverse("post", kwargs={"post_slug": self.test_news.slug})
         actual = self.test_news.get_absolute_url()
 
         self.assertEqual(expected, actual)
@@ -52,9 +50,7 @@ class MainNewsModelTestCase(TestCase):
 class MainPageModelTestCase(TestCase):
     def setUp(self):
         self.test_page = Page.objects.create(
-            slug='test-page',
-            content='Test Content',
-            menu_info='Test Page'
+            slug="test-page", content="Test Content", menu_info="Test Page"
         )
 
     def test_menu_position_1_by_default(self):
@@ -70,7 +66,7 @@ class MainPageModelTestCase(TestCase):
         Test the __str__ method
         """
 
-        expected = 'Test Page'
+        expected = "Test Page"
         actual = str(self.test_page)
 
         self.assertEqual(expected, actual)
@@ -80,7 +76,7 @@ class MainPageModelTestCase(TestCase):
         Test that get_absolute_url returns the expected URL.
         """
 
-        expected = reverse('page', kwargs={'page_slug': self.test_page.slug})
+        expected = reverse("page", kwargs={"page_slug": self.test_page.slug})
         actual = self.test_page.get_absolute_url()
 
         self.assertEqual(expected, actual)
@@ -89,9 +85,7 @@ class MainPageModelTestCase(TestCase):
 class MainBannerModelTestCase(TestCase):
     def setUp(self):
         self.test_banner = Banner.objects.create(
-            name='Test Banner',
-            banner='/media/test.webp',
-            url='test.com'
+            name="Test Banner", banner="/media/test.webp", url="test.com"
         )
 
     def test_position_1_by_default(self):
@@ -115,7 +109,7 @@ class MainBannerModelTestCase(TestCase):
         Test the __str__ method
         """
 
-        expected = 'Test Banner'
+        expected = "Test Banner"
         actual = str(self.test_banner)
 
         self.assertEqual(expected, actual)

@@ -94,14 +94,28 @@ disable_banner.short_description = "Выключить"
 
 @admin.register(models.News)
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'slug', 'headline', 'get_photo',
-                    'is_pinned', 'date', 'is_published')
-    list_display_links = ('id', 'slug', 'headline')
-    search_fields = ('headline', 'text', 'date')
-    prepopulated_fields = {'slug': ('headline',)}
-    fields = ('headline', 'slug', 'text', 'photo',
-              'get_photo', 'is_pinned', 'is_published')
-    readonly_fields = ('get_photo', )
+    list_display = (
+        "id",
+        "slug",
+        "headline",
+        "get_photo",
+        "is_pinned",
+        "date",
+        "is_published",
+    )
+    list_display_links = ("id", "slug", "headline")
+    search_fields = ("headline", "text", "date")
+    prepopulated_fields = {"slug": ("headline",)}
+    fields = (
+        "headline",
+        "slug",
+        "text",
+        "photo",
+        "get_photo",
+        "is_pinned",
+        "is_published",
+    )
+    readonly_fields = ("get_photo",)
     actions = [make_published, make_unpublished, pin, unpin]
 
     def get_photo(self, object):
@@ -114,25 +128,35 @@ class NewsAdmin(admin.ModelAdmin):
 
 @admin.register(models.Page)
 class PageAdmin(admin.ModelAdmin):
-    list_display = ('id', 'slug', 'in_menu', 'menu_info',
-                    'menu_position', 'parent_page')
-    list_display_links = ('id', 'slug')
-    search_fields = ('id', 'content', 'menu_info',
-                     'menu_position', 'in_menu', 'parent_page')
-    fields = ('menu_info', 'slug', 'content', 'in_menu',
-              'parent_page', 'menu_position')
-    prepopulated_fields = {'slug': ('menu_info',)}
+    list_display = (
+        "id",
+        "slug",
+        "in_menu",
+        "menu_info",
+        "menu_position",
+        "parent_page",
+    )
+    list_display_links = ("id", "slug")
+    search_fields = (
+        "id",
+        "content",
+        "menu_info",
+        "menu_position",
+        "in_menu",
+        "parent_page",
+    )
+    fields = ("menu_info", "slug", "content", "in_menu", "parent_page", "menu_position")
+    prepopulated_fields = {"slug": ("menu_info",)}
     actions = [enable_item, disable_item]
 
 
 @admin.register(models.Banner)
 class BannerAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'get_banner',
-                    'url', 'position', 'is_enabled')
-    list_display_links = ('id', 'name', 'get_banner', 'url')
-    search_fields = ('id', 'name', 'url', 'position')
-    fields = ('name', 'url', 'banner', 'get_banner', 'position', 'is_enabled')
-    readonly_fields = ('get_banner', )
+    list_display = ("id", "name", "get_banner", "url", "position", "is_enabled")
+    list_display_links = ("id", "name", "get_banner", "url")
+    search_fields = ("id", "name", "url", "position")
+    fields = ("name", "url", "banner", "get_banner", "position", "is_enabled")
+    readonly_fields = ("get_banner",)
     actions = [enable_banner, disable_banner]
 
     def get_banner(self, object):

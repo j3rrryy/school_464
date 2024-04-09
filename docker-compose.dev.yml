@@ -17,7 +17,6 @@ services:
     env_file:
       - docker/env/.env.dev
     volumes:
-      - ./:/app
       - static:/app/static
       - media:/app/media
     depends_on:
