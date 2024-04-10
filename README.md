@@ -1,5 +1,12 @@
 # School website
 
+<p align="center">
+  <img src="https://github.com/j3rrryy/school_464/actions/workflows/main.yml/badge.svg">
+  <img src="https://img.shields.io/badge/Python-3.12-FFD64E.svg" alt="Python 3.12">
+  <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License">
+  <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Black formatter">
+</p>
+
 ## :book: Key features
 
 - RSS
