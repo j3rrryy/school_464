@@ -1,19 +1,24 @@
-name: CI
+name: CI/CD
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  run_tests:
-    runs-on: [ubuntu-latest]
-
+  test:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.1.1
 
       - name: Copy .env.example
         run: cp examples/docker/env/.env.dev.example docker/env/.env.dev
 
-      - name: Build Docker containers
+      - name: Build Docker images
         run: |
           docker compose -f docker-compose.tests.yml build
 
@@ -24,3 +29,26 @@ jobs:
 
       - name: Run Django tests
         run: docker compose -f docker-compose.tests.yml up django
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.1
+
+      - name: Deploy the app
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSHKEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd school_464
+            git pull origin main
+            docker compose build django
+            docker compose stop
+            docker rm school_464_django_prod
+            docker compose up
+            docker image prune -f
