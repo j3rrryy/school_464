@@ -46,6 +46,7 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd school_464
+            sudo -s
             git pull origin main
             docker compose build django
             docker compose stop
