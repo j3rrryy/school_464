@@ -45,11 +45,12 @@ jobs:
           key: ${{ secrets.SSHKEY }}
           port: ${{ secrets.PORT }}
           script: |
-            cd school_464
-            sudo -s
-            git pull origin main
-            docker compose build django
-            docker compose stop
-            docker rm school_464_django_prod
-            docker compose up
+            echo "${{ secrets.PASSWORD }}" | sudo -S sh -c "
+            cd school_464 &&
+            git pull origin main &&
+            docker compose build django &&
+            docker compose stop &&
+            docker rm school_464_django_prod &&
+            docker compose up &&
             docker image prune -f
+            "
