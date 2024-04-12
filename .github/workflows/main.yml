@@ -51,6 +51,6 @@ jobs:
             docker compose build django &&
             docker compose stop &&
             docker rm school_464_django_prod &&
-            docker compose up &&
+            docker compose up -d &&
             docker image prune -f
             "
