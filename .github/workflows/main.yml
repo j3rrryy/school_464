@@ -30,7 +30,7 @@ jobs:
       - name: Run Django tests
         run: |
           docker compose -f docker-compose.tests.yml up django
-          docker cp school_464_django_test:./coverage.xml ./coverage.xml
+          docker cp school_464_django_test:./app/coverage.xml ./coverage.xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4.3.0
