@@ -1,9 +1,7 @@
 # School website
 
 <p align="center">
-  <a href="https://github.com/j3rrryy/school_464/actions">
-    <img src="https://github.com/j3rrryy/school_464/actions/workflows/main.yml/badge.svg">
-  </a>
+  <img src="https://github.com/j3rrryy/school_464/actions/workflows/main.yml/badge.svg">
   <a href="https://codecov.io/gh/j3rrryy/school_464">
     <img src="https://codecov.io/gh/j3rrryy/school_464/graph/badge.svg?token=5SP4EMB1B3"/>
   </a>

@@ -28,12 +28,15 @@ jobs:
           sleep 20
 
       - name: Run Django tests
-        run: docker compose -f docker-compose.tests.yml up django
+        run: |
+          docker compose -f docker-compose.tests.yml up django
+          docker cp school_464_django_test:./app/.coverage ./.coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4.3.0
         with:
           fail_ci_if_error: true
+          file: ./.coverage
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: j3rrryy/school_464
 
