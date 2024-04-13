@@ -12,8 +12,8 @@ services:
     build:
       context: .
     restart: always
-    ports:
-      - 8000:8000
+    expose:
+      - 8000
     env_file:
       - docker/env/.env.dev
     volumes:
@@ -59,8 +59,8 @@ services:
     restart: always
     command:
       - redis-server
-    ports:
-      - 6379:6379
+    expose:
+      - 6379
     env_file:
       - docker/env/.env.dev
     volumes:

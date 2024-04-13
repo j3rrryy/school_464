@@ -152,8 +152,9 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = []
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": lambda request: DEBUG,
@@ -290,7 +291,7 @@ PWA_APP_SPLASH_SCREEN = [
 ]
 PWA_APP_DIR = "ltr"
 PWA_APP_LANG = "ru-RU"
-PWA_APP_DEBUG_MODE = False
+PWA_APP_DEBUG_MODE = DEBUG
 PWA_SERVICE_WORKER_PATH = os.path.join(
     BASE_DIR, "main", "static", "main", "js", "serviceworker.js"
 )

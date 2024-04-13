@@ -46,8 +46,12 @@ class NewsView(ListView):
         news = cache.get("news")
 
         if not news:
-            news = super().get_queryset()
-            news = news.filter(is_published=True).order_by(F("is_pinned").desc(), "-pk")
+            news = (
+                super()
+                .get_queryset()
+                .filter(is_published=True)
+                .order_by(F("is_pinned").desc(), "-pk")
+            )
             cache.set("news", news, 60 * 10)
 
         return news
@@ -106,8 +110,7 @@ class PostView(DetailView):
         post = cache.get(POST)
 
         if not post:
-            post = super().get_queryset()
-            post = post.get(slug=self.kwargs["post_slug"])
+            post = super().get_queryset().get(slug=self.kwargs["post_slug"])
             cache.set(POST, post, 60 * 60)
 
         return post
@@ -135,8 +138,7 @@ class PageView(DetailView):
         page = cache.get(PAGE)
 
         if not page:
-            page = super().get_queryset()
-            page = page.get(slug=self.kwargs["page_slug"])
+            page = super().get_queryset().get(slug=self.kwargs["page_slug"])
             cache.set(PAGE, page, 60 * 60)
 
         return page

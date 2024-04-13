@@ -46,6 +46,9 @@ class MainNewsModelTestCase(TestCase):
 
         self.assertEqual(expected, actual)
 
+    def tearDown(self):
+        self.test_news.delete()
+
 
 class MainPageModelTestCase(TestCase):
     def setUp(self):
@@ -81,6 +84,9 @@ class MainPageModelTestCase(TestCase):
 
         self.assertEqual(expected, actual)
 
+    def tearDown(self):
+        self.test_page.delete()
+
 
 class MainBannerModelTestCase(TestCase):
     def setUp(self):
@@ -113,3 +119,6 @@ class MainBannerModelTestCase(TestCase):
         actual = str(self.test_banner)
 
         self.assertEqual(expected, actual)
+
+    def tearDown(self):
+        self.test_banner.delete()

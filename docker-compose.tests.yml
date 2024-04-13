@@ -1,25 +1,25 @@
 version: '3.9'
 
 volumes:
-  pgdata:
-  redis:
-  static:
-  media:
+  pgdata_test:
+  redis_test:
+  static_test:
+  media_test:
 
 
 services:
   django:
     build:
       context: .
-    ports:
-      - 8000:8000
+    expose:
+      - 8000
     env_file:
       - docker/env/.env.dev
     environment:
       - DEBUG=0
     volumes:
-      - static:/app/static
-      - media:/app/media
+      - static_test:/app/static
+      - media_test:/app/media
     depends_on:
       - postgres
       - redis
@@ -27,24 +27,9 @@ services:
       python manage.py collectstatic --no-input &&
       python manage.py makemigrations &&
       python manage.py migrate &&
-      python manage.py test main"
+      coverage run manage.py test &&
+      coverage report"
     container_name: school_464_django_test
-
-  nginx:
-    image: nginx:stable-alpine
-    restart: always
-    working_dir: /app
-    ports:
-      - 80:80
-    volumes:
-      - static:/app/static
-      - media:/app/media
-      - ./docker/nginx/dev/:/etc/nginx/conf.d:ro
-    links:
-      - django
-    depends_on:
-      - django
-    container_name: school_464_nginx_test
 
   postgres:
     image: postgres:alpine
@@ -52,7 +37,7 @@ services:
     env_file:
       - docker/env/.env.dev
     volumes:
-      - pgdata:/var/lib/postgresql/data/
+      - pgdata_test:/var/lib/postgresql/data/
     container_name: school_464_postgres_test
 
   redis:
@@ -60,10 +45,10 @@ services:
     restart: always
     command:
       - redis-server
-    ports:
-      - 6379:6379
+    expose:
+      - 6379
     env_file:
       - docker/env/.env.dev
     volumes:
-      - redis:/data
+      - redis_test:/data
     container_name: school_464_redis_test

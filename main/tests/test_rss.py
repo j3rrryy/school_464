@@ -27,3 +27,6 @@ class MainRSSTestCase(TestCase):
             response,
             reverse("post", kwargs={"post_slug": self.test_news.slug}) + "</link>",
         )
+
+    def tearDown(self):
+        self.test_news.delete()

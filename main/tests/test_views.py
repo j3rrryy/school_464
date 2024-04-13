@@ -56,6 +56,10 @@ class MainViewsTestCase(TestCase):
         self.assertTemplateUsed(response, "main/page.html")
         self.assertContains(response, "Test Page")
 
+    def tearDown(self):
+        self.test_news.delete()
+        self.test_page.delete()
+
 
 class SystemViewsTestCase(TestCase):
     def test_offline(self):

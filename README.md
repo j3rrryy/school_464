@@ -1,10 +1,21 @@
 # School website
 
 <p align="center">
-  <img src="https://github.com/j3rrryy/school_464/actions/workflows/main.yml/badge.svg">
-  <img src="https://img.shields.io/badge/Python-3.12-FFD64E.svg" alt="Python 3.12">
-  <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License">
-  <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Black formatter">
+  <a href="https://github.com/j3rrryy/school_464/actions">
+    <img src="https://github.com/j3rrryy/school_464/actions/workflows/main.yml/badge.svg">
+  </a>
+  <a href="https://codecov.io/gh/j3rrryy/school_464">
+    <img src="https://codecov.io/gh/j3rrryy/school_464/graph/badge.svg?token=5SP4EMB1B3"/>
+  </a>
+  <a href="https://www.python.org/downloads/release/python-3120/">
+    <img src="https://img.shields.io/badge/Python-3.12-FFD64E.svg" alt="Python 3.12">
+  </a>
+  <a href="https://github.com/j3rrryy/school_464/blob/main/LICENSE">
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="MIT License">
+  </a>
+  <a href="https://github.com/psf/black">
+    <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Black formatter">
+  </a>
 </p>
 
 ## :book: Key features

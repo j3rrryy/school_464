@@ -24,11 +24,18 @@ jobs:
 
       - name: Run Docker containers exclude Django
         run: |
-          docker compose -f docker-compose.tests.yml up nginx postgres redis -d
+          docker compose -f docker-compose.tests.yml up postgres redis -d
           sleep 20
 
       - name: Run Django tests
         run: docker compose -f docker-compose.tests.yml up django
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4.3.0
+        with:
+          fail_ci_if_error: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: j3rrryy/school_464
 
   deploy:
     runs-on: ubuntu-latest

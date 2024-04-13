@@ -31,3 +31,7 @@ class MainSitemapsTestCase(TestCase):
             response,
             reverse("page", kwargs={"page_slug": self.test_page.slug}) + "</loc>",
         )
+
+    def tearDown(self):
+        self.test_news.delete()
+        self.test_page.delete()

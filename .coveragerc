@@ -1,0 +1,3 @@
+[run]
+source = main/
+omit = */migrations/*, */tests/*
