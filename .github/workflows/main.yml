@@ -30,15 +30,16 @@ jobs:
       - name: Run Django tests
         run: |
           docker compose -f docker-compose.tests.yml up django
-          docker cp school_464_django_test:./app/.coverage ./.coverage
+          docker cp school_464_django_test:./coverage.xml ./coverage.xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4.3.0
         with:
           fail_ci_if_error: true
-          file: ./.coverage
+          file: ./coverage.xml
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: j3rrryy/school_464
+          verbose: true
 
   deploy:
     runs-on: ubuntu-latest
