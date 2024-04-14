@@ -60,8 +60,9 @@ jobs:
             cd school_464 &&
             git pull origin main &&
             docker compose stop django postgres redis &&
-            docker compose build django &
+            docker compose build django &&
             docker rm school_464_django_prod &&
-            docker compose up django postgres redis -d &&
+            docker compose stop nginx &&
+            docker compose up -d &&
             docker image prune -f
             "

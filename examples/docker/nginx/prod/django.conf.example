@@ -63,8 +63,8 @@ server {
 #     }
 
 #     location /maintenance.html{
-#         alias /app/static/main/pages;
-#         expires 3d;
+#         root /app/static/main/pages;
+#         internal;
 #     }
 
 #     if ($http_host !~ "^<domain_name>$"){
