@@ -59,9 +59,9 @@ jobs:
             echo "${{ secrets.PASSWORD }}" | sudo -S sh -c "
             cd school_464 &&
             git pull origin main &&
-            docker compose build django &&
-            docker compose stop &&
+            docker compose stop django postgres redis &&
+            docker compose build django &
             docker rm school_464_django_prod &&
-            docker compose up -d &&
+            docker compose up django postgres redis -d &&
             docker image prune -f
             "
