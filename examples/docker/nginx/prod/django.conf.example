@@ -34,12 +34,14 @@ server {
 
 #     charset utf-8;
 
-#     gzip  on;
+#     gzip on;
 #     gzip_disable "msie6";
 #     gzip_min_length 1000;
 #     gzip_vary on;
-#     gzip_proxied   expired no-cache no-store private auth;
-#     gzip_types     text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+#     gzip_proxied expired no-cache no-store private auth;
+#     gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript application/javascript;
+
+#     error_page 502 /maintenance.html;
 
 #     location / {
 #         proxy_set_header X-Forwarded-Proto https;
@@ -51,13 +53,18 @@ server {
 #     }
 
 #     location /static/ {
-#         alias  /app/static/;
+#         alias /app/static/;
 #         expires 15d;
 #     }
 
 #     location /media/ {
-#         alias  /app/media/;
+#         alias /app/media/;
 #         expires 7d;
+#     }
+
+#     location /maintenance.html{
+#         alias /app/static/main/pages;
+#         expires 3d;
 #     }
 
 #     if ($http_host !~ "^<domain_name>$"){
