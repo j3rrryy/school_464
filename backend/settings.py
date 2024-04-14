@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 
 import environ
+from django.core.files.storage import FileSystemStorage
 
 
 env = environ.Env()
@@ -171,16 +172,6 @@ INTERNAL_IPS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-# Froala Editor config
-
-FROALA_EDITOR_THIRD_PARTY = (
-    "embedly",
-    "image_tui",
-    "line_height",
-    "special_characters",
-)
-FROALA_UPLOAD_PATH = ""
-
 # PWA
 
 PWA_APP_NAME = "Школа 464"
@@ -299,6 +290,12 @@ PWA_SERVICE_WORKER_PATH = os.path.join(
 
 # CKEditor 5
 
+
+class FileStorage(FileSystemStorage):
+    location = os.path.join(MEDIA_ROOT, "other")
+    base_url = f"{MEDIA_URL}/other/"
+
+
 customColorPalette = [
     {"color": "hsl(4, 90%, 58%)", "label": "Red"},
     {"color": "hsl(340, 82%, 52%)", "label": "Pink"},
@@ -307,6 +304,8 @@ customColorPalette = [
     {"color": "hsl(231, 48%, 48%)", "label": "Indigo"},
     {"color": "hsl(207, 90%, 54%)", "label": "Blue"},
 ]
+
+CKEDITOR_5_FILE_STORAGE = "backend.settings.FileStorage"
 
 CKEDITOR_5_CONFIGS = {
     "default": {

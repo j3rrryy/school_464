@@ -13,6 +13,7 @@ class News(models.Model):
     photo = ResizedImageField(
         blank=True,
         force_format="WEBP",
+        upload_to="news/",
         size=[640, 360],
         quality=75,
         verbose_name="Фото",
@@ -75,7 +76,11 @@ class Page(models.Model):
 class Banner(models.Model):
     name = models.CharField(max_length=255, verbose_name="Название")
     banner = ResizedImageField(
-        force_format="WEBP", size=[145, 80], quality=75, verbose_name="Баннер"
+        force_format="WEBP",
+        upload_to="banners/",
+        size=[145, 80],
+        quality=75,
+        verbose_name="Баннер",
     )
     url = models.CharField(max_length=255, verbose_name="Ссылка")
     position = models.IntegerField(default=1, verbose_name="Позиция")
