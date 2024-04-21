@@ -1,6 +1,7 @@
 from typing import Any
 
 from django.db.models import F
+from django.http import Http404
 from django.core.cache import cache
 from django.shortcuts import render
 from django.utils.html import escape
@@ -110,7 +111,11 @@ class PostView(DetailView):
         post = cache.get(POST)
 
         if not post:
-            post = super().get_queryset().get(slug=self.kwargs["post_slug"])
+            try:
+                post = super().get_queryset().get(slug=self.kwargs["post_slug"])
+            except:
+                raise Http404()
+
             cache.set(POST, post, 60 * 60)
 
         return post
@@ -138,10 +143,18 @@ class PageView(DetailView):
         page = cache.get(PAGE)
 
         if not page:
-            page = super().get_queryset().get(slug=self.kwargs["page_slug"])
+            try:
+                page = super().get_queryset().get(slug=self.kwargs["page_slug"])
+            except:
+                raise Http404()
+
             cache.set(PAGE, page, 60 * 60)
 
         return page
+
+
+def robots(request):
+    return render(request, "system/robots.txt", content_type="text/plain")
 
 
 def offline(request):

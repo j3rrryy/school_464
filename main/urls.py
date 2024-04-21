@@ -15,5 +15,6 @@ urlpatterns = [
     path("feed/", feeds.LatestNewsFeed(), name="feed"),
     re_path("^offline/$", views.offline, name="offline"),
     path("<slug:page_slug>/", views.PageView.as_view(), name="page"),
+    path("robots.txt", views.robots, name="robots"),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemaps"),
 ]

@@ -62,6 +62,13 @@ class MainViewsTestCase(TestCase):
 
 
 class SystemViewsTestCase(TestCase):
+    def test_robots(self):
+        response = self.client.get(reverse("robots.txt"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "system/robots.txt")
+        self.assertContains(response, "User-agent: *")
+
     def test_offline(self):
         response = self.client.get(reverse("offline"))
 
