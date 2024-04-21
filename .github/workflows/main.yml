@@ -18,10 +18,18 @@ jobs:
       - name: Copy .env.example
         run: cp examples/docker/env/.env.dev.example docker/env/.env.dev
 
-      - name: Build Docker images and run tests
+      - name: Build Docker images
         run: |
           docker compose -f docker-compose.tests.yml build
-          docker compose -f docker-compose.tests.yml up
+
+      - name: Run Docker containers exclude Django
+        run: |
+          docker compose -f docker-compose.tests.yml up postgres redis -d
+          sleep 5
+
+      - name: Run Django tests
+        run: |
+          docker compose -f docker-compose.tests.yml up django
           docker cp school_464_django_test:./app/coverage.xml ./coverage.xml
 
       - name: Upload coverage to Codecov
