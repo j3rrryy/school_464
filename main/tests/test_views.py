@@ -63,7 +63,7 @@ class MainViewsTestCase(TestCase):
 
 class SystemViewsTestCase(TestCase):
     def test_robots(self):
-        response = self.client.get(reverse("robots.txt"))
+        response = self.client.get(reverse("robots"))
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "system/robots.txt")
