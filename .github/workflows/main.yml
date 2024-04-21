@@ -25,7 +25,7 @@ jobs:
       - name: Run Docker containers exclude Django
         run: |
           docker compose -f docker-compose.tests.yml up postgres redis -d
-          sleep 7
+          sleep 5
 
       - name: Run Django tests
         run: |
