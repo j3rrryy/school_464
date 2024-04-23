@@ -201,6 +201,8 @@ a:hover {
   color: var(--bs-white);
   text-align: center;
   z-index: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .news-container {
@@ -242,7 +244,8 @@ a:hover {
   align-items: flex-start;
 }
 
-.news__title {
+.news__title,
+.news__text {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -260,11 +263,16 @@ a:hover {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  overflow-x: auto;
 }
 
 .page-container img {
   max-width: 100%;
   border-radius: 10px;
+}
+
+.page-container * {
+  width: auto !important;
 }
 
 .footer {
