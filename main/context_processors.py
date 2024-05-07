@@ -20,7 +20,8 @@ def menu_data(request):
             filter(lambda x: x.parent_page == "---------", data),
             key=lambda y: y.menu_position,
         ):
-            menu[item] = []  # create base menu items
+            # create base menu items
+            menu[item] = []
 
         for item in sorted(
             filter(lambda x: x.parent_page != "---------", data),
@@ -30,7 +31,8 @@ def menu_data(request):
                 (x for x in data if x.menu_info == item.parent_page), None
             )
             if parent_item:
-                menu[parent_item].append(item)  # create sub menu items
+                # create sub menu items
+                menu[parent_item].append(item)
 
         cache.set("menu", menu, 60 * 60)
 
@@ -50,13 +52,16 @@ def banners_data(request):
             key=lambda banner: banner.position,
         )
         banners = [[] for _ in range(math.ceil(len(banners_list) / 4))]
-        i = 0  # position of list in res
-        c = 0  # amount of banners in this list
+        # position of list in res
+        i = 0
+        # amount of banners in this list
+        c = 0
 
         for banner in banners_list:
             banners[i].append(banner)
             c += 1
-            if c == 4:  # max 4 banners in each row
+            # max 4 banners in each row
+            if c == 4:
                 i += 1
                 c = 0
 

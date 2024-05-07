@@ -11,8 +11,8 @@ class LatestNewsFeed(Feed):
     def items(self):
         return News.objects.filter(is_published=True).order_by("-date")[:5]
 
-    def item_title(self, item):
+    def item_title(self, item: News):
         return item.headline
 
-    def item_description(self, item):
+    def item_description(self, item: News):
         return item.text

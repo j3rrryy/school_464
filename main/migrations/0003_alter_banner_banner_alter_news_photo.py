@@ -7,18 +7,37 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0002_alter_news_text_alter_page_content'),
+        ("main", "0002_alter_news_text_alter_page_content"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='banner',
-            name='banner',
-            field=django_resized.forms.ResizedImageField(crop=None, force_format='WEBP', keep_meta=True, quality=75, scale=None, size=[145, 80], upload_to='banners/', verbose_name='Баннер'),
+            model_name="banner",
+            name="banner",
+            field=django_resized.forms.ResizedImageField(
+                crop=None,
+                force_format="WEBP",
+                keep_meta=True,
+                quality=75,
+                scale=None,
+                size=[145, 80],
+                upload_to="banners/",
+                verbose_name="Баннер",
+            ),
         ),
         migrations.AlterField(
-            model_name='news',
-            name='photo',
-            field=django_resized.forms.ResizedImageField(blank=True, crop=None, force_format='WEBP', keep_meta=True, quality=75, scale=None, size=[640, 360], upload_to='news/', verbose_name='Фото'),
+            model_name="news",
+            name="photo",
+            field=django_resized.forms.ResizedImageField(
+                blank=True,
+                crop=None,
+                force_format="WEBP",
+                keep_meta=True,
+                quality=75,
+                scale=None,
+                size=[640, 360],
+                upload_to="news/",
+                verbose_name="Фото",
+            ),
         ),
     ]

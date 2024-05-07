@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 
-from main.models import News, Page, Banner
+from main.models import Banner, News, Page
 
 
 class MainNewsModelTestCase(TestCase):

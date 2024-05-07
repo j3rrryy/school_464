@@ -42,19 +42,33 @@ class MainViewsTestCase(TestCase):
         response = self.client.get(
             reverse("post", kwargs={"post_slug": self.test_news.slug})
         )
+        response_404 = self.client.get(
+            reverse("post", kwargs={"post_slug": "does-not-exist"})
+        )
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "main/post.html")
         self.assertContains(response, "Test News")
 
+        self.assertEqual(response_404.status_code, 404)
+        self.assertTemplateUsed(response_404, "system/error_page.html")
+        self.assertContains(response_404, "Вернуться на предыдущую страницу")
+
     def test_PageView(self):
         response = self.client.get(
             reverse("page", kwargs={"page_slug": self.test_page.slug})
+        )
+        response_404 = self.client.get(
+            reverse("page", kwargs={"page_slug": "does-not-exist"})
         )
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "main/page.html")
         self.assertContains(response, "Test Page")
+
+        self.assertEqual(response_404.status_code, 404)
+        self.assertTemplateUsed(response_404, "system/error_page.html")
+        self.assertContains(response_404, "Вернуться на предыдущую страницу")
 
     def tearDown(self):
         self.test_news.delete()
