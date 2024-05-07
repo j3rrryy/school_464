@@ -58,8 +58,8 @@ jobs:
           script: |
             echo "${{ secrets.PASSWORD }}" | sudo -S sh -c "
             cd school_464 &&
-            git pull origin main &&
             docker compose stop django postgres redis &&
+            git pull origin main &&
             docker compose build django &&
             docker rm school_464_django_prod &&
             docker compose stop nginx &&
