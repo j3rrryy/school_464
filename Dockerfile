@@ -4,10 +4,9 @@ ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
 WORKDIR /app
-COPY . .
+COPY requirements.txt .
 
-# update pip python
 RUN pip3 install -U pip
-
-# install packages for the project
 RUN pip3 install -r requirements.txt
+
+COPY . .
