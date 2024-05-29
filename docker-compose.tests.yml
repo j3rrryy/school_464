@@ -1,5 +1,3 @@
-version: '3.9'
-
 volumes:
   pgdata_test:
   redis_test:

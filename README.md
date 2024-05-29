@@ -89,7 +89,11 @@
 
   - Set up automatic certificate renewal every 60 days in cron tab
 
-     ```shell
+    ```shell
+    chmod +x renew_cert.sh
+    ```
+
+    ```shell
     echo "0 0 1 */2 * ./school_464/renew_cert.sh" | crontab -
     ```
 
