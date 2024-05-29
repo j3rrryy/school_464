@@ -87,14 +87,10 @@
     docker compose up -d
     ```
 
-  - Set up automatic certificate renewal every 60 days in cron tab
+  - Run the setup script
 
     ```shell
-    chmod +x renew_cert.sh
-    ```
-
-    ```shell
-    echo "0 0 1 */2 * ./school_464/renew_cert.sh" | crontab -
+    ./setup.sh
     ```
 
 ### :construction_worker: Maintenance
