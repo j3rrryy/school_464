@@ -1,13 +1,13 @@
 from typing import Any
 
-from django.contrib.postgres.search import SearchQuery, SearchVector
-from django.core.cache import cache
 from django.db.models import F
-from django.db.models.query import QuerySet
 from django.http import Http404
 from django.shortcuts import render
+from django.core.cache import cache
 from django.utils.html import escape
+from django.db.models.query import QuerySet
 from django.views.generic import DetailView, ListView, TemplateView
+from django.contrib.postgres.search import SearchQuery, SearchVector
 
 from . import models
 

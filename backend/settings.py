@@ -4,6 +4,7 @@ from pathlib import Path
 import environ
 from django.core.files.storage import FileSystemStorage
 
+
 env = environ.Env()
 
 environ.Env.read_env()
@@ -146,6 +147,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEBUG_TOOLBAR_CONFIG = {
     "SHOW_TOOLBAR_CALLBACK": lambda request: DEBUG,
+    "IS_RUNNING_TESTS": lambda request: not DEBUG,
 }
 
 INTERNAL_IPS = [

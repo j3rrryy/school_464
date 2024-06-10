@@ -3,8 +3,8 @@ import re
 
 from django.conf import settings
 from django.core.cache import cache
-from django.db.models.signals import pre_delete, pre_save
 from django.dispatch import receiver
+from django.db.models.signals import pre_delete, pre_save
 
 from . import models
 
