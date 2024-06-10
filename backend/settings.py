@@ -146,8 +146,8 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEBUG_TOOLBAR_CONFIG = {
-    "SHOW_TOOLBAR_CALLBACK": lambda request: DEBUG,
-    "IS_RUNNING_TESTS": lambda request: not DEBUG,
+    "SHOW_TOOLBAR_CALLBACK": lambda _: DEBUG,
+    "IS_RUNNING_TESTS": DEBUG,
 }
 
 INTERNAL_IPS = [
