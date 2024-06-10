@@ -4,6 +4,7 @@ from pathlib import Path
 import environ
 from django.core.files.storage import FileSystemStorage
 
+
 env = environ.Env()
 
 environ.Env.read_env()
