@@ -22,7 +22,7 @@ services:
       - redis
     command: bash -c "
       python manage.py collectstatic --no-input &&
-      python manage.py makemigrations &&
+      python manage.py makemigrations --merge &&
       python manage.py migrate &&
       gunicorn --workers=2 --max-requests=500 backend.wsgi -b 0.0.0.0:8000"
     container_name: school_464_django_prod
