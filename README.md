@@ -90,7 +90,7 @@
   - Run the setup script
 
     ```shell
-    ./setup.sh
+    bash setup.sh
     ```
 
 ### :construction_worker: Maintenance
