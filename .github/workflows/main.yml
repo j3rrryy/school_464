@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4.1.1
 
       - name: Copy .env.example
-        run: cp examples/docker/env/.env.dev.example docker/env/.env.dev
+        run: cp examples/docker/env/.env.dev docker/env/.env.dev
 
       - name: Build Docker images
         run: |
