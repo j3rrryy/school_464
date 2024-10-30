@@ -4,8 +4,30 @@ volumes:
   static:
   media:
 
+networks:
+  main_network:
+  django_network:
+
 
 services:
+  nginx:
+    image: nginx:stable-alpine
+    restart: always
+    working_dir: /app
+    ports:
+      - 80:80
+    volumes:
+      - static:/app/static
+      - media:/app/media
+      - ./docker/nginx/dev/:/etc/nginx/conf.d:ro
+    networks:
+      - main_network
+    links:
+      - django
+    depends_on:
+      - django
+    container_name: nginx_dev
+
   django:
     build:
       context: .
@@ -18,6 +40,9 @@ services:
       - ./:/app
       - static:/app/static
       - media:/app/media
+    networks:
+      - main_network
+      - django_network
     depends_on:
       - postgres
       - redis
@@ -26,23 +51,7 @@ services:
       python manage.py makemigrations --merge &&
       python manage.py migrate &&
       python manage.py runserver 0.0.0.0:8000"
-    container_name: school_464_django_dev
-
-  nginx:
-    image: nginx:stable-alpine
-    restart: always
-    working_dir: /app
-    ports:
-      - 80:80
-    volumes:
-      - static:/app/static
-      - media:/app/media
-      - ./docker/nginx/dev/:/etc/nginx/conf.d:ro
-    links:
-      - django
-    depends_on:
-      - django
-    container_name: school_464_nginx_dev
+    container_name: django_dev
 
   postgres:
     image: postgres:alpine
@@ -51,7 +60,9 @@ services:
       - docker/env/.env.dev
     volumes:
       - pgdata:/var/lib/postgresql/data/
-    container_name: school_464_postgres_dev
+    networks:
+      - django_network
+    container_name: postgres_dev
 
   redis:
     image: redis:alpine
@@ -64,4 +75,6 @@ services:
       - docker/env/.env.dev
     volumes:
       - redis:/data
-    container_name: school_464_redis_dev
+    networks:
+      - django_network
+    container_name: redis_dev

@@ -16,6 +16,7 @@ services:
     environment:
       - DEBUG=0
     volumes:
+      - ./:/app
       - static_test:/app/static
       - media_test:/app/media
     depends_on:
@@ -27,7 +28,7 @@ services:
       python manage.py migrate &&
       coverage run manage.py test &&
       coverage xml -o ./coverage.xml"
-    container_name: school_464_django_test
+    container_name: django_test
 
   postgres:
     image: postgres:alpine
@@ -36,7 +37,7 @@ services:
       - docker/env/.env.dev
     volumes:
       - pgdata_test:/var/lib/postgresql/data/
-    container_name: school_464_postgres_test
+    container_name: postgres_test
 
   redis:
     image: redis:alpine
@@ -49,4 +50,4 @@ services:
       - docker/env/.env.dev
     volumes:
       - redis_test:/data
-    container_name: school_464_redis_test
+    container_name: redis_test

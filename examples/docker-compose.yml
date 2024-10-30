@@ -4,29 +4,12 @@ volumes:
   static:
   media:
 
+networks:
+  main_network:
+  django_network:
+
 
 services:
-  django:
-    build:
-      context: .
-    restart: always
-    expose:
-      - 8000
-    env_file:
-      - docker/env/.env.prod
-    volumes:
-      - static:/app/static
-      - media:/app/media
-    depends_on:
-      - postgres
-      - redis
-    command: bash -c "
-      python manage.py collectstatic --no-input &&
-      python manage.py makemigrations --merge &&
-      python manage.py migrate &&
-      gunicorn --workers=2 --max-requests=500 backend.wsgi -b 0.0.0.0:8000"
-    container_name: school_464_django_prod
-
   nginx:
     image: nginx:stable-alpine
     restart: always
@@ -40,11 +23,38 @@ services:
       - ./docker/nginx/prod/:/etc/nginx/conf.d:ro
       - ./docker/certbot/conf:/etc/letsencrypt:ro
       - ./docker/certbot/www:/var/www/certbot:ro
+    networks:
+      - main_network
     links:
       - django
     depends_on:
       - django
-    container_name: school_464_nginx_prod
+    container_name: nginx_prod
+
+  django:
+    build:
+      context: .
+    restart: always
+    expose:
+      - 8000
+    env_file:
+      - docker/env/.env.prod
+    volumes:
+      - ./:/app
+      - static:/app/static
+      - media:/app/media
+    networks:
+      - main_network
+      - django_network
+    depends_on:
+      - postgres
+      - redis
+    command: bash -c "
+      python manage.py collectstatic --no-input &&
+      python manage.py makemigrations --merge &&
+      python manage.py migrate &&
+      gunicorn --workers=2 --max-requests=500 backend.wsgi -b 0.0.0.0:8000"
+    container_name: django_prod
 
   postgres:
     image: postgres:alpine
@@ -53,7 +63,9 @@ services:
       - docker/env/.env.prod
     volumes:
       - pgdata:/var/lib/postgresql/data/
-    container_name: school_464_postgres_prod
+    networks:
+      - django_network
+    container_name: postgres_prod
 
   redis:
     image: redis:alpine
@@ -66,7 +78,9 @@ services:
       - docker/env/.env.prod
     volumes:
       - redis:/data
-    container_name: school_464_redis_prod
+    networks:
+      - django_network
+    container_name: redis_prod
 
   certbot:
     image: certbot/certbot
@@ -76,4 +90,4 @@ services:
     command: certonly --webroot --webroot-path=/var/www/certbot/ --email <your_email> --agree-tos --no-eff-email -d <domain (example.com)> -d <domain (www.example.com)>
     depends_on:
       - nginx
-    container_name: school_464_certbot_prod
+    container_name: certbot_prod
