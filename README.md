@@ -41,7 +41,7 @@
 
 - **(For prod)** Copy `.env.prod` file from `examples/docker/env/` to `docker/env/` folder and fill it in
 
-- **(For prod)** Copy `django.conf` file from `examples/docker/nginx/prod/` to `docker/nginx/prod` folder and fill it in
+- **(For prod)** Copy `nginx.conf` file from `examples/docker/nginx/prod/` to `docker/nginx/prod` folder and fill it in
 
 - **(For prod)** Copy `docker-compose.yml` file from `examples/` to `/` folder and fill it in
 
