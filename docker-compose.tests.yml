@@ -12,7 +12,7 @@ services:
     expose:
       - 8000
     env_file:
-      - docker/env/.env.dev
+      - ./docker/env/.env.dev
     environment:
       - DEBUG=0
     volumes:
@@ -34,7 +34,7 @@ services:
     image: postgres:alpine
     restart: always
     env_file:
-      - docker/env/.env.dev
+      - ./docker/env/.env.dev
     volumes:
       - pgdata_test:/var/lib/postgresql/data/
     container_name: postgres_test
@@ -47,7 +47,7 @@ services:
     expose:
       - 6379
     env_file:
-      - docker/env/.env.dev
+      - ./docker/env/.env.dev
     volumes:
       - redis_test:/data
     container_name: redis_test
