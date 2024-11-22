@@ -1,13 +1,14 @@
 from typing import Any
 
+from django.contrib.postgres.search import SearchQuery, SearchVector
+from django.core.cache import cache
+from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import F
+from django.db.models.query import QuerySet
 from django.http import Http404
 from django.shortcuts import render
-from django.core.cache import cache
 from django.utils.html import escape
-from django.db.models.query import QuerySet
 from django.views.generic import DetailView, ListView, TemplateView
-from django.contrib.postgres.search import SearchQuery, SearchVector
 
 from . import models
 
@@ -113,7 +114,7 @@ class PostView(DetailView):
         if not post:
             try:
                 post = super().get_queryset().get(slug=self.kwargs["post_slug"])
-            except:
+            except ObjectDoesNotExist:
                 raise Http404()
 
             cache.set(POST, post, 60 * 60)
@@ -145,7 +146,7 @@ class PageView(DetailView):
         if not page:
             try:
                 page = super().get_queryset().get(slug=self.kwargs["page_slug"])
-            except:
+            except ObjectDoesNotExist:
                 raise Http404()
 
             cache.set(PAGE, page, 60 * 60)

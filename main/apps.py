@@ -7,4 +7,4 @@ class MainConfig(AppConfig):
     verbose_name = "Школа 464"
 
     def ready(self):
-        import main.signals
+        import main.signals  # noqa: F401

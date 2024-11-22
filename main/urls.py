@@ -1,10 +1,8 @@
-from django.urls import path, re_path
 from django.contrib.sitemaps.views import sitemap
+from django.urls import path, re_path
 
-from . import feeds
-from . import views
+from . import feeds, views
 from . import sitemap as sitemaps
-
 
 sitemaps = {"news": sitemaps.NewsSitemap, "pages": sitemaps.PageSitemap}
 
