@@ -27,11 +27,6 @@ jobs:
           docker compose -f docker-compose.tests.yml up postgres redis -d
           sleep 5
 
-      - name: Lint with Ruff
-        run: |
-          docker exec django_test pip install ruff
-          docker exec django_test ruff check
-
       - name: Run Django tests
         run: |
           docker compose -f docker-compose.tests.yml up django

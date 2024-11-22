@@ -26,6 +26,8 @@ services:
       python manage.py collectstatic --no-input &&
       python manage.py makemigrations --merge &&
       python manage.py migrate &&
+      pip install ruff &&
+      ruff check &&
       coverage run manage.py test &&
       coverage xml -o ./coverage.xml"
     container_name: django_test
