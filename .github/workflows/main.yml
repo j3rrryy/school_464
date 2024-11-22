@@ -29,8 +29,8 @@ jobs:
 
       - name: Lint with Ruff
         run: |
-          docker exec django pip install ruff
-          docker exec django ruff check
+          docker exec django_test pip install ruff
+          docker exec django_test ruff check
 
       - name: Run Django tests
         run: |
