@@ -30,12 +30,6 @@ jobs:
           args: "format"
           changed-files: "true"
 
-      - name: Run Ruff import sorting
-        uses: astral-sh/ruff-action@v1.1.1
-        with:
-          args: "check --fix --select I"
-          changed-files: "true"
-
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5.0.1
         with:
