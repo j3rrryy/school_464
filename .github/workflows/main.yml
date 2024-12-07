@@ -115,11 +115,11 @@ jobs:
           script: |
             echo "${{ secrets.PASSWORD }}" | sudo -S sh -c "
             cd school_464 &&
-            docker compose stop django &&
+            docker compose -f docker-compose.prod.yml stop django &&
             docker rm django_prod &&
             docker pull ghcr.io/${{ github.repository }}:latest &&
             docker tag ghcr.io/${{ github.repository }}:latest school_464_django &&
             docker rmi ghcr.io/j3rrryy/school_464:latest &&
-            docker compose up django -d &&
+            docker compose -f docker-compose.prod.yml up django -d &&
             docker image prune -f
             "
