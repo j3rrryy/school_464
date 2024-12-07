@@ -1,24 +1,20 @@
 volumes:
-  pgdata_test:
-  redis_test:
-  static_test:
-  media_test:
+  pgdata:
+  redis:
+  static:
+  media:
 
 
 services:
   django:
-    build:
-      context: .
+    image: school_464_django
     expose:
       - 8000
     env_file:
-      - ./docker/env/.env.dev
-    environment:
-      - DEBUG=0
+      - ./test/.env
     volumes:
-      - ./:/app
-      - static_test:/app/static
-      - media_test:/app/media
+      - static:/app/static
+      - media:/app/media
     depends_on:
       - postgres
       - redis
@@ -34,9 +30,9 @@ services:
     image: postgres:alpine
     restart: always
     env_file:
-      - ./docker/env/.env.dev
+      - ./test/.env
     volumes:
-      - pgdata_test:/var/lib/postgresql/data/
+      - pgdata:/var/lib/postgresql/data/
     container_name: postgres_test
 
   redis:
@@ -47,7 +43,7 @@ services:
     expose:
       - 6379
     env_file:
-      - ./docker/env/.env.dev
+      - ./test/.env
     volumes:
-      - redis_test:/data
+      - redis:/data
     container_name: redis_test

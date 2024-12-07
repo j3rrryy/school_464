@@ -2,5 +2,8 @@
 venv/
 __pycache__/
 /static/
-docker-compose.yml
+/dev/.env
+/prod/.env
+/prod/docker-compose.cert.yml
+/prod/nginx.conf
 .DS_Store

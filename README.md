@@ -37,13 +37,13 @@
 
 ## :hammer_and_wrench: Getting started
 
-- Copy `.env.dev` file from `examples/docker/env/` to `docker/env/` folder fill it in
+- Copy `.env` file from `examples/dev/` to `dev/` folder fill it in
 
-- **(For prod)** Copy `.env.prod` file from `examples/docker/env/` to `docker/env/` folder and fill it in
+- **(For prod)** Copy `.env` file from `examples/prod/` to `prod/` folder and fill it in
 
-- **(For prod)** Copy `nginx.conf` file from `examples/docker/nginx/prod/` to `docker/nginx/prod` folder and fill it in
+- **(For prod)** Copy `nginx.conf` file from `examples/prod/` to `prod/` folder and fill it in
 
-- **(For prod)** Copy `docker-compose.yml` file from `examples/` to `/` folder and fill it in
+- **(For prod)** Copy `docker-compose.cert.yml` file from `examples/prod/` to `prod/` folder and fill it in
 
 ### :rocket: Start
 
@@ -55,36 +55,41 @@
 
 - Run the **prod build** and get a SSL certificate
 
-  - Build the project
+  - Create the directory on the server
 
     ```shell
-    docker compose build
+    mkdir -p /school_464/
     ```
 
-  - Start Docker and get a certificate
+  - Use SCP to copy the prod files to the server
 
     ```shell
-    docker compose up nginx certbot
+    scp -r ./prod/* <username>@<host>:/school_464/
     ```
 
-  - Stop your containers to continue
+  - Pull the Docker image from the GitHub Container Registry
 
     ```shell
-    docker compose stop
+    docker pull ghcr.io/j3rrryy/school_464:latest
+    docker tag ghcr.io/j3rrryy/school_464:latest school_464_django
     ```
 
-  - Comment out the command in `docker-compose.yml`
+  - Start the services to get a certificate
 
     ```shell
-    command: certonly --webroot --webroot-path=/var/www/certbot/ --email <your_email> --agree-tos --no-eff-email -d <domain (example.com)> -d <domain (www.example.com)>
+    docker compose -f docker-compose.cert.yml up
     ```
 
-  - Uncomment the part of nginx config in `docker/nginx/prod/django.conf`
-
-  - Start Docker again
+  - Stop the services
 
     ```shell
-    docker compose up -d
+    docker compose down
+    ```
+
+  - Start the prod build
+
+    ```shell
+    docker compose -f docker-compose.prod.yml up -d
     ```
 
   - Run the setup script
