@@ -39,7 +39,6 @@ services:
     env_file:
       - ./.env
     volumes:
-      - ./:/app
       - static:/app/static
       - media:/app/media
     networks:

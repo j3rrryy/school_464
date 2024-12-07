@@ -101,25 +101,25 @@ jobs:
           slug: j3rrryy/school_464
           verbose: true
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: test
-  #   steps:
-  #     - name: Deploy the app
-  #       uses: appleboy/ssh-action@v1.2.0
-  #       with:
-  #         host: ${{ secrets.HOST }}
-  #         username: ${{ secrets.USERNAME }}
-  #         key: ${{ secrets.SSHKEY }}
-  #         port: ${{ secrets.PORT }}
-  #         script: |
-  #           echo "${{ secrets.PASSWORD }}" | sudo -S sh -c "
-  #           cd school_464 &&
-  #           docker compose stop django postgres redis &&
-  #           docker rm django_prod &&
-  #           docker pull ghcr.io/${{ github.repository }}:latest &&
-  #           docker tag ghcr.io/${{ github.repository }}:latest school_464_django &&
-  #           docker compose stop nginx &&
-  #           docker compose up -d &&
-  #           docker image prune -f
-  #           "
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Deploy the app
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSHKEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            echo "${{ secrets.PASSWORD }}" | sudo -S sh -c "
+            cd school_464 &&
+            docker compose stop django &&
+            docker rm django_prod &&
+            docker pull ghcr.io/${{ github.repository }}:latest &&
+            docker tag ghcr.io/${{ github.repository }}:latest school_464_django &&
+            docker rmi ghcr.io/j3rrryy/school_464:latest &&
+            docker compose up django -d &&
+            docker image prune -f
+            "

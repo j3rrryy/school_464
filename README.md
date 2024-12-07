@@ -67,35 +67,10 @@
     scp -r ./prod/* <username>@<host>:/school_464/
     ```
 
-  - Pull the Docker image from the GitHub Container Registry
+  - Run the deploy script
 
     ```shell
-    docker pull ghcr.io/j3rrryy/school_464:latest
-    docker tag ghcr.io/j3rrryy/school_464:latest school_464_django
-    ```
-
-  - Start the services to get a certificate
-
-    ```shell
-    docker compose -f docker-compose.cert.yml up
-    ```
-
-  - Stop the services
-
-    ```shell
-    docker compose down
-    ```
-
-  - Start the prod build
-
-    ```shell
-    docker compose -f docker-compose.prod.yml up -d
-    ```
-
-  - Run the setup script
-
-    ```shell
-    bash setup.sh
+    bash deploy.sh
     ```
 
 ### :construction_worker: Maintenance
@@ -105,7 +80,7 @@
   - Get access to the container
 
      ```shell
-    docker exec -it <container_name> sh
+    docker exec -it django_dev sh
     ```
 
   - Press `Ctrl+C` + `Ctrl+Shift+V`
@@ -121,7 +96,7 @@
   - Get access to the container
 
      ```shell
-    docker exec -it <container_name> sh
+    docker exec -it django_dev sh
     ```
 
   - Press `Ctrl+C` + `Ctrl+Shift+V`
