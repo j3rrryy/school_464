@@ -80,7 +80,7 @@
   - Get access to the container
 
      ```shell
-    docker exec -it django_dev sh
+    docker exec -it <container_name> sh
     ```
 
   - Press `Ctrl+C` + `Ctrl+Shift+V`
@@ -96,7 +96,7 @@
   - Get access to the container
 
      ```shell
-    docker exec -it django_dev sh
+    docker exec -it <container_name> sh
     ```
 
   - Press `Ctrl+C` + `Ctrl+Shift+V`
