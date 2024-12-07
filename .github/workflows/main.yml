@@ -1,4 +1,4 @@
-name: Linting, Tests, Deployment
+name: Linting, Building, Testing, Deployment
 
 on:
   push:
@@ -51,7 +51,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker compose -f docker-compose.prod.yml build django -t ghcr.io/${{ github.repository }}:latest
+          docker build -f ./prod/docker-compose.prod.yml -t ghcr.io/${{ github.repository }}:latest .
 
       - name: Push Docker image
         run: |
