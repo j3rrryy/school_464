@@ -14,10 +14,6 @@ from . import models
 
 
 class IndexView(TemplateView):
-    """
-    Main page view
-    """
-
     template_name = "main/index.html"
     context_object_name = "index"
 
@@ -29,10 +25,6 @@ class IndexView(TemplateView):
 
 
 class NewsView(ListView):
-    """
-    News page view with pagination
-    """
-
     model = models.News
     template_name = "main/news.html"
     context_object_name = "news"
@@ -60,10 +52,6 @@ class NewsView(ListView):
 
 
 class SearchView(ListView):
-    """
-    Search page view
-    """
-
     template_name = "main/search.html"
     context_object_name = "search_results"
 
@@ -91,10 +79,6 @@ class SearchView(ListView):
 
 
 class PostView(DetailView):
-    """
-    Post page view
-    """
-
     model = models.News
     template_name = "main/post.html"
     context_object_name = "post"
@@ -123,10 +107,6 @@ class PostView(DetailView):
 
 
 class PageView(DetailView):
-    """
-    Website page view
-    """
-
     model = models.Page
     template_name = "main/page.html"
     context_object_name = "page"
@@ -163,9 +143,6 @@ def offline(request):
 
 
 def tr_handler404(request, exception):
-    """
-    404 error handler
-    """
     return render(
         request=request,
         template_name="system/error_page.html",
@@ -175,9 +152,6 @@ def tr_handler404(request, exception):
 
 
 def tr_handler500(request):
-    """
-    500 error handler
-    """
     return render(
         request=request,
         template_name="system/error_page.html",
@@ -187,9 +161,6 @@ def tr_handler500(request):
 
 
 def tr_handler403(request, exception):
-    """
-    403 error handler
-    """
     return render(
         request=request,
         template_name="system/error_page.html",

@@ -4,10 +4,6 @@ from .models import News, Page
 
 
 class NewsSitemap(Sitemap):
-    """
-    Sitemap for news
-    """
-
     changefreq = "never"
     priority = 0.7
     protocol = "https"
@@ -20,10 +16,6 @@ class NewsSitemap(Sitemap):
 
 
 class PageSitemap(Sitemap):
-    """
-    Sitemap for pages
-    """
-
     changefreq = "monthly"
     priority = 1.0
     protocol = "https"
