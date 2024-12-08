@@ -1,4 +1,4 @@
-name: Lint, Build, Test, Deploy
+name: Lint, Test, Deploy
 
 on:
   push:
@@ -49,13 +49,11 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GH_PAT }}
 
-      - name: Build Docker image
-        run: |
-          docker build -t ghcr.io/${{ github.repository }}:latest .
+      - name: Build test Docker image
+        run: docker build -t ghcr.io/${{ github.repository }}:test .
 
-      - name: Push Docker image
-        run: |
-          docker push ghcr.io/${{ github.repository }}:latest
+      - name: Push test Docker image
+        run: docker push ghcr.io/${{ github.repository }}:test
 
   test:
     runs-on: ubuntu-latest
@@ -71,11 +69,11 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GH_PAT }}
 
-      - name: Pull built Docker image
-        run: docker pull ghcr.io/${{ github.repository }}:latest
+      - name: Pull test Docker image
+        run: docker pull ghcr.io/${{ github.repository }}:test
 
       - name: Tag pulled image for testing
-        run: docker tag ghcr.io/${{ github.repository }}:latest school_464_django
+        run: docker tag ghcr.io/${{ github.repository }}:test school_464_django
 
       - name: Pull other images
         run: |
@@ -101,9 +99,32 @@ jobs:
           slug: j3rrryy/school_464
           verbose: true
 
-  deploy:
+  push:
     runs-on: ubuntu-latest
     needs: test
+    steps:
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3.3.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GH_PAT }}
+
+      - name: Pull test Docker image
+        run: docker pull ghcr.io/${{ github.repository }}:test
+
+      - name: Change tag to latest
+        run: docker tag ghcr.io/${{ github.repository }}:test ghcr.io/${{ github.repository }}:latest
+
+      - name: Push latest Docker image
+        run: docker push ghcr.io/${{ github.repository }}:latest
+
+      - name: Delete test Docker image
+        run: docker rmi ghcr.io/${{ github.repository }}:test
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: push
     steps:
       - name: Deploy the app
         uses: appleboy/ssh-action@v1.2.0
@@ -115,8 +136,7 @@ jobs:
           script: |
             echo "${{ secrets.PASSWORD }}" | sudo -S sh -c "
             cd school_464 &&
-            docker compose -f docker-compose.prod.yml stop django &&
-            docker rm django_prod &&
+            docker compose -f docker-compose.prod.yml down django &&
             docker pull ghcr.io/${{ github.repository }}:latest &&
             docker tag ghcr.io/${{ github.repository }}:latest school_464_django &&
             docker rmi ghcr.io/j3rrryy/school_464:latest &&
