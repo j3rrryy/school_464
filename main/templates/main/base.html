@@ -84,26 +84,27 @@
                 <div class="col-sm-6 col-xs-12">
                   <h5 class="text-center">Цветовая схема</h5>
                   <div class="text-center">
-                    <button class="btn basic-btn" id="defaultColorBtn" aria-label="Обычная цветовая схема">
-                      <i class="fa-solid fa-ban zoom-elem"></i>
+                    <button class="btn basic-btn" id="defaultColorBtn" aria-label="Обычная цветовая схема"
+                      data-fixed-colors>
+                      <i class="fa-solid fa-ban zoom-elem" data-fixed-colors></i>
                     </button>
                     <button class="btn border-black" id="blackOnWhiteBtn" aria-label="Цветовая схема черный/белый"
-                      style="background-color: var(--bs-black); color: var(--bs-white)">
-                      <i class="fa-solid fa-font zoom-elem"></i>
+                      style="background-color: var(--bs-black); color: var(--bs-white)" data-fixed-colors>
+                      <i class="fa-solid fa-font zoom-elem" data-fixed-colors></i>
                     </button>
                     <button class="btn border-black" id="darkBlueOnLightBlueBtn"
                       aria-label="Цветовая схема темно-синий/голубой"
-                      style="background-color: var(--vis-imp-1-0); color: var(--vis-imp-1-1)">
-                      <i class="fa-solid fa-font zoom-elem"></i>
+                      style="background-color: var(--vis-imp-1-0); color: var(--vis-imp-1-1)" data-fixed-colors>
+                      <i class="fa-solid fa-font zoom-elem" data-fixed-colors></i>
                     </button>
                     <button class="btn border-black" id="brownOnBeigeBtn" aria-label="Цветовая схема коричневый/бежевый"
-                      style="background-color: var(--vis-imp-2-0); color: var(--vis-imp-2-1)">
-                      <i class="fa-solid fa-font zoom-elem"></i>
+                      style="background-color: var(--vis-imp-2-0); color: var(--vis-imp-2-1)" data-fixed-colors>
+                      <i class="fa-solid fa-font zoom-elem" data-fixed-colors></i>
                     </button>
                     <button class="btn border-black" id="greenOnDarkBrownBtn"
                       aria-label="Цветовая схема зеленый/темно-коричневый"
-                      style="background-color: var(--vis-imp-3-0); color: var(--vis-imp-3-1)">
-                      <i class="fa-solid fa-font zoom-elem"></i>
+                      style="background-color: var(--vis-imp-3-0); color: var(--vis-imp-3-1)" data-fixed-colors>
+                      <i class="fa-solid fa-font zoom-elem" data-fixed-colors></i>
                     </button>
                   </div>
                 </div>
@@ -115,15 +116,15 @@
         <!-- menu -->
         <button class="navbar-toggler me-2" title="Меню" type="button" data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
-          style="color: var(--bs-white); background-color: var(--main-color-1); box-shadow: none">
-          <span class="navbar-toggler-icon zoom-elem " data-bs-theme="dark"></span>
+          style="color: var(--bs-white); background-color: var(--main-color-1); box-shadow: none" data-fixed-colors>
+          <span class="navbar-toggler-icon zoom-elem" data-bs-theme="dark" data-fixed-colors></span>
         </button>
         <div class="offcanvas offcanvas-end" id="offcanvasNavbar" tabindex="-1" aria-labelledby="offcanvasNavbarLabel"
           style="background-color: var(--main-color-2); color: var(--bs-white)">
           <div class="offcanvas-header">
             <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Меню</h5>
             <button class="btn-close" title="Закрыть" type="button" data-bs-dismiss="offcanvas" data-bs-theme="dark"
-              aria-label="Закрыть"></button>
+              aria-label="Закрыть" data-fixed-colors></button>
           </div>
           <div class="offcanvas-body">
             <form class="d-flex mt-3 mb-3" role="search" method="get" action="/search/">
@@ -172,8 +173,8 @@
 
     <!-- "back to top" button -->
     <button class="btn btn-floating zoom-elem" id="btn-back-to-top" type="button" data-bs-theme="dark"
-      aria-label="Наверх" style="background-color: var(--main-color-1); color: var(--main-color-2);">
-      <i class="fas fa-arrow-up"></i>
+      aria-label="Наверх" style="background-color: var(--main-color-1); color: var(--main-color-2);" data-fixed-colors>
+      <i class="fas fa-arrow-up" data-fixed-colors></i>
     </button>
 
     <!-- main content / no padding on the index page -->

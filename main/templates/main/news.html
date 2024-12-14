@@ -43,7 +43,7 @@
             background-color: var(--main-color-2);
             color: var(--main-color-1) !important;
             border: none;
-          "><span aria-hidden="true">&laquo;</span>
+          " data-fixed-colors><span aria-hidden="true">&laquo;</span>
           <span class="sr-only">First</span></a>
       </li>
       {% endif %} {% for p in paginator.page_range %}
@@ -53,14 +53,14 @@
             background-color: var(--main-color-1);
             color: var(--main-color-2) !important;
             border: none;
-          ">{{ p }}</a>
+          " data-fixed-colors>{{ p }}</a>
       </li>
       {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %} <li class="page-item">
         <a class="page-link zoom-elem" href="?page={{ p }}" data-bs-theme="dark" style="
             background-color: var(--main-color-2);
             color: var(--main-color-1) !important;
             border: none;
-          ">{{ p }}</a>
+          " data-fixed-colors>{{ p }}</a>
         </li>
         {% endif %}
         {% endfor %}
@@ -71,7 +71,7 @@
             background-color: var(--main-color-2);
             color: var(--main-color-1) !important;
             border: none;
-          ">
+          " data-fixed-colors>
             <span aria-hidden="true">&raquo;</span>
             <span class="sr-only">Last</span>
           </a>
