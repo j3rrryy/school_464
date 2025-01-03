@@ -4,8 +4,6 @@ set -e
 
 echo "Pulling Docker image..."
 docker pull ghcr.io/j3rrryy/school_464:latest
-docker tag ghcr.io/j3rrryy/school_464:latest school_464_django
-docker rmi ghcr.io/j3rrryy/school_464:latest || true
 
 echo "Starting services for certificate generation..."
 docker compose -f docker-compose.cert.yml up -d

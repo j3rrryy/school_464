@@ -7,7 +7,7 @@ volumes:
 
 services:
   django:
-    image: school_464_django
+    image: ghcr.io/j3rrryy/school_464:test
     expose:
       - 8000
     env_file:

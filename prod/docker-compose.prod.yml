@@ -32,7 +32,8 @@ services:
     container_name: nginx_prod
 
   django:
-    image: school_464_django
+    image: ghcr.io/j3rrryy/school_464:latest
+    pull_policy: always
     restart: always
     expose:
       - 8000
