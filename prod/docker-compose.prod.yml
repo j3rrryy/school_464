@@ -7,8 +7,8 @@ volumes:
   certbot_www:
 
 networks:
+  nginx_network:
   main_network:
-  django_network:
 
 
 services:
@@ -26,7 +26,7 @@ services:
       - certbot_conf:/etc/letsencrypt:ro
       - certbot_www:/var/www/certbot:ro
     networks:
-      - main_network
+      - nginx_network
     depends_on:
       - django
     container_name: nginx_prod
@@ -43,8 +43,8 @@ services:
       - static:/app/static
       - media:/app/media
     networks:
+      - nginx_network
       - main_network
-      - django_network
     depends_on:
       - postgres
       - redis
@@ -63,7 +63,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data/
     networks:
-      - django_network
+      - main_network
     container_name: postgres_prod
 
   redis:
@@ -78,5 +78,5 @@ services:
     volumes:
       - redis:/data
     networks:
-      - django_network
+      - main_network
     container_name: redis_prod
