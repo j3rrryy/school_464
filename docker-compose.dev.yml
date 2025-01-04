@@ -65,8 +65,6 @@ services:
   redis:
     image: redis:alpine
     restart: always
-    command:
-      - redis-server
     expose:
       - 6379
     env_file:
