@@ -47,13 +47,13 @@
 
 ### :rocket: Start
 
-- Run the **dev build**
+- Run the **dev ver.**
 
   ```shell
   docker compose -f docker-compose.dev.yml up --build -d
   ```
 
-- Run the **prod build** and get a SSL certificate
+- Run the **prod ver.** and get a SSL certificate
 
   - Create the directory on the server
 
@@ -108,5 +108,5 @@
 ### :x: Stop
 
 ```shell
-docker compose stop
+docker compose -f docker-compose.<dev/prod>.yml stop
 ```

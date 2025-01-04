@@ -2,8 +2,9 @@
 
 set -e
 
-echo "Pulling Docker image..."
-docker pull ghcr.io/j3rrryy/school_464:latest
+echo "Pulling Docker images..."
+docker compose -f docker-compose.cert.yml pull
+docker compose -f docker-compose.prod.yml pull
 
 echo "Starting services for certificate generation..."
 docker compose -f docker-compose.cert.yml up -d
