@@ -39,7 +39,7 @@
 
 ## :hammer_and_wrench: Getting started
 
-- Copy `.env` file from `examples/dev/` to `dev/` folder fill it in
+- Copy `.env` file from `examples/dev/` to `dev/` folder and fill it in
 
 - **(For prod)** Copy `.env` file from `examples/prod/` to `prod/` folder and fill it in
 
