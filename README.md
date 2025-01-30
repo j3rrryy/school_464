@@ -24,10 +24,10 @@
 - PWA
 - Dynamic menu
 - Dynamic footer
-- Uses PostgreSQL
 - Supports XML maps
 - Custom error pages
-- Supports caching (Redis)
+- Main DB - PostgreSQL
+- DB for cache - Redis
 - Easy editing of HTML pages
 - Version for the visually impaired
 - Automatic conversion of images to WebP
