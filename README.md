@@ -107,6 +107,14 @@
     python manage.py test
     ```
 
+  > [!NOTE]
+  > For local testing, uncomment the following:
+  >
+  > ```yml
+  > build:
+  >   context: .
+  >  ```
+
 ### :x: Stop
 
 ```shell

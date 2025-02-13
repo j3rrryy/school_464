@@ -67,8 +67,6 @@ services:
     restart: always
     expose:
       - 6379
-    env_file:
-      - ./dev/.env
     volumes:
       - redis:/data
     networks:

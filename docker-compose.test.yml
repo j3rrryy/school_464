@@ -7,6 +7,8 @@ volumes:
 
 services:
   django:
+    # build:
+    #   context: .
     image: ghcr.io/j3rrryy/school_464:test
     expose:
       - 8000
@@ -39,8 +41,6 @@ services:
     image: redis:alpine
     expose:
       - 6379
-    env_file:
-      - ./test/.env
     volumes:
       - redis:/data
     container_name: redis_test
