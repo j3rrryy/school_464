@@ -85,7 +85,7 @@
     docker exec -it <container_name> sh
     ```
 
-  - Press `Ctrl+C` + `Ctrl+Shift+V`
+  - Use this command
 
     ```shell
     python manage.py createsuperuser
@@ -101,7 +101,7 @@
     docker exec -it <container_name> sh
     ```
 
-  - Press `Ctrl+C` + `Ctrl+Shift+V`
+  - Use this command
 
     ```shell
     python manage.py test
@@ -112,7 +112,7 @@
 >
 > ```yml
 > build:
->   context: .
+>   context:
 >  ```
 
 ### :x: Stop
