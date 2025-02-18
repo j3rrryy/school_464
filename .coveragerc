@@ -1,3 +1,4 @@
 [run]
 source = main
-omit = */migrations/*, */tests/*
+omit = main/migrations/*, main/tests/*
+branch = True
