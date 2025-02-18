@@ -7,8 +7,6 @@ volumes:
 
 services:
   django:
-    # build:
-    #   context: .
     image: ghcr.io/j3rrryy/school_464:latest
     expose:
       - 8000

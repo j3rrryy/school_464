@@ -81,7 +81,7 @@
 
   - Get access to the container
 
-     ```shell
+    ```shell
     docker exec -it <container_name> sh
     ```
 
@@ -97,7 +97,7 @@
 
   - Get access to the container
 
-     ```shell
+    ```shell
     docker exec -it <container_name> sh
     ```
 
@@ -108,12 +108,7 @@
     ```
 
 > [!NOTE]
-> For local testing, uncomment the following:
->
-> ```yml
-> build:
->   context:
->  ```
+> For local testing, set `DEBUG=0`
 
 ### :x: Stop
 
