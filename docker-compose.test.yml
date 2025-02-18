@@ -21,7 +21,7 @@ services:
       - postgres
       - redis
     command: bash -c "
-      pip install -r requirements.test.txt &&
+      pip install -r ./test/requirements.test.txt &&
       python manage.py collectstatic --no-input &&
       python manage.py makemigrations --merge &&
       python manage.py migrate &&
