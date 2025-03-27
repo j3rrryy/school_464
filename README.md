@@ -91,25 +91,6 @@
     python manage.py createsuperuser
     ```
 
----
-
-- Run tests
-
-  - Get access to the container
-
-    ```shell
-    docker exec -it <container_name> sh
-    ```
-
-  - Use this command
-
-    ```shell
-    python manage.py test
-    ```
-
-> [!NOTE]
-> For local testing, set `DEBUG=0`
-
 ### :x: Stop
 
 ```shell
