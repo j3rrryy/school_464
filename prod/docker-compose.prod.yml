@@ -15,7 +15,6 @@ services:
   nginx:
     image: nginx:stable-alpine
     restart: always
-    working_dir: /app
     ports:
       - 80:80
       - 443:443
@@ -48,11 +47,10 @@ services:
     depends_on:
       - postgres
       - redis
-    command: bash -c "
-      python manage.py collectstatic --no-input &&
-      python manage.py makemigrations --merge &&
-      python manage.py migrate &&
-      gunicorn --workers=2 --max-requests=500 backend.wsgi -b 0.0.0.0:8000"
+    command: sh -c "
+      chmod -R 755 /app/static/ &&
+      chmod -R 755 /app/media/ &&
+      uv run gunicorn --workers=2 --max-requests=500 backend.wsgi -b 0.0.0.0:8000"
     container_name: django_prod
 
   postgres:

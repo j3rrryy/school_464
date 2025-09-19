@@ -79,6 +79,7 @@ jobs:
         run: docker push ghcr.io/${{ github.repository }}:latest
 
   deploy:
+    if: ${{ vars.DEPLOY == 'true' }}
     runs-on: ubuntu-latest
     needs: test
     steps:

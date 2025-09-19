@@ -1,12 +1,7 @@
 import os
 from pathlib import Path
 
-import environ
 from django.core.files.storage import FileSystemStorage
-
-env = environ.Env()
-env.read_env()
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,14 +11,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(int(env("DEBUG")))
+DEBUG = bool(int(os.environ["DEBUG"]))
 
-ALLOWED_HOSTS = env("ALLOWED_HOSTS").split()
+ALLOWED_HOSTS = os.environ["ALLOWED_HOSTS"].split()
 
-CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS").split()
+CSRF_TRUSTED_ORIGINS = os.environ["CSRF_TRUSTED_ORIGINS"].split()
 
 
 # Application definition
@@ -86,18 +81,18 @@ WSGI_APPLICATION = "backend.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": env("POSTGRES_DB"),
-        "USER": env("POSTGRES_USER"),
-        "PASSWORD": env("POSTGRES_PASSWORD"),
-        "HOST": env("POSTGRES_HOST"),
-        "PORT": env("POSTGRES_PORT"),
+        "NAME": os.environ["POSTGRES_DB"],
+        "USER": os.environ["POSTGRES_USER"],
+        "PASSWORD": os.environ["POSTGRES_PASSWORD"],
+        "HOST": os.environ["POSTGRES_HOST"],
+        "PORT": os.environ["POSTGRES_PORT"],
     }
 }
 
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": env("REDIS_LOCATION"),
+        "LOCATION": os.environ["REDIS_LOCATION"],
     }
 }
 

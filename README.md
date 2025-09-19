@@ -16,6 +16,9 @@
   <a href="https://github.com/astral-sh/ruff">
     <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json" alt="Ruff">
   </a>
+  <a href="https://github.com/astral-sh/uv">
+    <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json" alt="uv">
+  </a>
 </p>
 
 ## :book: Key features
@@ -88,7 +91,7 @@
   - Use this command
 
     ```shell
-    python manage.py createsuperuser
+    uv run python manage.py createsuperuser
     ```
 
 ### :x: Stop

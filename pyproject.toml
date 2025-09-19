@@ -1,0 +1,19 @@
+[project]
+name = "school_464"
+version = "1.12.0"
+requires-python = ">=3.12"
+dependencies = [
+    "Django==5.2.6",
+    "django-adminlte-3==0.1.6",
+    "django-ckeditor-5==0.2.18",
+    "django-debug-toolbar==6.0.0",
+    "django-cleanup==9.0.0",
+    "django-pwa==2.0.1",
+    "django-redis==6.0.0",
+    "django-resized==1.0.3",
+    "gunicorn==23.0.0",
+    "psycopg2-binary==2.9.10",
+]
+
+[dependency-groups]
+test = ["coverage==7.10.6"]
