@@ -20,19 +20,18 @@ services:
         condition: service_healthy
     command: sh -c "
       uv sync --group test &&
-      uv run --group test coverage run manage.py test --rcfile=./test/.coveragerc &&
+      uv run --group test coverage run --rcfile=./test/.coveragerc manage.py test &&
       uv run --group test coverage xml -o ./coverage.xml"
     container_name: django_test
 
   postgres:
     image: postgres:17.5-alpine
-    restart: unless-stopped
     env_file:
       - ./test/.env
     volumes:
       - pgdata:/var/lib/postgresql/data/
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      test: pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB
       interval: 5s
       timeout: 5s
       retries: 10
@@ -41,11 +40,10 @@ services:
 
   redis:
     image: redis:8.2-alpine
-    restart: unless-stopped
     volumes:
       - redis:/data/
     healthcheck:
-      test: ["CMD-SHELL", "redis-cli ping | grep PONG"]
+      test: redis-cli ping | grep PONG
       interval: 5s
       timeout: 5s
       retries: 10
