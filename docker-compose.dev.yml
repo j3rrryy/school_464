@@ -5,14 +5,14 @@ volumes:
   media:
 
 networks:
-  nginx_network:
-  main_network:
+  nginx:
+  backend:
 
 
 services:
   nginx:
-    image: nginx:stable-alpine
-    restart: always
+    image: nginx:1.28.0-alpine
+    restart: unless-stopped
     ports:
       - 80:80
     volumes:
@@ -20,7 +20,7 @@ services:
       - media:/app/media
       - ./dev/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     networks:
-      - nginx_network
+      - nginx
     depends_on:
       - django
     container_name: nginx_dev
@@ -28,7 +28,7 @@ services:
   django:
     build:
       context: .
-    restart: always
+    restart: unless-stopped
     expose:
       - 8000
     env_file:
@@ -38,8 +38,8 @@ services:
       - static:/app/static
       - media:/app/media
     networks:
-      - nginx_network
-      - main_network
+      - nginx
+      - backend
     depends_on:
       - postgres
       - redis
@@ -50,23 +50,21 @@ services:
     container_name: django_dev
 
   postgres:
-    image: postgres:alpine
-    restart: always
+    image: postgres:17.5-alpine
+    restart: unless-stopped
     env_file:
       - ./dev/.env
     volumes:
       - pgdata:/var/lib/postgresql/data/
     networks:
-      - main_network
+      - backend
     container_name: postgres_dev
 
   redis:
-    image: redis:alpine
-    restart: always
-    expose:
-      - 6379
+    image: redis:8.2-alpine
+    restart: unless-stopped
     volumes:
-      - redis:/data
+      - redis:/data/
     networks:
-      - main_network
+      - backend
     container_name: redis_dev

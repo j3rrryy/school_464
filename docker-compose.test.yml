@@ -8,8 +8,6 @@ volumes:
 services:
   django:
     image: ghcr.io/j3rrryy/school_464:latest
-    expose:
-      - 8000
     env_file:
       - ./test/.env
     volumes:
@@ -25,8 +23,8 @@ services:
     container_name: django_test
 
   postgres:
-    image: postgres:alpine
-    restart: always
+    image: postgres:17.5-alpine
+    restart: unless-stopped
     env_file:
       - ./test/.env
     volumes:
@@ -34,9 +32,8 @@ services:
     container_name: postgres_test
 
   redis:
-    image: redis:alpine
-    expose:
-      - 6379
+    image: redis:8.2-alpine
+    restart: unless-stopped
     volumes:
-      - redis:/data
+      - redis:/data/
     container_name: redis_test
