@@ -22,8 +22,8 @@ docker compose -f docker-compose.cert.yml down
 echo "Starting production version..."
 docker compose -f docker-compose.prod.yml up -d
 
-echo "Scheduling tasks for certificate renewal and cleanup..."
-sudo chmod +x renew_cert.sh cleanup.sh
-(crontab -l; echo "0 0 1 */2 * bash ./school_464/renew_cert.sh"; echo "0 0 * * * bash ./school_464/cleanup.sh") | crontab -
+echo "Scheduling task for certificate renewal..."
+sudo chmod +x renew_cert.sh
+(crontab -l; echo "0 0 1 */2 * bash ./school_464/renew_cert.sh") | crontab -
 
 echo "Deployment complete!"
