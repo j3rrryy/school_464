@@ -50,7 +50,8 @@ jobs:
 
       - name: Run tests
         run: |
-          docker compose -f ./docker-compose.test.yml up
+          docker compose -f ./docker-compose.test.yml up postgres redis -d
+          docker compose -f ./docker-compose.test.yml up django
           docker cp django_test:./app/coverage.xml ./coverage.xml
 
       - name: Upload coverage to Codecov

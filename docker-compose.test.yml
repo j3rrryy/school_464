@@ -20,7 +20,7 @@ services:
         condition: service_healthy
     command: sh -c "
       uv sync --group test &&
-      uv run --group test coverage run --rcfile=./test/.coveragerc manage.py test &&
+      uv run --group test coverage run manage.py test &&
       uv run --group test coverage xml -o ./coverage.xml"
     container_name: django_test
 
