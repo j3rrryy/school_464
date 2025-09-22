@@ -37,18 +37,12 @@ class NewsView(ListView):
         return context
 
     def get_queryset(self) -> QuerySet[Any]:
-        news = cache.get("news")
-
-        if not news:
-            news = (
-                super()
-                .get_queryset()
-                .filter(is_published=True)
-                .order_by(F("is_pinned").desc(), "-pk")
-            )
-            cache.set("news", news, 60 * 10)
-
-        return news
+        return (
+            super()
+            .get_queryset()
+            .filter(is_published=True)
+            .order_by(F("is_pinned").desc(), "-pk")
+        )
 
 
 class SearchView(ListView):
@@ -86,22 +80,20 @@ class PostView(DetailView):
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context["title"] = escape(self.object.headline)  # safe header output
+        context["title"] = escape(self.object.headline)
         context["no_padding"] = False
         return context
 
     def get_object(self, queryset=None) -> QuerySet[Any]:
-        POST = f"post_{self.kwargs['post_slug']}"
-
-        post = cache.get(POST)
+        cache_key = f"post_{self.kwargs['post_slug']}"
+        post = cache.get(cache_key)
 
         if not post:
             try:
                 post = super().get_queryset().get(slug=self.kwargs["post_slug"])
             except ObjectDoesNotExist:
                 raise Http404()
-
-            cache.set(POST, post, 60 * 60)
+            cache.set(cache_key, post)
 
         return post
 
@@ -114,22 +106,20 @@ class PageView(DetailView):
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context["title"] = escape(self.object.menu_info)  # safe header output
+        context["title"] = escape(self.object.menu_info)
         context["no_padding"] = False
         return context
 
     def get_object(self, queryset=None) -> QuerySet[Any]:
-        PAGE = f"page_{self.kwargs['page_slug']}"
-
-        page = cache.get(PAGE)
+        cache_key = f"page_{self.kwargs['page_slug']}"
+        page = cache.get(cache_key)
 
         if not page:
             try:
                 page = super().get_queryset().get(slug=self.kwargs["page_slug"])
             except ObjectDoesNotExist:
                 raise Http404()
-
-            cache.set(PAGE, page, 60 * 60)
+            cache.set(cache_key, page)
 
         return page
 

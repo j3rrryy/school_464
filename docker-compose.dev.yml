@@ -1,6 +1,5 @@
 volumes:
   pgdata:
-  redis:
   static:
   media:
 
@@ -42,7 +41,6 @@ services:
       - backend
     depends_on:
       - postgres
-      - redis
     command: sh -c "
       chmod -R 755 /app/static/ &&
       chmod -R 755 /app/media/ &&
@@ -59,12 +57,3 @@ services:
     networks:
       - backend
     container_name: postgres_dev
-
-  redis:
-    image: redis:8.2-alpine
-    restart: unless-stopped
-    volumes:
-      - redis:/data/
-    networks:
-      - backend
-    container_name: redis_dev

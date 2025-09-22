@@ -43,14 +43,12 @@ jobs:
       - name: Build Docker image
         run: docker build -t django:test .
 
-      - name: Pull other images
-        run: |
-          docker pull postgres:17.5-alpine
-          docker pull redis:8.2-alpine
+      - name: Pull Postgres images
+        run: docker pull postgres:17.5-alpine
 
       - name: Run tests
         run: |
-          docker compose -f ./docker-compose.test.yml up postgres redis -d
+          docker compose -f ./docker-compose.test.yml up postgres -d
           docker compose -f ./docker-compose.test.yml up django
           docker cp django_test:./app/coverage.xml ./coverage.xml
 

@@ -88,7 +88,6 @@ class NewsAdmin(admin.ModelAdmin):
 
     def get_photo(self, object):
         if object.photo:
-            # get preview
             return mark_safe(f"<img src='{object.photo.url}' width=100>")
 
     get_photo.short_description = "Миниатюра"
@@ -129,7 +128,6 @@ class BannerAdmin(admin.ModelAdmin):
 
     def get_banner(self, object):
         if object.banner:
-            # get preview
             return mark_safe(f"<img src='{object.banner.url}' width=100>")
 
     get_banner.short_description = "Миниатюра"

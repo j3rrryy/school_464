@@ -91,8 +91,13 @@ DATABASES = {
 
 CACHES = {
     "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": os.environ["REDIS_LOCATION"],
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "school-464",
+        "OPTIONS": {
+            "MAX_ENTRIES": 100,
+            "CULL_FREQUENCY": 4,
+            "TIMEOUT": 3600,
+        },
     }
 }
 

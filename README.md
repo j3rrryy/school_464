@@ -29,8 +29,8 @@
 - Dynamic footer
 - Supports XML maps
 - Custom error pages
-- Main DB - PostgreSQL
-- DB for cache - Redis
+- In-memory caching
+- Database - PostgreSQL
 - Easy editing of HTML pages
 - Version for the visually impaired
 - Automatic conversion of images to WebP

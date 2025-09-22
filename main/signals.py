@@ -11,7 +11,6 @@ from . import models
 
 @receiver([pre_delete, pre_save], sender=models.News)
 def news_update(sender, instance, **kwargs):
-    cache.delete("news")
     cache.delete(f"post_{instance.slug}")
 
 

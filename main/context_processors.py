@@ -1,5 +1,3 @@
-import math
-
 from django.core.cache import cache
 
 from . import models
@@ -9,28 +7,22 @@ def menu_data(request):
     menu = cache.get("menu")
 
     if not menu:
-        data = models.Page.objects.filter(in_menu=True)
+        data = models.Page.objects.filter(in_menu=True).order_by("menu_position")
         menu = {}
+        parents_dict = {}
 
-        for item in sorted(
-            filter(lambda x: x.parent_page == "---------", data),
-            key=lambda y: y.menu_position,
-        ):
-            # create base menu items
-            menu[item] = []
+        for item in data:
+            if item.parent_page == "---------":
+                menu[item] = []
+                parents_dict[item.menu_info] = item
 
-        for item in sorted(
-            filter(lambda x: x.parent_page != "---------", data),
-            key=lambda y: y.menu_position,
-        ):
-            parent_item = next(
-                (x for x in data if x.menu_info == item.parent_page), None
-            )
-            if parent_item:
-                # create sub menu items
-                menu[parent_item].append(item)
+        for item in data:
+            if item.parent_page != "---------":
+                parent_item = parents_dict.get(item.parent_page)
+                if parent_item:
+                    menu[parent_item].append(item)
 
-        cache.set("menu", menu, 60 * 60)
+        cache.set("menu", menu, None)
 
     return {"menu": menu.items()}
 
@@ -39,24 +31,10 @@ def banners_data(request):
     banners = cache.get("banners")
 
     if not banners:
-        banners_list = sorted(
-            models.Banner.objects.filter(is_enabled=True),
-            key=lambda banner: banner.position,
+        banners_list = models.Banner.objects.filter(is_enabled=True).order_by(
+            "position"
         )
-        banners = [[] for _ in range(math.ceil(len(banners_list) / 4))]
-        # position of list in res
-        i = 0
-        # amount of banners in this list
-        c = 0
-
-        for banner in banners_list:
-            banners[i].append(banner)
-            c += 1
-            # max 4 banners in each row
-            if c == 4:
-                i += 1
-                c = 0
-
-        cache.set("banners", banners, 60 * 60)
+        banners = [banners_list[i : i + 4] for i in range(0, len(banners_list), 4)]
+        cache.set("banners", banners, None)
 
     return {"banners": banners}

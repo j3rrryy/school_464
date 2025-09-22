@@ -149,19 +149,6 @@ wheels = [
 ]
 
 [[package]]
-name = "django-redis"
-version = "6.0.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "django" },
-    { name = "redis" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/08/53/dbcfa1e528e0d6c39947092625b2c89274b5d88f14d357cee53c4d6dbbd4/django_redis-6.0.0.tar.gz", hash = "sha256:2d9cb12a20424a4c4dde082c6122f486628bae2d9c2bee4c0126a4de7fda00dd", size = 56904, upload-time = "2025-06-17T18:15:46.376Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/7e/79/055dfcc508cfe9f439d9f453741188d633efa9eab90fc78a67b0ab50b137/django_redis-6.0.0-py3-none-any.whl", hash = "sha256:20bf0063a8abee567eb5f77f375143c32810c8700c0674ced34737f8de4e36c0", size = 33687, upload-time = "2025-06-17T18:15:34.165Z" },
-]
-
-[[package]]
 name = "django-resized"
 version = "1.0.3"
 source = { registry = "https://pypi.org/simple" }
@@ -289,15 +276,6 @@ wheels = [
 ]
 
 [[package]]
-name = "redis"
-version = "6.4.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/0d/d6/e8b92798a5bd67d659d51a18170e91c16ac3b59738d91894651ee255ed49/redis-6.4.0.tar.gz", hash = "sha256:b01bc7282b8444e28ec36b261df5375183bb47a07eb9c603f284e89cbc5ef010", size = 4647399, upload-time = "2025-08-07T08:10:11.441Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/e8/02/89e2ed7e85db6c93dfa9e8f691c5087df4e3551ab39081a4d7c6d1f90e05/redis-6.4.0-py3-none-any.whl", hash = "sha256:f0544fa9604264e9464cdf4814e7d4830f74b165d52f2a330a760a88dd248b7f", size = 279847, upload-time = "2025-08-07T08:10:09.84Z" },
-]
-
-[[package]]
 name = "school-464"
 version = "1.12.0"
 source = { virtual = "." }
@@ -308,7 +286,6 @@ dependencies = [
     { name = "django-cleanup" },
     { name = "django-debug-toolbar" },
     { name = "django-pwa" },
-    { name = "django-redis" },
     { name = "django-resized" },
     { name = "gunicorn" },
     { name = "psycopg2-binary" },
@@ -327,7 +304,6 @@ requires-dist = [
     { name = "django-cleanup", specifier = "==9.0.0" },
     { name = "django-debug-toolbar", specifier = "==6.0.0" },
     { name = "django-pwa", specifier = "==2.0.1" },
-    { name = "django-redis", specifier = "==6.0.0" },
     { name = "django-resized", specifier = "==1.0.3" },
     { name = "gunicorn", specifier = "==23.0.0" },
     { name = "psycopg2-binary", specifier = "==2.9.10" },

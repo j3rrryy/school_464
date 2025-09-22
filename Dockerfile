@@ -13,6 +13,5 @@ COPY . .
 RUN uv run python -m compileall -q -x '\.venv' .
 
 ENTRYPOINT ["sh", "-c", "uv run python manage.py collectstatic --no-input && \
-    uv run python manage.py makemigrations --merge && \
     uv run python manage.py migrate && \
     exec \"$@\"" , "--"]

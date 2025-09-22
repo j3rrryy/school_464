@@ -18,19 +18,19 @@ class MainViewsTestCase(TestCase):
             slug="test-page", content="Test Content", menu_info="Test Page"
         )
 
-    def test_IndexView(self):
+    def test_index_view(self):
         response = self.client.get(reverse("index"))
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "main/index.html")
 
-    def test_NewsView(self):
+    def test_news_view(self):
         response = self.client.get(reverse("news"))
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "main/news.html")
 
-    def test_SearchView(self):
+    def test_search_view(self):
         response = self.client.get(reverse("search"), {"query": "Test"})
 
         self.assertEqual(response.status_code, 200)
@@ -38,7 +38,7 @@ class MainViewsTestCase(TestCase):
         self.assertContains(response, "Test News")
         self.assertContains(response, "Test Page")
 
-    def test_PostView(self):
+    def test_post_view(self):
         response = self.client.get(
             reverse("post", kwargs={"post_slug": self.test_news.slug})
         )
@@ -53,7 +53,7 @@ class MainViewsTestCase(TestCase):
         self.assertEqual(response_404.status_code, 404)
         self.assertTemplateUsed(response_404, "system/error_page.html")
 
-    def test_PageView(self):
+    def test_page_view(self):
         response = self.client.get(
             reverse("page", kwargs={"page_slug": self.test_page.slug})
         )
