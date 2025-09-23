@@ -44,7 +44,7 @@ jobs:
         run: docker build -t django:test .
 
       - name: Pull Postgres images
-        run: docker pull postgres:17.5-alpine
+        run: docker pull postgres:16.10-alpine
 
       - name: Run tests
         run: |

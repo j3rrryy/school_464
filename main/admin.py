@@ -71,9 +71,17 @@ class NewsAdmin(admin.ModelAdmin):
         "date",
         "is_published",
     )
-    list_display_links = ("id", "slug", "headline")
-    search_fields = ("headline", "text", "date")
-    prepopulated_fields = {"slug": ("headline",)}
+    list_display_links = ("id", "slug")
+    search_fields = (
+        "id",
+        "slug",
+        "headline",
+        "text",
+        "photo",
+        "is_pinned",
+        "date",
+        "is_published",
+    )
     fields = (
         "headline",
         "slug",
@@ -83,6 +91,7 @@ class NewsAdmin(admin.ModelAdmin):
         "is_pinned",
         "is_published",
     )
+    prepopulated_fields = {"slug": ("headline",)}
     readonly_fields = ("get_photo",)
     actions = [make_published, make_unpublished, pin, unpin]
 
@@ -95,34 +104,28 @@ class NewsAdmin(admin.ModelAdmin):
 
 @admin.register(models.Page)
 class PageAdmin(admin.ModelAdmin):
-    list_display = (
-        "id",
-        "slug",
-        "in_menu",
-        "menu_info",
-        "menu_position",
-        "parent_page",
-    )
+    list_display = ("id", "slug", "name", "in_menu", "menu_position", "parent")
     list_display_links = ("id", "slug")
     search_fields = (
         "id",
+        "slug",
+        "name",
         "content",
-        "menu_info",
-        "menu_position",
         "in_menu",
-        "parent_page",
+        "menu_position",
+        "parent",
     )
-    fields = ("menu_info", "slug", "content", "in_menu", "parent_page", "menu_position")
-    prepopulated_fields = {"slug": ("menu_info",)}
+    fields = ("name", "slug", "content", "in_menu", "menu_position", "parent")
+    prepopulated_fields = {"slug": ("name",)}
     actions = [enable_item, disable_item]
 
 
 @admin.register(models.Banner)
 class BannerAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "get_banner", "url", "position", "is_enabled")
-    list_display_links = ("id", "name", "get_banner", "url")
-    search_fields = ("id", "name", "url", "position")
-    fields = ("name", "url", "banner", "get_banner", "position", "is_enabled")
+    list_display_links = ("id", "name")
+    search_fields = ("id", "name", "banner", "url", "position", "is_enabled")
+    fields = ("name", "banner", "get_banner", "url", "position", "is_enabled")
     readonly_fields = ("get_banner",)
     actions = [enable_banner, disable_banner]
 

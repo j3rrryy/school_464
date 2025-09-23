@@ -37,36 +37,26 @@ class Page(models.Model):
     slug = models.SlugField(
         max_length=255, unique=True, db_index=True, verbose_name="URL"
     )
-    content = CKEditor5Field(verbose_name="Содержимое страницы")
-    in_menu = models.BooleanField(default=True, verbose_name="Включен в меню")
-    menu_info = models.CharField(max_length=255, verbose_name="Имя в меню")
+    name = models.CharField(max_length=255, unique=True, verbose_name="Имя")
+    content = CKEditor5Field(verbose_name="Содержимое")
+    in_menu = models.BooleanField(default=True, verbose_name="Включена в меню")
     menu_position = models.IntegerField(
         default=1, verbose_name="Позиция в меню/подменю"
     )
-    parent_page = models.CharField(
-        max_length=255,
-        default="---------",
-        choices=[("---------", "---------")],
-        verbose_name="Имя родительского пункта в меню (если является подпунктом)",
+    parent = models.ForeignKey(
+        "self",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="children",
+        verbose_name="Родительский пункт меню",
     )
 
     def __str__(self):
-        return str(self.menu_info)
+        return str(self.name)
 
     def get_absolute_url(self):
         return reverse("page", kwargs={"page_slug": self.slug})
-
-    def set_parent_choices(self):
-        parent_choices = Page.objects.filter(
-            in_menu=True, parent_page="---------"
-        ).values_list("menu_info", "menu_info")
-        self._meta.get_field("parent_page").choices = [
-            ("---------", "---------")
-        ] + list(parent_choices)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.set_parent_choices()
 
     class Meta:
         verbose_name = "страницу"

@@ -22,7 +22,7 @@ services:
     container_name: django_test
 
   postgres:
-    image: postgres:17.5-alpine
+    image: postgres:16.10-alpine
     env_file:
       - ./test/.env
     volumes:

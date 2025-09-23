@@ -15,7 +15,7 @@ class MainSitemapsTestCase(TestCase):
         )
 
         self.test_page = Page.objects.create(
-            slug="test-page", content="Test Content", menu_info="Test Page"
+            slug="test-page", content="Test Content", name="Test Page"
         )
 
     def test_sitemaps(self):

@@ -63,7 +63,7 @@ class SearchView(ListView):
             search=SearchVector("headline", "text")
         )
         page_results = models.Page.objects.annotate(
-            search=SearchVector("menu_info", "content")
+            search=SearchVector("name", "content")
         )
 
         return {
@@ -106,7 +106,7 @@ class PageView(DetailView):
 
     def get_context_data(self, **kwargs) -> dict[str, Any]:
         context = super().get_context_data(**kwargs)
-        context["title"] = escape(self.object.menu_info)
+        context["title"] = escape(self.object.name)
         context["no_padding"] = False
         return context
 

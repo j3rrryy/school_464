@@ -48,7 +48,7 @@ services:
     container_name: django_dev
 
   postgres:
-    image: postgres:17.5-alpine
+    image: postgres:16.10-alpine
     restart: unless-stopped
     env_file:
       - ./dev/.env

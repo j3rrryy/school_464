@@ -37,7 +37,7 @@ class MainNewsModelTestCase(TestCase):
 class MainPageModelTestCase(TestCase):
     def setUp(self):
         self.test_page = Page.objects.create(
-            slug="test-page", content="Test Content", menu_info="Test Page"
+            slug="test-page", content="Test Content", name="Test Page"
         )
 
     def test_menu_position_1_by_default(self):

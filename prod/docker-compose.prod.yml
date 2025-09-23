@@ -52,7 +52,7 @@ services:
     container_name: django_prod
 
   postgres:
-    image: postgres:17.5-alpine
+    image: postgres:16.10-alpine
     restart: unless-stopped
     env_file:
       - ./.env

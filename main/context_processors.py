@@ -1,4 +1,5 @@
 from django.core.cache import cache
+from django.db.models import Prefetch
 
 from . import models
 
@@ -7,21 +8,14 @@ def menu_data(request):
     menu = cache.get("menu")
 
     if not menu:
-        page_list = models.Page.objects.filter(in_menu=True).order_by("menu_position")
-        menu = {}
-        parents_dict = {}
+        children_qs = models.Page.objects.filter(in_menu=True).order_by("menu_position")
+        root_pages = (
+            models.Page.objects.filter(in_menu=True, parent__isnull=True)
+            .prefetch_related(Prefetch("children", queryset=children_qs))
+            .order_by("menu_position", "name")
+        )
 
-        for page in page_list:
-            if page.parent_page == "---------":
-                menu[page] = []
-                parents_dict[page.menu_info] = page
-
-        for page in page_list:
-            if page.parent_page != "---------":
-                parent_item = parents_dict.get(page.parent_page)
-                if parent_item:
-                    menu[parent_item].append(page)
-
+        menu = {root: tuple(root.children.all()) for root in root_pages}
         cache.set("menu", menu, None)
 
     return {"menu": menu.items()}
