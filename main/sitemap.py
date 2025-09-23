@@ -9,7 +9,7 @@ class NewsSitemap(Sitemap):
     protocol = "https"
 
     def items(self):
-        return News.objects.all()
+        return News.objects.filter(is_published=True).order_by("-pk")
 
     def lastmod(self, obj):
         return obj.date

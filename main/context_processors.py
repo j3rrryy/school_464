@@ -7,20 +7,20 @@ def menu_data(request):
     menu = cache.get("menu")
 
     if not menu:
-        data = models.Page.objects.filter(in_menu=True).order_by("menu_position")
+        page_list = models.Page.objects.filter(in_menu=True).order_by("menu_position")
         menu = {}
         parents_dict = {}
 
-        for item in data:
-            if item.parent_page == "---------":
-                menu[item] = []
-                parents_dict[item.menu_info] = item
+        for page in page_list:
+            if page.parent_page == "---------":
+                menu[page] = []
+                parents_dict[page.menu_info] = page
 
-        for item in data:
-            if item.parent_page != "---------":
-                parent_item = parents_dict.get(item.parent_page)
+        for page in page_list:
+            if page.parent_page != "---------":
+                parent_item = parents_dict.get(page.parent_page)
                 if parent_item:
-                    menu[parent_item].append(item)
+                    menu[parent_item].append(page)
 
         cache.set("menu", menu, None)
 
@@ -31,10 +31,8 @@ def banners_data(request):
     banners = cache.get("banners")
 
     if not banners:
-        banners_list = models.Banner.objects.filter(is_enabled=True).order_by(
-            "position"
-        )
-        banners = [banners_list[i : i + 4] for i in range(0, len(banners_list), 4)]
+        banner_list = models.Banner.objects.filter(is_enabled=True).order_by("position")
+        banners = [banner_list[i : i + 4] for i in range(0, len(banner_list), 4)]
         cache.set("banners", banners, None)
 
     return {"banners": banners}

@@ -48,7 +48,7 @@ services:
     command: sh -c "
       chmod -R 755 /app/static/ &&
       chmod -R 755 /app/media/ &&
-      uv run gunicorn --workers=2 --max-requests=500 backend.wsgi -b 0.0.0.0:8000"
+      uv run gunicorn backend.wsgi"
     container_name: django_prod
 
   postgres:

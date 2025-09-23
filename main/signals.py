@@ -26,8 +26,7 @@ def news_delete(sender, instance, **kwargs):
 
 @receiver([pre_delete, pre_save], sender=models.Page)
 def page_update(sender, instance, **kwargs):
-    cache.delete("menu")
-    cache.delete(f"page_{instance.slug}")
+    cache.delete_many(("menu", f"page_{instance.slug}"))
 
 
 @receiver(pre_delete, sender=models.Page)
