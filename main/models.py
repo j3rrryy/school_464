@@ -1,3 +1,5 @@
+from django.contrib.postgres.indexes import GinIndex
+from django.contrib.postgres.search import SearchVectorField
 from django.db import models
 from django.urls import reverse
 from django_ckeditor_5.fields import CKEditor5Field
@@ -5,9 +7,7 @@ from django_resized import ResizedImageField
 
 
 class News(models.Model):
-    slug = models.SlugField(
-        max_length=255, unique=True, db_index=True, verbose_name="URL"
-    )
+    slug = models.SlugField(max_length=255, unique=True, verbose_name="URL")
     headline = models.CharField(max_length=255, verbose_name="Заголовок")
     text = CKEditor5Field(verbose_name="Текст")
     photo = ResizedImageField(
@@ -22,6 +22,8 @@ class News(models.Model):
     date = models.DateField(auto_now_add=True, verbose_name="Дата")
     is_published = models.BooleanField(default=True, verbose_name="Опубликовано")
 
+    search_vector = SearchVectorField(null=True)
+
     def __str__(self) -> str:
         return str(self.headline)
 
@@ -31,12 +33,18 @@ class News(models.Model):
     class Meta:
         verbose_name = "новость"
         verbose_name_plural = "Новости"
+        indexes = [
+            models.Index(
+                fields=["is_pinned", "id"],
+                name="news_pub_pin_id_idx",
+                condition=models.Q(is_published=True),
+            ),
+            GinIndex(fields=["search_vector"], name="news_search_vector_idx"),
+        ]
 
 
 class Page(models.Model):
-    slug = models.SlugField(
-        max_length=255, unique=True, db_index=True, verbose_name="URL"
-    )
+    slug = models.SlugField(max_length=255, unique=True, verbose_name="URL")
     name = models.CharField(max_length=255, unique=True, verbose_name="Имя")
     content = CKEditor5Field(verbose_name="Содержимое")
     in_menu = models.BooleanField(default=True, verbose_name="Включена в меню")
@@ -52,6 +60,8 @@ class Page(models.Model):
         verbose_name="Родительский пункт меню",
     )
 
+    search_vector = SearchVectorField(null=True)
+
     def __str__(self):
         return str(self.name)
 
@@ -61,6 +71,7 @@ class Page(models.Model):
     class Meta:
         verbose_name = "страницу"
         verbose_name_plural = "Страницы"
+        indexes = [GinIndex(fields=["search_vector"], name="page_search_vector_idx")]
 
 
 class Banner(models.Model):

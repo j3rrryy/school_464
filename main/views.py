@@ -1,6 +1,6 @@
 from typing import Any
 
-from django.contrib.postgres.search import SearchQuery, SearchVector
+from django.contrib.postgres.search import SearchQuery, SearchRank
 from django.core.cache import cache
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import F
@@ -57,19 +57,24 @@ class SearchView(ListView):
         return context
 
     def get_queryset(self):
-        query = SearchQuery(self.request.GET.get("query"))
+        query = SearchQuery(self.request.GET.get("query", ""))
 
-        news_results = models.News.objects.annotate(
-            search=SearchVector("headline", "text")
+        news_results = (
+            models.News.objects.annotate(
+                rank=SearchRank(F("search_vector"), query, cover_density=True)
+            )
+            .filter(search_vector=query)
+            .order_by("-rank")[:15]
         )
-        page_results = models.Page.objects.annotate(
-            search=SearchVector("name", "content")
+        page_results = (
+            models.Page.objects.annotate(
+                rank=SearchRank(F("search_vector"), query, cover_density=True)
+            )
+            .filter(search_vector=query)
+            .order_by("-rank")[:15]
         )
 
-        return {
-            "news": news_results.filter(search=query),
-            "page": page_results.filter(search=query),
-        }
+        return {"news": news_results, "page": page_results}
 
 
 class PostView(DetailView):
