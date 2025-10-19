@@ -63,13 +63,13 @@
   - Create the directory on the server
 
     ```shell
-    mkdir -p /school_464/
+    mkdir -p ./school_464/
     ```
 
   - Use SCP to copy the prod files to the server
 
     ```shell
-    scp -r ./prod/* <username>@<host>:/school_464/
+    scp -r ./prod/* <username>@<host>:./school_464/
     ```
 
   - Run the deploy script
