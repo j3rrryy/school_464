@@ -263,7 +263,7 @@ PWA_APP_DIR = "ltr"
 PWA_APP_LANG = "ru-RU"
 PWA_APP_DEBUG_MODE = DEBUG
 PWA_SERVICE_WORKER_PATH = os.path.join(
-    BASE_DIR, "main", "static", "main", "js", "serviceworker.1bfa13fa.js"
+    BASE_DIR, "main", "static", "main", "js", "serviceworker.fcf8a709.js"
 )
 
 

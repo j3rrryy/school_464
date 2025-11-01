@@ -74,7 +74,11 @@ allElements.forEach(e => {
 // ======================
 
 function setFontSize(newSize) {
-    document.documentElement.style.fontSize = newSize + "px";
+    if (!newSize) {
+        document.documentElement.style.removeProperty("font-size");
+    } else {
+        document.documentElement.style.fontSize = newSize + "px";
+    }
     saveTheme(localStorage.getItem("accessibilityTheme") || "default", newSize);
 }
 
@@ -113,4 +117,5 @@ window.onload = () => {
     const fontSize = localStorage.getItem("fontSize");
     applyTheme(theme);
     if (fontSize) document.documentElement.style.fontSize = fontSize + "px";
+    else document.documentElement.style.removeProperty("font-size");
 };

@@ -2,7 +2,7 @@ const staticCacheName = "school-464-v" + new Date().getTime();
 const filesToCache = [
     "/offline/",
     "/static/main/css/style.adb8bd1a.css",
-    "/static/main/js/script.bdbf141f.js",
+    "/static/main/js/script.a7bbf447.js",
     "/static/main/favicons/favicon.ico",
     "/static/main/img/pwa/icon-192x192.png",
     "/static/main/img/pwa/icon-256x256.png",
