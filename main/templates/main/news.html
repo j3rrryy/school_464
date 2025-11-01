@@ -43,7 +43,7 @@
             background-color: var(--main-color-2);
             color: var(--main-color-1) !important;
             border: none;
-          " data-fixed-colors><span aria-hidden="true">&laquo;</span>
+          " data-fixed-colors><span aria-hidden="true" data-fixed-colors>&laquo;</span>
           <span class="sr-only">First</span></a>
       </li>
       {% endif %} {% for p in paginator.page_range %}
@@ -72,7 +72,7 @@
             color: var(--main-color-1) !important;
             border: none;
           " data-fixed-colors>
-            <span aria-hidden="true">&raquo;</span>
+            <span aria-hidden="true" data-fixed-colors>&raquo;</span>
             <span class="sr-only">Last</span>
           </a>
         </li>

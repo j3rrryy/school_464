@@ -12,12 +12,12 @@
   общеобразовательная школа №464 Пушкинского района Санкт-Петербурга">
   {% progressive_web_app_meta %}
   <link rel="shortcut icon" type="image/x-icon" href="{% static 'main/favicons/favicon.ico' %}">
-  <link rel="stylesheet" href="{% static '/main/css/style.css' %}">
+  <link rel="stylesheet" href="{% static '/main/css/style.adb8bd1a.css' %}">
   <link rel="stylesheet" href="{% static '/django_ckeditor_5/dist/styles.css' %}" media="all">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
-  <script src="{% static '/main/js/script.js' %}" async></script>
+  <script src="{% static '/main/js/script.bdbf141f.js' %}" async></script>
   <script src="https://kit.fontawesome.com/04e52cf776.js" crossorigin="anonymous" async></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"
@@ -71,13 +71,15 @@
                   <h5 class="text-center">Размер шрифта</h5>
                   <div class="text-center">
                     <button class="btn basic-btn" id="decreaseFontBtn" aria-label="Уменьшить шрифт">
-                      <i class="fa-solid fa-font zoom-elem"><i class="fa-solid fa-minus"></i></i>
+                      <i class="fa-solid fa-font zoom-elem" data-fixed-colors><i class="fa-solid fa-minus"
+                          data-fixed-colors></i></i>
                     </button>
                     <button class="btn basic-btn" id="normalFontBtn" aria-label="Обычный шрифт">
-                      <i class="fa-solid fa-font zoom-elem"></i>
+                      <i class="fa-solid fa-font zoom-elem" data-fixed-colors></i>
                     </button>
                     <button class="btn basic-btn" id="increaseFontBtn" aria-label="Увеличить шрифт">
-                      <i class="fa-solid fa-font zoom-elem"><i class="fa-solid fa-plus"></i></i>
+                      <i class="fa-solid fa-font zoom-elem" data-fixed-colors><i class="fa-solid fa-plus"
+                          data-fixed-colors></i></i>
                     </button>
                   </div>
                 </div>
@@ -88,7 +90,7 @@
                       data-fixed-colors>
                       <i class="fa-solid fa-ban zoom-elem" data-fixed-colors></i>
                     </button>
-                    <button class="btn border-black" id="blackOnWhiteBtn" aria-label="Цветовая схема черный/белый"
+                    <button class="btn border-black" id="whiteOnBlackBtn" aria-label="Цветовая схема черный/белый"
                       style="background-color: var(--bs-black); color: var(--bs-white)" data-fixed-colors>
                       <i class="fa-solid fa-font zoom-elem" data-fixed-colors></i>
                     </button>
@@ -132,7 +134,7 @@
               <button class="btn" title="Поиск" type="submit" data-bs-theme="dark" style="
                     background-color: var(--main-color-1);
                     color: var(--main-color-2);
-                  ">
+                  " data-fixed-colors>
                 Поиск
               </button>
             </form>
