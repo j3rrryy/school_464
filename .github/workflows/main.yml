@@ -49,7 +49,7 @@ jobs:
       - name: Run tests
         run: |
           docker compose -f ./docker-compose.test.yml up postgres -d
-          docker compose -f ./docker-compose.test.yml up django
+          docker compose -f ./docker-compose.test.yml up --abort-on-container-exit --exit-code-from django django
           docker cp django_test:./app/coverage.xml ./coverage.xml
 
       - name: Upload coverage to Codecov
