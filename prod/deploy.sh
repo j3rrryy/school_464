@@ -24,6 +24,6 @@ docker compose -f docker-compose.prod.yml up -d
 
 echo "Scheduling task for certificate renewal..."
 sudo chmod +x renew_cert.sh
-(crontab -l; echo "0 0 1 */2 * bash ./school_464/renew_cert.sh") | crontab -
+(crontab -l; echo "0 0 * * * ${PWD}/renew_cert.sh >> /home/j3rry/school_464/renew.log 2>&1") | crontab -
 
 echo "Deployment complete!"
