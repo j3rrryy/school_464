@@ -26,7 +26,6 @@ def news_update(sender, instance, **kwargs):
 @receiver(post_delete, sender=models.News)
 def news_delete(sender, instance, **kwargs):
     to_delete = re.findall(rf"\"{settings.MEDIA_URL}other/(.+?)\"", instance.text)
-
     for file in to_delete:
         path = f"{settings.MEDIA_ROOT}/other/{file}"
         if os.path.exists(path):
@@ -49,7 +48,6 @@ def page_update(sender, instance, **kwargs):
 @receiver(post_delete, sender=models.Page)
 def page_delete(sender, instance, **kwargs):
     to_delete = re.findall(rf"\"{settings.MEDIA_URL}other/(.+?)\"", instance.content)
-
     for file in to_delete:
         path = f"{settings.MEDIA_ROOT}/other/{file}"
         if os.path.exists(path):

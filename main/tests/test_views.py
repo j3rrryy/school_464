@@ -86,4 +86,4 @@ class SystemViewsTestCase(TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "system/offline.html")
-        self.assertContains(response, "Нет подключения к интернету")
+        self.assertContains(response, "Не удалось загрузить сайт")

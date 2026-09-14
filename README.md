@@ -1,7 +1,7 @@
 # School website
 
 <p align="center">
-  <a href="https://github.com/j3rrryy/todo_app/actions/workflows/main.yml">
+  <a href="https://github.com/j3rrryy/school_464/actions/workflows/main.yml">
     <img src="https://github.com/j3rrryy/school_464/actions/workflows/main.yml/badge.svg" alt="СI/CD">
   </a>
   <a href="https://codecov.io/gh/j3rrryy/school_464">

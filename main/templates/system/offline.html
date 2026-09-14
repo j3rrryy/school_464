@@ -10,7 +10,7 @@
     <meta name="description" content="Государственное бюджетное общеобразовательное учреждение средняя
       общеобразовательная школа №464 Пушкинского района Санкт-Петербурга">
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'main/favicons/favicon.ico' %}">
-    <title>Нет подключения к интернету</title>
+    <title>Не удалось загрузить сайт</title>
 </head>
 
 <body style="color: white; background-color: #242c38; height: 100vh;">
@@ -18,9 +18,15 @@
         <img src="{% static 'main/img/logo.svg' %}" alt="Логотип школы" style="width: 200px" decoding="async"
             fetchpriority="high">
     </div>
-    <div style="display: flex; justify-content: center; align-items: start; height: 50%;">
-        <h3 style="font-family: system-ui;">Нет подключения к интернету</h3>
+    <div style="display: flex; justify-content: center; align-items: start">
+        <div style="text-align: center; font-family: system-ui">
+            <h3>Не удалось загрузить сайт</h3>
+            <p style="margin: 0 2em; opacity: 0.6">Проверьте подключение к интернету и попробуйте ещё раз.</p>
+        </div>
     </div>
+    <script>
+        window.addEventListener('online', () => location.reload());
+    </script>
 </body>
 
 </html>
