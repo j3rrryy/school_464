@@ -2,8 +2,8 @@ const now = new Date();
 const staticCacheName = `school-464-v${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}`;
 const filesToCache = [
   "/offline/",
-  "/static/main/css/style.adb8bd1a.css",
-  "/static/main/js/script.a7bbf447.js",
+  "/static/main/css/style.37d0bdce.css",
+  "/static/main/js/script.359f958d.js",
   "/static/main/favicons/favicon.ico",
   "/static/main/img/logo.svg",
   "/static/main/img/pwa/icon-192x192.png",
